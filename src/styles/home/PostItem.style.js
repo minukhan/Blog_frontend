@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const PostContainer = styled.div`
   display: flex;
-  border-radius: 16px;
+  border-radius: var(--border-radius);
   box-shadow: 10px 10px 30px rgba(174, 174, 192, 0.4);
   width: 100%;
   margin-bottom: 20px;
@@ -64,7 +64,7 @@ export const Icon = styled.div`
   margin-right: -5px;
   width: 25px;
   height: 25px;
-  background-image: url("/images/menuIcon.svg");
+  background-image: url("/images/svg/menuIcon.svg");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -105,11 +105,10 @@ export const PostSummary = styled.p`
   margin-bottom: 15px;
 `;
 export const PostCategory = styled.button`
-  border-radius: 16px;
+  border-radius: var(--border-radius);
   box-shadow: 10px 10px 10px rgba(174, 174, 192, 0.5) inset;
   padding: 8px 15px;
   background-color: var(--light-gray);
-  border: none;
   font-size: 13px;
   font-weight: 400;
   color: var(--navy);
