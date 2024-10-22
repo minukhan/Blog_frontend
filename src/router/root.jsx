@@ -5,6 +5,7 @@ import Home from "../pages/Home";
 
 const loading = <div>loading...</div>;
 const MyPage = lazy(() => import("../pages/myPage/Index"));
+const VoicePostPage = lazy(() => import("../pages/voicePost/Index"));
 
 const root = createBrowserRouter([
   {
@@ -12,6 +13,14 @@ const root = createBrowserRouter([
     element: (
       <Suspense fallback={loading}>
         <Home />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/narration/register",
+    element: (
+      <Suspense fallback={loading}>
+        <VoicePostPage />
       </Suspense>
     ),
   },
