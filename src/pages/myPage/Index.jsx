@@ -8,12 +8,10 @@ function MyPage() {
   return (
     <MyPageLayout>
       {/* <Header /> */}
-      MyPage이다
       <Outlet />
     </MyPageLayout>
   );
 }
-
 
 export default MyPage;
 

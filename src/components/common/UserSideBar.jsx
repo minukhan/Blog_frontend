@@ -65,7 +65,7 @@ const Wrap = styled.div`
   justify-content: center;
   gap: 130px;
 
-  width: 342px;
+  min-width: 342px;
   height: 736px;
   border-radius: 30px;
   background: var(--light-gray);

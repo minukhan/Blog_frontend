@@ -4,7 +4,7 @@ import UserSideBar from "../common/UserSideBar";
 
 function MyPageLayout({ children }) {
   return (
-    <div>
+    <div style={{ background: "var(--light-gray)" }}>
       <PageWrap>
         <Wrap>
           <UserSideBar />
@@ -18,7 +18,6 @@ function MyPageLayout({ children }) {
 export default MyPageLayout;
 
 const PageWrap = styled.div`
-  border: 1px solid black;
   max-width: 1500px;
   margin: 0 auto;
   padding-top: 130px;
@@ -26,4 +25,5 @@ const PageWrap = styled.div`
 
 const Wrap = styled.div`
   display: flex;
+  gap: 40px;
 `;
