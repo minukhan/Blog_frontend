@@ -13,13 +13,7 @@ function PlayBox() {
         <S.SubText>softourr</S.SubText>
       </S.TextWrap>
       <S.VolumeIcon />
-      {/* <S.PlayBar type="range" /> */}
       <AudioPlayer src="/audio/music.mp3" />
-      {/* <S.ButtonGroup>
-        <S.ControlButton>⏮️</S.ControlButton>
-        <S.ControlButton>▶️</S.ControlButton>
-        <S.ControlButton>⏭️</S.ControlButton>
-      </S.ButtonGroup> */}
     </S.PlayBox>
   );
 }

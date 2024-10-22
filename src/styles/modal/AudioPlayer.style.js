@@ -4,13 +4,14 @@ export const PlayerContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 `;
 export const TimeWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
   padding: 10px 0;
+  margin-bottom: 20px;
 `;
 
 export const Time = styled.div`

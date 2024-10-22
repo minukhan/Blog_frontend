@@ -1,6 +1,5 @@
 import styled from "styled-components";
 export const PlayBox = styled.div`
-  width: calc(50% - 10px);
   border-radius: var(--border-radius);
   background-color: var(--light-gray);
   padding: 20px;
@@ -26,7 +25,7 @@ export const Thumbnail = styled.div`
   border-radius: 50%;
   box-shadow: var(--box-shadow);
   border: 5px solid white;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 `;
 export const TextWrap = styled.div`
   margin: 0 auto;
@@ -50,7 +49,7 @@ export const SubText = styled.p`
   font-size: 13px;
   color: var(--gray);
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 export const VolumeIcon = styled.div`
@@ -60,4 +59,5 @@ export const VolumeIcon = styled.div`
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  margin-bottom: 40px;
 `;

@@ -61,7 +61,6 @@ const useProgress = (selectedMusicRef) => {
     currentTime,
     duration,
     percentage,
-    setCurrentTime,
     handleTimeUpdate,
     handleProgressClick,
     formatTime,

@@ -8,7 +8,6 @@ const AudioPlayer = ({ src }) => {
     currentTime,
     duration,
     percentage,
-    setCurrentTime,
     handleTimeUpdate,
     handleProgressClick,
     formatTime,
