@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 // import "@radix-ui/themes/styles.css";
+
 export const GlobalStyle = createGlobalStyle`
     ${reset}
     :root{
@@ -40,6 +41,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     a {
         text-decoration: none;
+        color: inherit; 
     }
     a:visited {
         text-decoration: none;
@@ -47,5 +49,11 @@ export const GlobalStyle = createGlobalStyle`
     
     textarea {
         resize: none;
+    }
+
+    /* radix-ui */
+    .radix-themes {
+        /* --gray-color: #ECF0F3; */
+	    /* --gray-9: var(--gray-color); */
     }
 `;
