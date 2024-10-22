@@ -1,8 +1,10 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
+import myPageRouter from "./myPageRouter";
 import Home from "../pages/Home";
 
 const loading = <div>loading...</div>;
+const MyPage = lazy(() => import("../pages/myPage/Index"));
 
 const root = createBrowserRouter([
   {
@@ -12,6 +14,15 @@ const root = createBrowserRouter([
         <Home />
       </Suspense>
     ),
+  },
+  {
+    path: "/:postId",
+    element: (
+      <Suspense fallback={loading}>
+        <MyPage />
+      </Suspense>
+    ),
+    children: myPageRouter(),
   },
 ]);
 
