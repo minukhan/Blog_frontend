@@ -21,6 +21,7 @@ const PageWrap = styled.div`
   max-width: 1500px;
   margin: 0 auto;
   padding-top: 130px;
+  padding-bottom: 100px;
 `;
 
 const Wrap = styled.div`

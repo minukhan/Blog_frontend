@@ -94,7 +94,11 @@ function PostWritePage() {
         <PostEditor />
       </EditorWrap>
 
-      <StyledBtn onClick={handleSubmit}>등록</StyledBtn>
+      <BtnWrap>
+        <StyledBtn onClick={handleSubmit} style={{ padding: "0 50px" }}>
+          등록
+        </StyledBtn>
+      </BtnWrap>
     </Wrap>
   );
 }
@@ -186,3 +190,7 @@ const ThumbWrap = styled.div`
   justify-content: space-between;
 `;
 const EditorWrap = styled.div``;
+const BtnWrap = styled.div`
+  display: flex;
+  justify-content: end;
+`;
