@@ -9,13 +9,16 @@ export const GlobalStyle = createGlobalStyle`
         /* Colors */
         --navy: #31516D;
         --light-gray : #ECF0F3;
+        --gray : #697077;
+        --black : #222222;
 
-    }    
+    }
     body {
         -ms-overflow-style: none;
         border-radius: 30px;
         background: var(--light-gray);
-        box-shadow: 13px 13px 25px #c3c3c3, -13px -13px 25px #fdfdfd;
+
+        /* box-shadow: 13px 13px 25px #c3c3c3, -13px -13px 25px #fdfdfd; */
     }
      
     ::-webkit-scrollbar {
