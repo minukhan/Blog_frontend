@@ -64,7 +64,6 @@ const Wrap = styled.div`
   align-items: center;
   justify-content: center;
   gap: 130px;
-
   min-width: 342px;
   height: 736px;
   border-radius: 30px;
@@ -73,13 +72,11 @@ const Wrap = styled.div`
 `;
 const ProfileWrap = styled.div`
   width: 100%;
-
   font-size: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
-
   p {
     letter-spacing: 1.5;
   }
@@ -89,7 +86,6 @@ const ProfileImg = styled.div`
   height: 100px;
   border-radius: 6.875rem;
   background-color: white;
-
   img {
     width: 100%;
     height: 100%;
@@ -109,7 +105,6 @@ const CategoryWrap = styled.div`
   flex-direction: column;
   align-items: start;
   width: 100%;
-
   h2 {
     margin-left: 20px;
     font-size: 18px;

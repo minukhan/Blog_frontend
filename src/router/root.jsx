@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import myPageRouter from "./myPageRouter";
+import PostDetailpage from "../pages/PostDetailpage/PostDetailpage";
 
 const loading = <div>loading...</div>;
 const MyPage = lazy(() => import("../pages/myPage/Index"));
@@ -11,6 +12,14 @@ const root = createBrowserRouter([
     element: (
       <Suspense fallback={loading}>
         <MainLayout />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/post/detail",
+    element: (
+      <Suspense fallback={loading}>
+        <PostDetailpage />
       </Suspense>
     ),
   },
