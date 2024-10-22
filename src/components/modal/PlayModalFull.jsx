@@ -1,16 +1,11 @@
-import { useDispatch } from "react-redux";
 import * as S from "../../styles/modal/PlayModalFull.style";
 import PlayBox from "./PlayBox";
 import PlaylistBox from "./PlaylistBox";
-function PlayModalFull() {
-  const dispatch = useDispatch();
-  const togglePlayModal = () => {
-    dispatch({ type: "TOGGLE_PLAY_MODAL" });
-  };
+function PlayModalFull({ togglePlayModal }) {
   return (
     <>
-      <S.ModalBackground />
-      <S.PlayModalFullWrapper onClick={() => togglePlayModal}>
+      <S.ModalBackground onClick={togglePlayModal} />
+      <S.PlayModalFullWrapper>
         <PlayBox />
         <PlaylistBox />
       </S.PlayModalFullWrapper>

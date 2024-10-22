@@ -1,23 +1,28 @@
 import { RouterProvider } from "react-router-dom";
 import root from "./router/root";
 import useAuth from "./hooks/useAuth";
-import { useSelector } from "react-redux";
 import { createPortal } from "react-dom";
 import PlayModal from "./components/modal/PlayModal";
 import PlayModalFull from "./components/modal/PlayModalFull";
+import { useState } from "react";
 function App() {
   const { loggedIn } = useAuth(); // 로그인 여부 확인
-  const { isPlayModalOpen } = useSelector((state) => state.modal);
-
+  const [isPlayModalOpen, setIsPlayModalOpen] = useState(true);
+  const togglePlayModal = () => {
+    setIsPlayModalOpen((prev) => !prev); // 이전 상태값을 토글
+  };
   return (
     <>
       <RouterProvider router={root} />
-      {/* {loggedIn &&
+      {loggedIn &&
         createPortal(
-          isPlayModalOpen ? <PlayModal /> : <PlayModalFull />,
+          isPlayModalOpen ? (
+            <PlayModal togglePlayModal={togglePlayModal} />
+          ) : (
+            <PlayModalFull togglePlayModal={togglePlayModal} />
+          ),
           document.body
-        )} */}
-      {loggedIn && createPortal(<PlayModalFull />, document.body)}
+        )}
     </>
   );
 }

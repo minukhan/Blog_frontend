@@ -1,17 +1,10 @@
 import { useState } from "react";
 import * as S from "../../styles/modal/PlayModal.style";
-import { useDispatch, useSelector } from "react-redux";
-function PlayModal() {
+function PlayModal({ togglePlayModal }) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const { isPlayModalOpen } = useSelector((state) => state.modal);
 
   const togglePlayPause = () => {
     setIsPlaying((prev) => !prev);
-  };
-  const dispatch = useDispatch();
-  const togglePlayModal = () => {
-    dispatch({ type: "TOGGLE_PLAY_MODAL" });
-    console.log("togglePlayModal " + isPlayModalOpen);
   };
   return (
     <S.ModalWrapper onClick={togglePlayModal}>

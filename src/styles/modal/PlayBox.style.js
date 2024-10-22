@@ -8,7 +8,6 @@ export const PlayBox = styled.div`
   flex-direction: column;
 `;
 
-// 타이틀 텍스트
 export const Title = styled.h1`
   font-size: 20px;
   font-weight: 600;
@@ -51,33 +50,14 @@ export const SubText = styled.p`
   font-size: 13px;
   color: var(--gray);
   text-align: center;
+  margin-bottom: 20px;
 `;
 
 export const VolumeIcon = styled.div`
-  font-size: 24px;
-  margin-left: 10px;
-`;
-
-// 플레이바
-export const PlayBar = styled.input`
-  width: 100%; // 플레이바 너비
-  margin: 10px 0; // 위아래 여백
-`;
-
-// 버튼 그룹
-export const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: space-between; // 버튼 간격을 균일하게 배치
-  align-items: center; // 가운데 정렬
-`;
-
-// 개별 버튼
-export const ControlButton = styled.button`
-  background-color: transparent; // 배경색 투명
-  border: none; // 테두리 없음
-  font-size: 24px; // 아이콘 크기
-  cursor: pointer; // 커서 손 모양
-  &:hover {
-    color: var(--color-navy); // 호버 시 색상 변화
-  }
+  width: 15px;
+  height: 15px;
+  background-image: url("/images/svg/sound.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 `;

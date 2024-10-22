@@ -1,4 +1,5 @@
 import * as S from "../../styles/modal/PlayBox.style";
+import AudioPlayer from "./AudioPlayer";
 function PlayBox() {
   return (
     <S.PlayBox>
@@ -11,15 +12,14 @@ function PlayBox() {
         </S.MainText>
         <S.SubText>softourr</S.SubText>
       </S.TextWrap>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <S.VolumeIcon>🔊</S.VolumeIcon>
-      </div>
-      <S.PlayBar type="range" />
-      <S.ButtonGroup>
+      <S.VolumeIcon />
+      {/* <S.PlayBar type="range" /> */}
+      <AudioPlayer src="/audio/music.mp3" />
+      {/* <S.ButtonGroup>
         <S.ControlButton>⏮️</S.ControlButton>
         <S.ControlButton>▶️</S.ControlButton>
         <S.ControlButton>⏭️</S.ControlButton>
-      </S.ButtonGroup>
+      </S.ButtonGroup> */}
     </S.PlayBox>
   );
 }
