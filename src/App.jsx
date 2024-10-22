@@ -6,8 +6,6 @@ function App() {
   return (
     <>
       <RouterProvider router={root} />
-      <PostDetailpage />
-      <h2>Start</h2>
     </>
   );
 }
