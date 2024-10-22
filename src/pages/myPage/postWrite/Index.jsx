@@ -1,15 +1,41 @@
 import { TextArea } from "@radix-ui/themes";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { StyledBtn } from "../../../styles/commonStyled";
 import PostEditor from "./PostEditor";
+import { POST_WRITE } from "../../../api/post";
 
 function PostWritePage() {
   const [selectedThumbImg, setSelectedThumbImg] = useState(
     "/images/postWrite_thumbPreview.png"
   );
   const [thumbFile, setThumbFile] = useState(null);
+  const [title, setTitle] = useState("");
+  const [summary, setSummary] = useState("");
+  const [editorContent, setEditorContent] = useState("");
 
+  // 기본 이미지를 파일로 변환하는 함수
+  const urlToFile = async (url, filename, mimeType) => {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return new File([blob], filename, { type: mimeType });
+  };
+
+  useEffect(() => {
+    // 페이지 로드 시 기본 이미지를 파일로 변환해서 thumbFile로 설정
+    const convertUrlToFile = async () => {
+      const file = await urlToFile(
+        "/images/postWrite_thumbPreview.png",
+        "postWrite_thumbPreview.png",
+        "image/png"
+      );
+      setThumbFile(file);
+    };
+
+    convertUrlToFile();
+  }, []);
+
+  //
   const handleSelectedThumbImg = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -22,20 +48,37 @@ function PostWritePage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const plainText = editorContent.replace(/<[^>]*>/g, "");
 
     /** 썸네일 이미지 */
     const formData = new FormData();
 
-    if (thumbFile) {
-      formData.append("image", thumbFile); // 실제 파일 데이터를 추가
+    // thumbFile이 없을 경우 기본 이미지를 formData에 추가
+    if (!thumbFile) {
+      formData.append("thumbnailUrl", selectedThumbImg);
+    } else {
+      formData.append("thumbnailUrl", thumbFile);
     }
 
-    try {
-      // axios
-      // console.log("S3 Image URL:", response.data.url); // 서버에서 받은 S3 URL
-    } catch (error) {
-      console.log(error);
+    formData.append("postTitle", title);
+    formData.append("postSummary", summary);
+    formData.append("postContent", editorContent);
+    formData.append("postCategory", "tech");
+    formData.append("plainText", plainText);
+    formData.append("userId", 1);
+
+    // 확인용: formData 내용 출력
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
     }
+
+    POST_WRITE(formData)
+      .then((data) => {
+        console.log("postId", data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -48,7 +91,11 @@ function PostWritePage() {
               게시글 제목
             </Text>
             <div style={{ marginLeft: "50px" }}>
-              <StyledTextArea placeholder="제목을 입력해주세요" />
+              <StyledTextArea
+                placeholder="제목을 입력해주세요"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </div>
           </Box>
           <Box>
@@ -57,7 +104,11 @@ function PostWritePage() {
               게시글 한줄 요약
             </Text>
             <div style={{ marginLeft: "50px" }}>
-              <StyledTextArea placeholder="한줄 요약을 입력해주세요" />
+              <StyledTextArea
+                placeholder="한줄 요약을 입력해주세요"
+                value={summary} // 상태값을 바인딩
+                onChange={(e) => setSummary(e.target.value)} // 상태 업데이트
+              />
             </div>
           </Box>
         </Right>
@@ -91,7 +142,7 @@ function PostWritePage() {
       </InfoWrap>
 
       <EditorWrap>
-        <PostEditor />
+        <PostEditor setContent={setEditorContent} />
       </EditorWrap>
 
       <BtnWrap>
