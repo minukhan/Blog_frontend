@@ -2,6 +2,7 @@ import { TextArea } from "@radix-ui/themes";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { StyledBtn } from "../../../styles/commonStyled";
+import PostEditor from "./PostEditor";
 
 function PostWritePage() {
   const [selectedThumbImg, setSelectedThumbImg] = useState(
@@ -89,7 +90,9 @@ function PostWritePage() {
         </Left>
       </InfoWrap>
 
-      <EditorWrap></EditorWrap>
+      <EditorWrap>
+        <PostEditor />
+      </EditorWrap>
 
       <StyledBtn onClick={handleSubmit}>등록</StyledBtn>
     </Wrap>
@@ -105,6 +108,10 @@ const Wrap = styled.div`
   border-radius: 30px;
   background: var(--light-gray);
   box-shadow: 13px 13px 25px #c3c3c3, -13px -13px 25px #fdfdfd;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 `;
 
 const InfoWrap = styled.div`
