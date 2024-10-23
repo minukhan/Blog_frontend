@@ -1,9 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import * as SS from "../../styles/usersettings/settingsub.style";
 import UserInputBar2 from "../../components/UserSettings/UserInputBar2";
 import UserUpdateButton from "../../components/UserSettings/UserUpdateButton";
+import { editUserSocialInfo } from "../../api/userSettingApi";
 
-function UserSettingSubRight() {
+function UserSettingSubRight({
+  uid,
+  blogintro,
+  github,
+  instagram,
+  twitter,
+  setRefresh,
+}) {
+  const [newBlogIntro, setNewBlogIntro] = useState("");
+  const [newGithub, setNewGithub] = useState("");
+  const [newInstagram, setNewInstagram] = useState("");
+  const [newTwitter, setNewTwitter] = useState("");
+
+  const data = {
+    intro: newBlogIntro,
+    github: newGithub,
+    insta: newInstagram,
+    twitter: newTwitter,
+  };
+
+  const editUserInfo2 = () => {
+    if (newBlogIntro == "") data.intro = blogintro;
+    if (newGithub == "") data.github = github;
+    if (newInstagram == "") data.insta = instagram;
+    if (newTwitter == "") data.twitter = twitter;
+
+    editUserSocialInfo(uid, data).then((res) => {
+      console.log(res);
+      if (res.isSuccess) {
+        setRefresh((cur) => {
+          return !cur;
+        });
+        alert("수정이 완료됐습니다.");
+      } else {
+        alert("수정 실패했습니다.");
+      }
+    });
+    setNewBlogIntro("");
+    setNewGithub("");
+    setNewInstagram("");
+    setNewTwitter("");
+  };
+
   return (
     <SS.SettingSub>
       <div
@@ -25,6 +68,10 @@ function UserSettingSubRight() {
         >
           <SS.blogintro>Blog Intro</SS.blogintro>
           <input
+            onChange={(e) => {
+              setNewBlogIntro(e.target.value);
+            }}
+            value={newBlogIntro}
             style={{
               width: 300,
               height: 29,
@@ -49,11 +96,23 @@ function UserSettingSubRight() {
             gap: "10px",
           }}
         >
-          <UserInputBar2 inputName={"Github"} />
-          <UserInputBar2 inputName={"Instagram"} />
-          <UserInputBar2 inputName={"Twitter"} />
+          <UserInputBar2
+            prop={newGithub}
+            setProp={setNewGithub}
+            inputName={"Github"}
+          />
+          <UserInputBar2
+            prop={newInstagram}
+            setProp={setNewInstagram}
+            inputName={"Instagram"}
+          />
+          <UserInputBar2
+            prop={newTwitter}
+            setProp={setNewTwitter}
+            inputName={"Twitter"}
+          />
         </div>
-        <UserUpdateButton />
+        <UserUpdateButton func={editUserInfo2} />
       </div>
     </SS.SettingSub>
   );

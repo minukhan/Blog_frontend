@@ -1,36 +1,62 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaGithub, FaInstagram, FaTwitterSquare } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const user = {
-  img: "/images/userBasicImg.png",
-  nickname: "하니",
-  desc: "Senior Developer",
-  github: "https://example.com",
-  insta: "https://example.com",
-  twitter: "https://example.com",
+  img: "",
+  name: "",
+  desc: "",
+  github: "",
+  insta: "",
+  twitter: "",
 };
 
-function UserSideBar() {
+function UserSideBar({
+  uid,
+  profileImg,
+  name,
+  blogintro,
+  github,
+  instagram,
+  twitter,
+  refresh,
+}) {
+  const [data, setData] = useState(user);
+
+  useEffect(() => {
+    setData((cur) => {
+      const newData = { ...cur };
+      (newData.img = "/images/userBasicImg.png"),
+        (newData.name = name),
+        (newData.desc = blogintro),
+        (newData.github = github),
+        (newData.insta = instagram),
+        (newData.twitter = twitter);
+      return newData;
+    });
+    console.log("ref됨");
+    console.log(data);
+  }, [profileImg, name, blogintro, github, instagram, twitter, uid, refresh]);
+
   return (
     <Wrap>
       <ProfileWrap>
         <ProfileImg>
-          <img src={user.img} alt={user.name} />
+          <img src={data.img} alt={""} />
         </ProfileImg>
 
-        <p style={{ fontWeight: "700", paddingTop: "15px" }}>{user.nickname}</p>
-        <p>{user.desc}</p>
+        <p style={{ fontWeight: "700", paddingTop: "15px" }}>{data.name}</p>
+        <p>{data.desc}</p>
 
         <SocialWrap>
-          <a href={user.github} target="_blank" rel="noopener noreferrer">
+          <a href={data.github} target="_blank" rel="noopener noreferrer">
             <FaGithub style={{ fontSize: "25px", color: "#000000" }} />
           </a>
-          <a href={user.github} target="_blank" rel="noopener noreferrer">
+          <a href={data.insta} target="_blank" rel="noopener noreferrer">
             <FaInstagram style={{ fontSize: "25px", color: "#000000" }} />
           </a>
-          <a href={user.github} target="_blank" rel="noopener noreferrer">
+          <a href={data.twitter} target="_blank" rel="noopener noreferrer">
             <FaTwitterSquare style={{ fontSize: "25px", color: "#000000" }} />
           </a>
         </SocialWrap>

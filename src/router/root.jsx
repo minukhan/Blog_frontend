@@ -10,7 +10,7 @@ const root = createBrowserRouter([
     element: <Suspense fallback={loading}>{/* <Home /> */}</Suspense>,
   },
   {
-    path: "/user/settings",
+    path: "/user/settings/:uid",
     element: (
       <Suspense fallback={loading}>
         <UserSettings />

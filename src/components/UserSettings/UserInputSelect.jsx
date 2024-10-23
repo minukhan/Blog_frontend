@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as SS from "../../styles/usersettings/settingsub.style";
 import { FaCaretDown } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
-function UserInputSelect({ setVoiceSelect }) {
+function UserInputSelect({ voiceSelect, setVoiceSelect }) {
+  const redirectVoicePage = "/";
+
   const [btnClick, setBtnClick] = useState(false);
   const voiceOptionOpen = (e) => {
     setBtnClick(!btnClick);
   };
+
+  const changeOption = (opt) => {
+    setVoiceSelect(opt);
+  };
+
+  useEffect(() => {}, [voiceSelect]);
 
   return (
     <div
@@ -36,7 +45,7 @@ function UserInputSelect({ setVoiceSelect }) {
 
       <div>
         <SS.select onClick={voiceOptionOpen}>
-          My voice
+          {voiceSelect}
           <FaCaretDown color="#000000" size={"20px"} />
         </SS.select>
         <div
@@ -61,21 +70,13 @@ function UserInputSelect({ setVoiceSelect }) {
               borderRadius: 16,
             }}
           >
-            <div
-              style={{
-                width: 20,
-                height: 20,
-                left: 132,
-                top: 9,
-                position: "absolute",
-              }}
-            >
+            <Link to={redirectVoicePage}>
               <div
                 style={{
-                  width: 17.5,
-                  height: 17.5,
-                  left: 1.25,
-                  top: 1.25,
+                  width: 20,
+                  height: 20,
+                  left: 132,
+                  top: 9,
                   position: "absolute",
                 }}
               >
@@ -83,35 +84,45 @@ function UserInputSelect({ setVoiceSelect }) {
                   style={{
                     width: 17.5,
                     height: 17.5,
-                    left: 0,
-                    top: 0,
+                    left: 1.25,
+                    top: 1.25,
                     position: "absolute",
-                    border: "1px #40565F solid",
-                    borderRadius: "50%",
                   }}
-                ></div>
-                <div
-                  style={{
-                    width: 7.5,
-                    height: 0,
-                    left: 5,
-                    top: 8.75,
-                    position: "absolute",
-                    border: "1px #40565F solid",
-                  }}
-                ></div>
-                <div
-                  style={{
-                    width: 0,
-                    height: 7.5,
-                    left: 8.75,
-                    top: 5,
-                    position: "absolute",
-                    border: "1px #40565F solid",
-                  }}
-                ></div>
+                >
+                  <div
+                    style={{
+                      width: 17.5,
+                      height: 17.5,
+                      left: 0,
+                      top: 0,
+                      position: "absolute",
+                      border: "1px #40565F solid",
+                      borderRadius: "50%",
+                    }}
+                  ></div>
+                  <div
+                    style={{
+                      width: 7.5,
+                      height: 0,
+                      left: 5,
+                      top: 8.75,
+                      position: "absolute",
+                      border: "1px #40565F solid",
+                    }}
+                  ></div>
+                  <div
+                    style={{
+                      width: 0,
+                      height: 7.5,
+                      left: 8.75,
+                      top: 5,
+                      position: "absolute",
+                      border: "1px #40565F solid",
+                    }}
+                  ></div>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
           <div
             style={{
@@ -128,6 +139,8 @@ function UserInputSelect({ setVoiceSelect }) {
             }}
           >
             <div
+              role="button"
+              onClick={() => changeOption("MYVOICE")}
               style={{
                 alignSelf: "stretch",
                 color: "#40565F",
@@ -135,6 +148,7 @@ function UserInputSelect({ setVoiceSelect }) {
                 fontFamily: "Oxygen",
                 fontWeight: "300",
                 wordWrap: "break-word",
+                cursor: "pointer",
               }}
             >
               My Voice
@@ -147,6 +161,8 @@ function UserInputSelect({ setVoiceSelect }) {
               }}
             ></div>
             <div
+              role="button"
+              onClick={() => changeOption("WOMAN")}
               style={{
                 alignSelf: "stretch",
                 color: "#40565F",
@@ -154,9 +170,10 @@ function UserInputSelect({ setVoiceSelect }) {
                 fontFamily: "Oxygen",
                 fontWeight: "300",
                 wordWrap: "break-word",
+                cursor: "pointer",
               }}
             >
-              Women
+              Woman
             </div>
             <div
               style={{
@@ -166,6 +183,8 @@ function UserInputSelect({ setVoiceSelect }) {
               }}
             ></div>
             <div
+              role="button"
+              onClick={() => changeOption("MAN")}
               style={{
                 alignSelf: "stretch",
                 color: "#40565F",
@@ -173,9 +192,10 @@ function UserInputSelect({ setVoiceSelect }) {
                 fontFamily: "Oxygen",
                 fontWeight: "300",
                 wordWrap: "break-word",
+                cursor: "pointer",
               }}
             >
-              Men
+              Man
             </div>
             <div
               style={{

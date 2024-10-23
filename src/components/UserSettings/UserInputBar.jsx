@@ -1,6 +1,10 @@
 import React from "react";
 
-function UserInputBar({ inputName }) {
+function UserInputBar({ newName, setNewName, inputName }) {
+  const changeName = (e) => {
+    setNewName(e.target.value);
+  };
+
   return (
     <div
       style={{
@@ -25,7 +29,8 @@ function UserInputBar({ inputName }) {
         {inputName}
       </div>
       <input
-        type="text"
+        onChange={(e) => changeName(e)}
+        value={newName}
         style={{
           boxSizing: "border-box",
           width: 170,

@@ -1,6 +1,6 @@
 import React from "react";
 
-function UserUpdateButton() {
+function UserUpdateButton({ func }) {
   return (
     <div
       style={{
@@ -12,6 +12,7 @@ function UserUpdateButton() {
     >
       <div
         role="button"
+        onClick={func}
         style={{
           width: 142,
           height: 31,
@@ -22,10 +23,20 @@ function UserUpdateButton() {
           boxShadow:
             "-10px -10px 30px #FFFFFF, 10px 10px 30px rgba(174, 174, 192, 0.4)",
           borderRadius: 98,
+
           cursor: "pointer",
+          color: "#40565F",
+          fontSize: 15,
+          fontFamily: "Oxygen",
+          fontWeight: "700",
+          textAlign: "center",
+          lineHeight: 2,
+          wordWrap: "break-word",
         }}
-      />
-      <div
+      >
+        Update
+      </div>
+      {/* <div
         style={{
           left: 45,
           top: 6,
@@ -35,10 +46,12 @@ function UserUpdateButton() {
           fontFamily: "Oxygen",
           fontWeight: "700",
           wordWrap: "break-word",
+          userSelect: "none",
+          cursor: "pointer",
         }}
       >
         Update
-      </div>
+      </div> */}
     </div>
   );
 }
