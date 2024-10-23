@@ -2,7 +2,8 @@ import { lazy, Suspense } from "react";
 
 const loading = <div className="bg-red-500">loading...</div>;
 const PostWritePage = lazy(() => import("../pages/myPage/postWrite/Index"));
-const PostViewPage = lazy(() => import("../pages/myPage/\bpostsView/Index"));
+// todo
+const PostViewPage = lazy(() => import("../pages/myPage/postView/Index"));
 
 const myPageRouter = () => {
   return [
@@ -15,7 +16,7 @@ const myPageRouter = () => {
       ),
     },
     {
-      path: "",
+      path: "post",
       element: (
         <Suspense fallback={loading}>
           <PostViewPage />
