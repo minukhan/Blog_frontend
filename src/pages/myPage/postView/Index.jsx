@@ -1,9 +1,11 @@
-import PostView from "../../../components/common/mypage/PostView";
+import PostView from "../../../components/mypage/PostView";
+import PostViewComment from "./../../../components/mypage/PostViewComment";
 
 function PostsViewPage() {
   return (
     <div>
       <PostView />
+      {/* <PostViewComment /> */}
     </div>
   );
 }

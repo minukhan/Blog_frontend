@@ -5,12 +5,13 @@ export const Wrap = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 130px;
-  min-width: 342px;
+  gap: 100px;
+  min-width: 270px;
   padding: 30px 0px;
   border-radius: 30px;
   background: var(--light-gray);
-  box-shadow: 13px 13px 25px #c3c3c3, -13px -13px 25px #fdfdfd;
+  /* box-shadow: 13px 13px 25px #c3c3c3, -13px -13px 25px #fdfdfd; */
+  box-shadow: 10px 10px 30px rgba(174, 174, 192, 0.6);
 `;
 
 export const ProfileWrap = styled.div`
