@@ -6,6 +6,7 @@ import PostDetailpage from "../pages/PostDetailpage/PostDetailpage";
 const loading = <div>loading...</div>;
 const MyPage = lazy(() => import("../pages/myPage/Index"));
 const MainLayout = lazy(() => import("../pages/Index"));
+const VoicePostPage = lazy(() => import("../pages/voicePost/Index"));
 const root = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +21,14 @@ const root = createBrowserRouter([
     element: (
       <Suspense fallback={loading}>
         <PostDetailpage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/narration/register",
+    element: (
+      <Suspense fallback={loading}>
+        <VoicePostPage />
       </Suspense>
     ),
   },

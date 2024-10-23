@@ -3,7 +3,11 @@ import styled from "styled-components";
 import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
 
-function PostEditor() {
+function PostEditor({ setContent }) {
+  const handleContentChange = (content) => {
+    setContent(content); // 부모 컴포넌트의 상태를 업데이트
+  };
+
   return (
     <Wrap>
       <SunEditor
@@ -52,7 +56,7 @@ function PostEditor() {
           resizing: false,
         }}
         setAllPlugins={true}
-        // onChange={handleContentChange}
+        onChange={handleContentChange}
       />
     </Wrap>
   );
