@@ -12,13 +12,14 @@ export const GlobalStyle = createGlobalStyle`
         /* Colors */
         --navy: #31516D;
         --light-gray : #ECF0F3;
-        --gray : #96A3A9;
+        --gray : #96a3a9;
         --deep-gray : #2C2C2C;
         --black : #222222;
         --red : #D75858;
         --box-shadow: 8px 8px 20px rgba(174, 174, 192, 0.4),
     -8px -8px 20px rgba(255, 255, 255, 0.7);
     --border-radius : 16px;
+    --max-width : 1100px;
 
     }
     body {
