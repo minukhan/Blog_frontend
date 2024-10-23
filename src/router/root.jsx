@@ -1,17 +1,34 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import myPageRouter from "./myPageRouter";
-import Home from "../pages/Home";
+import PostDetailpage from "../pages/PostDetailpage/PostDetailpage";
 
 const loading = <div>loading...</div>;
 const MyPage = lazy(() => import("../pages/myPage/Index"));
-
+const MainLayout = lazy(() => import("../pages/Index"));
+const VoicePostPage = lazy(() => import("../pages/voicePost/Index"));
 const root = createBrowserRouter([
   {
     path: "/",
     element: (
       <Suspense fallback={loading}>
-        <Home />
+        <MainLayout />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/post/detail",
+    element: (
+      <Suspense fallback={loading}>
+        <PostDetailpage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/narration/register",
+    element: (
+      <Suspense fallback={loading}>
+        <VoicePostPage />
       </Suspense>
     ),
   },
