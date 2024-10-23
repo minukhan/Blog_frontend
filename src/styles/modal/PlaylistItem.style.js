@@ -8,15 +8,6 @@ export const ItemContainer = styled.div`
   box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.1),
     3px 3px 10px rgba(255, 255, 255, 0.8) inset;
 `;
-// export const Thumbnail = styled.img`
-//   background-image: url("/images/thumbnail.png");
-//   background-size: cover;
-//   background-position: center;
-//   width: 65px;
-//   height: 65px;
-//   border-radius: 50%;
-//   margin-right: 10px;
-// `;
 export const ThumbnailContainer = styled.div`
   cursor: pointer;
   position: relative;

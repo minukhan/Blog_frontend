@@ -1,47 +1,54 @@
-import { useState } from "react";
 import * as S from "../../styles/common/Header.style";
-import { FaUser, FaShoppingCart, FaAngleDown, FaBell } from "react-icons/fa";
+import { CiLogin } from "react-icons/ci";
+import { FiSettings } from "react-icons/fi";
+import { FaRegUserCircle } from "react-icons/fa";
+import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
 function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const { loggedIn } = useAuth();
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const toggleLogin = () => {
-    setIsLoggedIn(!isLoggedIn);
+    setLoggedIn((prev) => !prev);
   };
 
   return (
     <S.HeaderContainer>
-      <S.Logo>MyLogo</S.Logo>
-
-      <S.NavLinks>
-        <S.NavItem>Home</S.NavItem>
-        <S.NavItem>
-          Category <S.DropdownIcon />
-          <S.DropdownMenu>
-            <li>Subcategory 1</li>
-            <li>Subcategory 2</li>
-            <li>Subcategory 3</li>
-          </S.DropdownMenu>
-        </S.NavItem>
-      </S.NavLinks>
+      <S.LeftSection>
+        {/* <S.Logo src="/logo.png" alt="logo" /> */}
+        <S.Logo src="/tmp.png" alt="logo" />
+        <S.NavLinks>
+          <S.NavItem>Home</S.NavItem>
+          <S.NavItem>
+            Category <S.DropdownIcon />
+            <S.DropdownMenu>
+              <li>Subcategory 1</li>
+              <li>Subcategory 2</li>
+              <li>Subcategory 3</li>
+            </S.DropdownMenu>
+          </S.NavItem>
+          <div style={{ cursor: "pointer" }} onClick={toggleLogin}>
+            test
+          </div>
+        </S.NavLinks>
+      </S.LeftSection>
 
       <S.IconsWrapper>
-        {isLoggedIn ? (
+        {loggedIn ? (
           <>
             <S.Icon>
-              <FaShoppingCart size={20} />
+              <FiSettings size={20} />
             </S.Icon>
             <S.Icon>
-              <FaBell size={20} />
+              <FaRegUserCircle size={20} />
             </S.Icon>
           </>
         ) : (
           <>
             <S.Icon>
-              <FaUser size={20} />
+              <CiLogin size={20} />
             </S.Icon>
-            <S.LoginButton onClick={toggleLogin}>
-              {isLoggedIn ? "Logout" : "Login"}
-            </S.LoginButton>
+            <S.LoginButton onClick={toggleLogin}>Login</S.LoginButton>
           </>
         )}
       </S.IconsWrapper>

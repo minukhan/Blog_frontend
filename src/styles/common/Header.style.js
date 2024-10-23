@@ -1,22 +1,25 @@
 import styled from "styled-components";
-import { FaUser, FaShoppingCart, FaAngleDown, FaBell } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 
 export const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background-color: #f8f9fa;
+  padding: 10px 30px;
+  max-width: 1000px;
+  margin: 0 auto;
 `;
-
-export const Logo = styled.div`
-  font-size: 24px;
-  font-weight: bold;
+export const LeftSection = styled.div`
+  display: flex;
+  align-items: center;
+`;
+export const Logo = styled.img`
+  width: 60px;
+  margin-right: 20px;
 `;
 
 export const NavLinks = styled.nav`
   display: flex;
-  align-items: center;
 `;
 
 export const NavItem = styled.div`
@@ -29,8 +32,8 @@ export const NavItem = styled.div`
   }
 `;
 
-export const DropdownIcon = styled(FaAngleDown)`
-  margin-left: 5px;
+export const DropdownIcon = styled(FaChevronDown)`
+  margin-left: 3px;
 `;
 
 export const DropdownMenu = styled.ul`
@@ -38,18 +41,21 @@ export const DropdownMenu = styled.ul`
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: white;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius);
+  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.1),
+    3px 3px 10px rgba(255, 255, 255, 0.8) inset;
   list-style: none;
   padding: 10px 0;
   margin: 0;
-  width: 150px;
+  width: 120px;
 
   li {
+    font-size: 14px;
     padding: 10px;
     cursor: pointer;
+    border-bottom: 1px solid #999999;
     &:hover {
-      background-color: #f1f1f1;
+      opacity: 0.7;
     }
   }
 `;
@@ -60,16 +66,14 @@ export const IconsWrapper = styled.div`
 `;
 
 export const Icon = styled.div`
-  margin-left: 15px;
+  margin-left: 20px;
   cursor: pointer;
+  opacity: 0.7;
 `;
 
 export const LoginButton = styled.button`
-  margin-left: 20px;
   padding: 5px 10px;
-  background-color: #007bff;
-  color: white;
+  color: gray;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
 `;
