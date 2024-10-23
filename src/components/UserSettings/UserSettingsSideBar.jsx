@@ -27,7 +27,7 @@ function UserSideBar({
   useEffect(() => {
     setData((cur) => {
       const newData = { ...cur };
-      (newData.img = "/images/userBasicImg.png"),
+      (newData.img = profileImg),
         (newData.name = name),
         (newData.desc = blogintro),
         (newData.github = github),

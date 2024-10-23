@@ -12,6 +12,8 @@ export const SettingSub = styled.div`
 `;
 
 export const profileImg = styled.img`
+  width: 100px;
+  height: 100px;
   box-sizing: border-box;
   background: #f2f4f8;
   border-radius: 100px;

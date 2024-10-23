@@ -29,7 +29,17 @@ function userSettings() {
       setInstagram(res.data.social.instagram);
       setTwitter(res.data.social.twitter);
     });
-  }, [uid, name, voiceSelect, blogintro, github, instagram, twitter, refresh]);
+  }, [
+    uid,
+    name,
+    voiceSelect,
+    profileImg,
+    blogintro,
+    github,
+    instagram,
+    twitter,
+    refresh,
+  ]);
 
   return (
     <S.Container>
