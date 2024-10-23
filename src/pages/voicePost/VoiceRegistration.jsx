@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import { FaMicrophoneAlt } from "react-icons/fa";
+import { TbPlayerPauseFilled } from "react-icons/tb";
+import { StyledBtn } from "../../styles/commonStyled";
 
 const VoiceRegistration = () => {
   const [stream, setStream] = useState();
@@ -9,6 +11,7 @@ const VoiceRegistration = () => {
   const [source, setSource] = useState();
   const [analyser, setAnalyser] = useState();
   const [audioUrl, setAudioUrl] = useState();
+  //   const [audioSrc, setAudioSrc] = useState("");
 
   const onRecAudio = () => {
     // 음원정보를 담은 노드를 생성하거나 음원을 실행또는 디코딩 시키는 일을 한다
@@ -77,24 +80,42 @@ const VoiceRegistration = () => {
 
   const onSubmitAudioFile = useCallback(() => {
     if (audioUrl) {
-      console.log(URL.createObjectURL(audioUrl)); // 출력된 링크에서 녹음된 오디오 확인 가능
+      console.log("녹음된 오디오 확인 가능:", URL.createObjectURL(audioUrl)); // 출력된 링크에서 녹음된 오디오 확인 가능
+      // File 생성자를 사용해 파일로 변환
+      const sound = new File([audioUrl], "soundBlob", {
+        lastModified: new Date().getTime(),
+        type: "audio",
+      });
+      console.log(sound); // File 정보 출력
+    } else {
+      alert("녹음을 먼저 진행해주세요");
     }
-    // File 생성자를 사용해 파일로 변환
-    const sound = new File([audioUrl], "soundBlob", {
-      lastModified: new Date().getTime(),
-      type: "audio",
-    });
-    console.log(sound); // File 정보 출력
   }, [audioUrl]);
 
   return (
     <Wrap>
-      {/* <button onClick={onRec ? onRecAudio : offRecAudio}>녹음</button> */}
-      {/* <button onClick={onSubmitAudioFile}>결과 확인</button> */}
+      <Main>
+        <IconBtn onClick={onRec ? onRecAudio : offRecAudio}>
+          {onRec ? (
+            <FaMicrophoneAlt size={18} color="#fff" />
+          ) : (
+            <TbPlayerPauseFilled size={18} color="#fff" />
+          )}
+        </IconBtn>
+        <p>버튼을 눌러 녹음을 시작하세요</p>
+      </Main>
 
-      <IconBtn onClick={onRec ? onRecAudio : offRecAudio}>
-        <FaMicrophoneAlt size={18} color="#fff" />
-      </IconBtn>
+      <StyledBtn onClick={onSubmitAudioFile}>모델링 실행</StyledBtn>
+
+      {/* 모델링 결과 */}
+
+      {/* 녹음된 오디오 재생 */}
+      {/* {audioSrc && (
+        <audio controls>
+          <source src={audioSrc} type="audio/webm" />
+          Your browser does not support the audio element.
+        </audio>
+      )} */}
 
       <ScriptWrap>
         <b>"틈새"</b>에서는 회원님의 목소리를 AI가 분석해 모델링한 후 블로그
@@ -139,9 +160,16 @@ const IconBtn = styled.button`
 
 const ScriptWrap = styled.div`
   font-size: 14px;
-  line-height: 1.3;
+  line-height: 1.8;
+  text-align: center;
 
   b {
     font-weight: 700;
   }
+`;
+
+const Main = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 15px;
 `;

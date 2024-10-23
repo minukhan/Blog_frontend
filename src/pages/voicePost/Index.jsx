@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import VoiceRegistration from "./VoiceRegistration";
+import InfoForm from "./InfoForm";
 
 function VoicePostPage() {
   return (
@@ -9,6 +10,7 @@ function VoicePostPage() {
         <Box>
           <VoiceRegistration />
         </Box>
+        {/* <InfoForm /> */}
       </Main>
     </Wrap>
   );

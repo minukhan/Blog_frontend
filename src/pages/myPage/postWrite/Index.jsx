@@ -95,9 +95,7 @@ function PostWritePage() {
       </EditorWrap>
 
       <BtnWrap>
-        <StyledBtn onClick={handleSubmit} style={{ padding: "0 50px" }}>
-          등록
-        </StyledBtn>
+        <StyledBtn onClick={handleSubmit}>등록</StyledBtn>
       </BtnWrap>
     </Wrap>
   );
@@ -145,10 +143,13 @@ const Text = styled.div`
   display: flex;
   gap: 5px;
 `;
-const StyledTextArea = styled(TextArea)`
+const StyledTextArea = styled.textarea`
   border: none;
+  width: 100%;
   outline: none;
   box-shadow: none;
+  background-color: transparent;
+  resize: none;
 `;
 
 const InputWrap = styled.div`
