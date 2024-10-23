@@ -2,6 +2,8 @@ import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import myPageRouter from "./myPageRouter";
 import PostDetailpage from "../pages/PostDetailpage/PostDetailpage";
+import UserSettings from "../pages/userSettings";
+import MyHome from "../pages/MyHome";
 
 const loading = <div>loading...</div>;
 const MyPage = lazy(() => import("../pages/myPage/Index"));
@@ -40,6 +42,22 @@ const root = createBrowserRouter([
       </Suspense>
     ),
     children: myPageRouter(),
+  },
+  {
+    path: "/user/settings/:uid",
+    element: (
+      <Suspense fallback={loading}>
+        <UserSettings />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/mypage",
+    element: (
+      <Suspense fallback={loading}>
+        <MyHome />
+      </Suspense>
+    ),
   },
 ]);
 
