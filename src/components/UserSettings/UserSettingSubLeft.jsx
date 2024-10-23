@@ -11,7 +11,7 @@ function UserSettingSubLeft({ uid, profileImg, name, voiceSelect, doRefresh }) {
 
   useEffect(() => {
     SetNewVoiceSelect(voiceSelect);
-  }, [voiceSelect]);
+  }, [voiceSelect, profileImg, uid]);
 
   const data = {
     name: newName,
@@ -55,7 +55,7 @@ function UserSettingSubLeft({ uid, profileImg, name, voiceSelect, doRefresh }) {
             gap: "30px",
           }}
         >
-          <SS.profileImg src="/images/userBasicImg.png" />
+          <SS.profileImg src={profileImg} />
           <SS.UploadButton>Upload new photo</SS.UploadButton>
         </div>
         <SS.bar style={{ marginBottom: "10px" }} />
