@@ -4,6 +4,7 @@ import styled from "styled-components";
 export const StyledBtn = styled(Button)`
   background: var(--light-gray);
   box-shadow: 13px 13px 25px #c3c3c3, -13px -13px 25px #fdfdfd;
+  padding: 10px 20px;
 
   border-radius: 98px;
   cursor: pointer;
