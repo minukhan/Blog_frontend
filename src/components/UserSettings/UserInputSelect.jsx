@@ -4,6 +4,7 @@ import { FaCaretDown } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function UserInputSelect({ voiceSelect, setVoiceSelect }) {
+  // 음성 파일 수정 페이지로 이동
   const redirectVoicePage = "/";
 
   const [btnClick, setBtnClick] = useState(false);

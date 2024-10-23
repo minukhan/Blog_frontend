@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import UserSettings from "../pages/userSettings";
-import MyPage from "../pages/MyPage";
+import MyHome from "../pages/MyHome";
 
 const loading = <div>loading...</div>;
 
@@ -22,7 +22,7 @@ const root = createBrowserRouter([
     path: "/mypage",
     element: (
       <Suspense fallback={loading}>
-        <MyPage />
+        <MyHome />
       </Suspense>
     ),
   },
