@@ -8,9 +8,15 @@ import { Link } from "react-router-dom";
 function Header() {
   // const { loggedIn } = useAuth();
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isProfileDropdownOpen, setProfileDropdownOpen] = useState(false);
 
   const toggleLogin = () => {
     setLoggedIn((prev) => !prev);
+  };
+  // 드롭다운 토글 함수
+  const toggleProfileDropdown = () => {
+    console.log(isProfileDropdownOpen);
+    setProfileDropdownOpen((prev) => !prev);
   };
 
   return (
@@ -42,9 +48,17 @@ function Header() {
             <S.Icon>
               <FiSettings size={20} />
             </S.Icon>
-            <S.Icon>
+            <S.Icon onClick={toggleProfileDropdown}>
               <FaRegUserCircle size={20} />
             </S.Icon>
+            {isProfileDropdownOpen && (
+              <S.ProfileDropdownWrapper>
+                <S.ProfileDropdown>
+                  <li>Myblog</li>
+                  <li>Logout</li>
+                </S.ProfileDropdown>
+              </S.ProfileDropdownWrapper>
+            )}
           </>
         ) : (
           <>

@@ -77,3 +77,28 @@ export const LoginButton = styled.button`
   border: none;
   border-radius: 5px;
 `;
+export const ProfileDropdownWrapper = styled.div`
+  position: relative;
+`;
+export const ProfileDropdown = styled.ul`
+  position: absolute;
+  top: 10px;
+  right: 0;
+  border-radius: var(--border-radius);
+  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.1),
+    3px 3px 10px rgba(255, 255, 255, 0.8) inset;
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+  width: 120px;
+
+  li {
+    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #999999;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+`;
