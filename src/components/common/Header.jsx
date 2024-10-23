@@ -4,6 +4,7 @@ import { FiSettings } from "react-icons/fi";
 import { FaRegUserCircle } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 function Header() {
   // const { loggedIn } = useAuth();
   const [loggedIn, setLoggedIn] = useState(false);
@@ -18,7 +19,9 @@ function Header() {
         {/* <S.Logo src="/logo.png" alt="logo" /> */}
         <S.Logo src="/tmp.png" alt="logo" />
         <S.NavLinks>
-          <S.NavItem>Home</S.NavItem>
+          <S.NavItem>
+            <Link to="/">Home</Link>
+          </S.NavItem>
           <S.NavItem>
             Category <S.DropdownIcon />
             <S.DropdownMenu>

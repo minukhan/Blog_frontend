@@ -8,7 +8,6 @@ import Header from "../../components/common/Header";
 function MyPage() {
   return (
     <MyPageLayout>
-      <Header />
       <Outlet />
     </MyPageLayout>
   );
