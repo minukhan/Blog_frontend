@@ -3,28 +3,53 @@ import styled from "styled-components";
 import UserSideBar from "../components/common/UserSideBar";
 import { FaCaretDown } from "react-icons/fa";
 import PostItem from "../components/MyPage/PostItem";
-import { getPostByUserId, getUserInfo } from "../api/myHomeApi";
+import {
+  getPostByUserId,
+  getUserInfo,
+  getUserPostsByCategory,
+} from "../api/myHomeApi";
 import { useParams } from "react-router-dom";
 
 function MyPage() {
-  const uid = 2;
+  const uid = 1;
+  const { categoryName } = useParams();
   const [posts, setPosts] = useState([]);
-  const [userName, setUserName] = useState("");
+  const [user, setUser] = useState({
+    name: "",
+    profileImg: "",
+    social: {
+      github: "",
+      instagram: "",
+      twitter: "",
+      intro: "",
+    },
+  });
 
   useEffect(() => {
-    getPostByUserId(uid).then((res) => {
-      console.log(res);
-      setPosts(res);
-    });
+    console.log(categoryName);
+    // 유저 정보는 공통이므로 항상 요청
     getUserInfo(uid).then((res) => {
-      setUserName(res.data.name);
+      console.log(res);
+      setUser(res.data);
     });
-    console.log(userName);
-  }, [setPosts]);
+
+    // categoryName에 따라 요청 분기
+    if (categoryName) {
+      console.log("Fetching posts by category:", categoryName);
+      getUserPostsByCategory(uid, categoryName).then((res) => {
+        setPosts(res ? res : []); // 카테고리별 게시물 설정
+      });
+    } else {
+      console.log("Fetching all posts for user");
+      getPostByUserId(uid).then((res) => {
+        setPosts(res ? res : []); // 모든 게시물 설정
+      });
+    }
+  }, [categoryName, uid]);
 
   return (
     <MainWrap>
-      <UserSideBar />
+      <UserSideBar user={user} />
       <PostMain>
         <SortToggleBar>
           Sort
@@ -32,7 +57,7 @@ function MyPage() {
         </SortToggleBar>
 
         {posts.map((item, i) => {
-          return <PostItem key={i} item={item} username={userName} />;
+          return <PostItem key={i} item={item} username={user.name} />;
         })}
       </PostMain>
     </MainWrap>

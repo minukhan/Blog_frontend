@@ -15,24 +15,37 @@ function UserSideBar() {
   const navigate = useNavigate();
   const userId = window.localStorage.getItem("userId");
 
+
   return (
     <S.Wrap>
       <S.ProfileWrap>
         <S.ProfileImg>
-          <img src={user.img} alt={user.name} />
+          <img src={user.profileImg} alt={user.name} />
         </S.ProfileImg>
 
-        <p style={{ fontWeight: "700", paddingTop: "15px" }}>{user.nickname}</p>
-        <p>{user.desc}</p>
+        <p style={{ fontWeight: "700", paddingTop: "15px" }}>{user.name}</p>
+        <p>{user.social.intro}</p>
 
         <S.SocialWrap>
-          <a href={user.github} target="_blank" rel="noopener noreferrer">
+          <a
+            href={user.social.github}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaGithub style={{ fontSize: "25px" }} />
           </a>
-          <a href={user.insta} target="_blank" rel="noopener noreferrer">
+          <a
+            href={user.social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaInstagram style={{ fontSize: "25px" }} />
           </a>
-          <a href={user.twitter} target="_blank" rel="noopener noreferrer">
+          <a
+            href={user.social.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaTwitterSquare style={{ fontSize: "25px" }} />
           </a>
         </S.SocialWrap>
@@ -47,13 +60,13 @@ function UserSideBar() {
       <S.CategoryWrap>
         <h2>CATEGORY</h2>
         <S.Category>
-          <Link to="#">기 술</Link>
-          <Link to="#">음 식</Link>
-          <Link to="#">여 행</Link>
-          <Link to="#">반려동물</Link>
-          <Link to="#">뉴 스</Link>
-          <Link to="#">영 화</Link>
-          <Link to="#">연 예</Link>
+          <Link to="TECH">기 술</Link>
+          <Link to="COOK">음 식</Link>
+          <Link to="TRAVEL">여 행</Link>
+          <Link to="ANIMAL">반려동물</Link>
+          <Link to="NEWS">뉴 스</Link>
+          <Link to="MOVIE">영 화</Link>
+          <Link to="ENTERTAIN">연 예</Link>
         </S.Category>
       </S.CategoryWrap>
     </S.Wrap>
