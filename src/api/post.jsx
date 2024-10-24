@@ -17,3 +17,9 @@ export const POST_WRITE = async (postInfo) => {
 
   return res.data;
 };
+
+export const POST_READ = async (postId) => {
+  const res = await axios.get(`http://localhost:8080/api/posts/${postId}`);
+  console.log(res.data);
+  return res.data;
+};
