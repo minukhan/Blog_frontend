@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import UserSideBar from "../components/common/UserSideBar";
 import { FaCaretDown } from "react-icons/fa";
-import * as S from "../styles/home/home.style";
 import PostItem from "../components/MyPage/PostItem";
+import { getPostByUserId, getUserInfo } from "../api/myHomeApi";
+import { useParams } from "react-router-dom";
 
 function MyPage() {
+  const { uid } = useParams();
+  const [posts, setPosts] = useState([]);
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    getPostByUserId(uid).then((res) => {
+      console.log(res);
+      setPosts(res);
+    });
+    getUserInfo(uid).then((res) => {
+      setUserName(res.data.name);
+    });
+    console.log(userName);
+  }, [uid, setPosts]);
+
   return (
     <MainWrap>
       <UserSideBar />
@@ -15,9 +31,9 @@ function MyPage() {
           <FaCaretDown color="#000000" size={"30px"} />
         </SortToggleBar>
 
-        <PostItem />
-        <PostItem />
-        <PostItem />
+        {posts.map((item, i) => {
+          return <PostItem key={i} item={item} username={userName} />;
+        })}
       </PostMain>
     </MainWrap>
   );
@@ -41,7 +57,8 @@ const MainWrap = styled.div`
 const PostMain = styled.div`
   /* Rectangle 1 */
   width: 955px;
-  height: 1248px;
+  height: auto;
+  min-height: 1248px;
 
   background: #ecf0f3;
   box-shadow: -10px -10px 30px #ffffff, 10px 10px 30px rgba(174, 174, 192, 0.4);
