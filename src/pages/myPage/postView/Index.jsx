@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import PostView from "./../../../components/MyPage/PostView/PostView";
 import PostViewComment from "./../../../components/MyPage/PostView/PostViewComment";
+import useScrollToTop from "../../../hooks/useScrollTop";
 
 function PostsViewPage() {
+  useScrollToTop();
   return (
     <div>
       <PostContainer>

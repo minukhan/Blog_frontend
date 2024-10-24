@@ -55,7 +55,7 @@ function UserSettingSubLeft({ uid, profileImg, name, voiceSelect, doRefresh }) {
             gap: "30px",
           }}
         >
-          <SS.profileImg src={profileImg} />
+          <SS.profileImg src={profileImg || "./images/userBasicImg.png"} />
           <SS.UploadButton>Upload new photo</SS.UploadButton>
         </div>
         <SS.bar style={{ marginBottom: "10px" }} />

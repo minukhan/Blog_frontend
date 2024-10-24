@@ -1,15 +1,14 @@
 import { useEffect } from "react";
 import * as S from "../../styles/home/PostItem.style";
+import { useNavigate } from "react-router-dom";
 
 function PostItem({ post }) {
-  const userProfileImage = localStorage.getItem("userProfileImage");
-  useEffect(() => {
-    if (userProfileImage) {
-      post.profileImage = userProfileImage;
-    } else {
-      console.log("userProfileImage가 로컬 스토리지에 저장되어 있지 않습니다.");
-    }
-  }, []);
+  const navigate = useNavigate();
+  // 포스트 제목 클릭 시 해당 경로로 이동하는 함수
+  const handleTitleClick = () => {
+    navigate(`/${post.postId}/post`);
+  };
+
   // post prop 추가
   return (
     <S.PostContainer>
@@ -35,7 +34,7 @@ function PostItem({ post }) {
           <S.Icon />
         </S.PostHeader>
         <S.PostBody>
-          <S.PostTitle>
+          <S.PostTitle onClick={handleTitleClick}>
             {post.postTitle || "틈새에서 나만의 플레이리스트 만들기"}
           </S.PostTitle>
           <S.PostSummary>
