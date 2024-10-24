@@ -15,7 +15,7 @@ function PostItem({ post }) {
   }, []);
 
   const handleClick = () => {
-    navigate(`${post}/post`);
+    navigate(`${post.postId}/post`);
   };
   // post prop 추가
   return (
