@@ -1,4 +1,8 @@
 import axios from "axios";
+import { getCookie } from "../utils/useCookie";
+
+const assessToken = getCookie("accessToken");
+const userId = window.localStorage.getItem("userId");
 
 export const POST_WRITE = async (postInfo) => {
   //   const accessToken = window.localStorage.getItem("accessToken");
@@ -18,7 +22,14 @@ export const POST_WRITE = async (postInfo) => {
 };
 
 export const POST_READ = async (postId) => {
-  const res = await axios.get(`http://localhost:8080/api/posts/${postId}`);
+  const res = await axios({
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${assessToken}`,
+    },
+    method: "get",
+    url: `http://localhost:8080/api/posts/${postId}`,
+  });
   console.log(res.data);
   return res.data;
 };
