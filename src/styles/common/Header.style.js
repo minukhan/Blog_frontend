@@ -96,9 +96,25 @@ export const ProfileDropdown = styled.ul`
     font-size: 14px;
     padding: 10px;
     cursor: pointer;
-    border-bottom: 1px solid #999999;
+    position: relative;
+    &::after {
+      content: "";
+      display: block;
+      width: 80%;
+      height: 1px;
+      background-color: #999999;
+      position: absolute;
+      bottom: 3px; // 아래쪽 위치
+    }
     &:hover {
       opacity: 0.7;
     }
   }
+`;
+
+export const LoginWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
 `;
