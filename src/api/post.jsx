@@ -3,7 +3,6 @@ import axios from "axios";
 export const POST_WRITE = async (postInfo) => {
   //   const accessToken = window.localStorage.getItem("accessToken");
 
-  console.log("확인용", postInfo);
   const url = "http://localhost:8080/api/posts";
 
   const res = await axios({
@@ -15,5 +14,11 @@ export const POST_WRITE = async (postInfo) => {
     },
   });
 
+  return res.data;
+};
+
+export const POST_READ = async (postId) => {
+  const res = await axios.get(`http://localhost:8080/api/posts/${postId}`);
+  console.log(res.data);
   return res.data;
 };
