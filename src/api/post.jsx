@@ -5,6 +5,7 @@ export const POST_WRITE = async (postInfo) => {
   const url = "http://localhost:8080/api/posts";
   const accessToken = getCookie("accessToken");
 
+  console.log("!!!!!!!!!!1!확인", postInfo);
   const res = await axios({
     method: "post",
     url: url,
