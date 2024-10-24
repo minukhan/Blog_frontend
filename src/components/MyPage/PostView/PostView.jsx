@@ -1,8 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import * as S from "../../../styles/mypage/PostView.style";
+import { useEffect, useState } from "react";
+import { POST_READ } from "../../../api/post";
 function PostView() {
   const navigate = useNavigate();
   const postId = 1;
+  const [postObject, setPostObject] = useState({
+    postId: 0,
+    userId: 0,
+    postTitle: "",
+    postCategory: "",
+    postContent: "",
+    audioUrl: "",
+    thumbnailUrl: "",
+    postSummary: "",
+    isDeleted: false,
+    createdAt: "",
+    updatedAt: "",
+  });
   const handleEdit = () => {
     navigate(`/edit/${postId}`); // todo
   };
@@ -19,6 +34,43 @@ function PostView() {
     }
   };
 
+  const postdate = () => {
+    const pdate = new Date(postObject.createdAt);
+    return (
+      pdate.getFullYear() +
+      "-" +
+      (pdate.getMonth() + 1) +
+      "-" +
+      pdate.getDate() +
+      " " +
+      pdate.getHours() +
+      ":" +
+      pdate.getMinutes() +
+      ":"
+    );
+  };
+  useEffect(() => {
+    POST_READ(postId).then((res) => {
+      console.log(res);
+      setPostObject((prev) => {
+        return {
+          ...prev,
+          postId: res.postId,
+          userId: res.userId,
+          postTitle: res.postTitle,
+          postCategory: res.postCategory,
+          postContent: res.postContent,
+          audioUrl: res.audioUrl,
+          thumbnailUrl: res.thumbnailUrl,
+          postSummary: res.postSummary,
+          isDeleted: res.isDeleted,
+          createdAt: res.createdAt,
+          updatedAt: res.updatedAt,
+        };
+      });
+    });
+  }, [setPostObject]);
+
   return (
     <>
       <S.PostHeader>
@@ -26,44 +78,28 @@ function PostView() {
           <S.PlayIcon />
           <S.AddIcon />
         </S.IconWrapper>
-        <S.PostCategory>Food</S.PostCategory>
+        <S.PostCategory>{postObject.postCategory}</S.PostCategory>
       </S.PostHeader>
-      <S.PostTitle>틈새에서 나만의 플레이리스트 만들기</S.PostTitle>
-      <S.PostMeta>3 days ago - 3:26</S.PostMeta>
+      <S.PostTitle>{postObject.postTitle}</S.PostTitle>
+      <S.PostMeta>
+        {
+          /* {postdate.getFullYear() +
+          "-" +
+          (postdate.getMonth() + 1) +
+          "-" +
+          postdate.getDate() +
+          " "} */ postdate()
+        }
+      </S.PostMeta>
       <S.PostContent>
         <S.PostContentHeader>
-          <S.Thumbnail src="/images/home/thumbnail.png" alt="Post Thumbnail" />
+          <S.Thumbnail src={postObject.thumbnailUrl} alt="Post Thumbnail" />
           <S.SummaryWrap>
             <S.SummaryTitle>요 약</S.SummaryTitle>
-            <S.Summary>
-              저희 “틈새” 프로젝트는 블로그 플랫폼 구축을 목표로 하며, 차별화된
-              핵심 기능은 TTS(텍스트 음성 변환)을 활용해 블로그 게시글을
-              음성으로 읽어주는 것입니다.
-            </S.Summary>
+            <S.Summary>{postObject.postSummary}</S.Summary>
           </S.SummaryWrap>
         </S.PostContentHeader>
-        <S.TextPlaceholder>
-          저희 “틈새” 프로젝트는 블로그 플랫폼 구축을 목표로 하며, 차별화된 핵심
-          기능은 TTS(텍스트 음성 변환)을 활용해 블로그 게시글을 음성으로
-          읽어주는 것입니다. <br />
-          <br />
-          이때 그냥 TTS 기능이 아니라 사용자가 자신의 목소리를 모델링 해서
-          등록할 수 있도록 하여, 작성한 게시글을 자신만의 목소리로 나레이션할 수
-          있습니다. <br />
-          <br />
-          틈새에서는 내 목소리로 블로그를 들을 수 있습니다. 바쁜 일상 속
-          틈새에서 나만의 플레이리스트를 완성해보는 건 어떤가요? 저희 “틈새”
-          프로젝트는 블로그 플랫폼 구축을 목표로 하며, 차별화된 핵심 기능은
-          TTS(텍스트 음성 변환)을 활용해 블로그 게시글을 음성으로 읽어주는
-          것입니다. <br />
-          <br />
-          이때 그냥 TTS 기능이 아니라 사용자가 자신의 목소리를 모델링 해서
-          등록할 수 있도록 하여, 작성한 게시글을 자신만의 목소리로 나레이션할 수
-          있습니다. <br />
-          <br />
-          틈새에서는 내 목소리로 블로그를 들을 수 있습니다. 바쁜 일상 속
-          틈새에서 나만의 플레이리스트를 완성해보는 건 어떤가요?
-        </S.TextPlaceholder>
+        <S.TextPlaceholder>{postObject.postContent}</S.TextPlaceholder>
       </S.PostContent>
 
       <S.PostButtonWrap>
