@@ -3,6 +3,8 @@ import styled from "styled-components";
 import * as Form from "@radix-ui/react-form";
 import { StyledBtn } from "../../styles/commonStyled";
 import { useSelect } from "../../hooks/useSelect";
+import { POST_FORMSETTING } from "../../api/userSettingApi";
+import { redirect } from "react-router-dom";
 
 function InfoForm() {
   const nicknameRef = useRef();
@@ -15,12 +17,19 @@ function InfoForm() {
     e.preventDefault();
 
     const formData = {
-      nickname: nicknameRef.current.value,
-      desc: descRef.current.value,
-      category: categoryRef.current.value,
+      userNickname: nicknameRef.current.value,
+      userDesc: descRef.current.value,
+      voiceSelected: categoryRef.current.value,
     };
 
-    console.log("입력된 값:", formData);
+    POST_FORMSETTING(formData)
+      .then((data) => {
+        console.log("postId", data);
+        redirect("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
