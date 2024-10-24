@@ -99,7 +99,10 @@ function PostView() {
             <S.Summary>{postObject.postSummary}</S.Summary>
           </S.SummaryWrap>
         </S.PostContentHeader>
-        <S.TextPlaceholder>{postObject.postContent}</S.TextPlaceholder>
+        {/* <S.TextPlaceholder>{postObject.postContent}</S.TextPlaceholder> */}
+        <S.TextPlaceholder
+          dangerouslySetInnerHTML={{ __html: postObject.postContent }}
+        />
       </S.PostContent>
 
       <S.PostButtonWrap>
