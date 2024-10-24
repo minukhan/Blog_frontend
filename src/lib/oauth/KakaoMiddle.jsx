@@ -11,10 +11,8 @@ const KakaoMiddle = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // code(인가코드)는 서버로 보내기
       try {
-        const code = new URL(window.location.href).searchParams.get("code"); // 현재 url의 파라미터 가져오기 + 파라미터 안에서 'code'값 가져오기
-        console.log("인가코드:", code);
+        const code = new URL(window.location.href).searchParams.get("code");
 
         const url = `http://localhost:8080/api/kakao/callback?code=${code}`;
         const res = await axios({
@@ -36,12 +34,14 @@ const KakaoMiddle = () => {
             res.datauserProfileImage
           );
 
-          navigate("/narration/register");
+          //   navigate("/narration/register");
+          navigate("/");
         } else {
           console.log(res);
         }
       } catch (error) {
         console.log(error);
+        navigate("/");
       }
     };
 

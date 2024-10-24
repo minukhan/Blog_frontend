@@ -2,21 +2,22 @@ import * as S from "../../styles/common/Header.style";
 import { CiLogin } from "react-icons/ci";
 import { FiSettings } from "react-icons/fi";
 import { FaRegUserCircle } from "react-icons/fa";
-import useAuth from "../../hooks/useAuth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useLogin from "../../lib/\boauth/useLogin";
+import { getCookie } from "../../utils/useCookie";
 
 function Header() {
   const { handleLogin } = useLogin();
 
-  // const { loggedIn } = useAuth();
   const [loggedIn, setLoggedIn] = useState(false);
   const [isProfileDropdownOpen, setProfileDropdownOpen] = useState(false);
 
-  const toggleLogin = () => {
-    setLoggedIn((prev) => !prev);
-  };
+  useEffect(() => {
+    const token = getCookie("accessToken");
+    setLoggedIn(!!token);
+  }, []);
+
   // 드롭다운 토글 함수
   const toggleProfileDropdown = () => {
     console.log(isProfileDropdownOpen);
@@ -40,9 +41,7 @@ function Header() {
               <li>Subcategory 3</li>
             </S.DropdownMenu>
           </S.NavItem>
-          <div style={{ cursor: "pointer" }} onClick={toggleLogin}>
-            test
-          </div>
+          <div style={{ cursor: "pointer" }}>test</div>
         </S.NavLinks>
       </S.LeftSection>
 
@@ -69,7 +68,7 @@ function Header() {
             <S.Icon>
               <CiLogin size={20} />
             </S.Icon>
-            <S.LoginButton onClick={toggleLogin}>Login</S.LoginButton>
+            <S.LoginButton>Login</S.LoginButton>
           </S.LoginWrap>
         )}
       </S.IconsWrapper>
