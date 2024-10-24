@@ -4,9 +4,10 @@ import * as Form from "@radix-ui/react-form";
 import { StyledBtn } from "../../styles/commonStyled";
 import { useSelect } from "../../hooks/useSelect";
 import { POST_FORMSETTING } from "../../api/userSettingApi";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function InfoForm() {
+  const navigate = useNavigate();
   const nicknameRef = useRef();
   const descRef = useRef();
   const categoryRef = useRef();
@@ -25,7 +26,7 @@ function InfoForm() {
     POST_FORMSETTING(formData)
       .then((data) => {
         console.log("postId", data);
-        redirect("/");
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
