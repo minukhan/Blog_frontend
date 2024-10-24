@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaGithub, FaInstagram, FaTwitterSquare } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { deleteUserInfo } from "../../api/userSettingApi";
 
 const user = {
   img: "",
@@ -23,6 +24,7 @@ function UserSideBar({
   refresh,
 }) {
   const [data, setData] = useState(user);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setData((cur) => {
@@ -38,6 +40,14 @@ function UserSideBar({
     console.log("ref됨");
     console.log(data);
   }, [profileImg, name, blogintro, github, instagram, twitter, uid, refresh]);
+
+  const deleteAccount = () => {
+    if (confirm("회원 탈퇴를 하시겠습니까?")) {
+      deleteUserInfo(uid);
+      alert("탈퇴가 완료됐습니다.");
+      navigate("/");
+    }
+  };
 
   return (
     <Wrap>
@@ -73,9 +83,10 @@ function UserSideBar({
       <AccountInfoWrap>
         <h2>Account Information</h2>
         <Category>
-          <Link>My Playlist</Link>
-          <Link>My Address</Link>
-          <Link>Log out</Link>
+          <p>Logout</p>
+          <p style={{ color: "#cc0000" }} onClick={() => deleteAccount()}>
+            Delete Account
+          </p>
         </Category>
       </AccountInfoWrap>
     </Wrap>
@@ -149,7 +160,7 @@ const Category = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  a {
+  p {
     padding-right: 40px;
     margin: 25px 0;
     text-decoration: none;

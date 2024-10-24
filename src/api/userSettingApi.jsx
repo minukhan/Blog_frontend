@@ -17,3 +17,8 @@ export const editUserSocialInfo = async (uId, uInfo) => {
   const res = await axios.put(`${perfix}/${uId}/social`, uInfo);
   return res.data;
 };
+
+export const deleteUserInfo = async (uId) => {
+  const res = await axios.delete(`${perfix}/${uId}/delete`);
+  return res.data;
+};
