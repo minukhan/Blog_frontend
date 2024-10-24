@@ -130,8 +130,8 @@ function PostWritePage() {
             <div style={{ marginLeft: "50px" }}>
               <StyledTextArea
                 placeholder="한줄 요약을 입력해주세요"
-                value={summary} // 상태값을 바인딩
-                onChange={(e) => setSummary(e.target.value)} // 상태 업데이트
+                value={summary}
+                onChange={(e) => setSummary(e.target.value)}
               />
             </div>
           </Box_2>
