@@ -11,16 +11,15 @@ function PlayModalFull({ togglePlayModal }) {
   const [error, setError] = useState(null); // 에러 상태
 
   const fetchPlaylists = async () => {
-    const userId = 3;
+    const userId = window.localStorage.getItem("userId");
+    console.log(userId);
 
     try {
       const response = await axios.get(
         `http://localhost:8080/api/playlists/${userId}`
       ); // userId로 API 호출
       setPlaylists(response.data); // 상태 업데이트
-      if (response.data.length > 0) {
-        setSelectedPlaylist(response.data[0]); // 첫 번째 플레이리스트를 선택
-      }
+      setSelectedPlaylist(response.data[0]); // 첫 번째 항목을 기본값으로 설정
       setLoading(false); // 로딩 완료
     } catch (err) {
       setError(err.message); // 에러 발생 시 상태 업데이트
@@ -39,9 +38,9 @@ function PlayModalFull({ togglePlayModal }) {
     <>
       <S.ModalBackground onClick={togglePlayModal} />
       <S.PlayModalFullWrapper>
-        {/* 선택된 플레이리스트가 있을 경우 PlayBox에 전달 */}
-        {selectedPlaylist && <PlayBox playlist={selectedPlaylist} />}
-        {/* PlaylistBox에 onSelect 함수 전달 */}
+        {/* 선택된 플레이리스트를 PlayBox에 전달 */}
+        {selectedPlaylist && <PlayBox playlists={selectedPlaylist} />}
+        {/* PlaylistBox에 onSelect 함수를 전달하여 선택된 항목을 변경 */}
         <PlaylistBox playlists={playlists} onSelect={setSelectedPlaylist} />
       </S.PlayModalFullWrapper>
     </>
