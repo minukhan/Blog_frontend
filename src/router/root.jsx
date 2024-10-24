@@ -52,7 +52,7 @@ const root = createBrowserRouter([
     ),
   },
   {
-    path: "/mypage",
+    path: "/mypage/:uid",
     element: (
       <Suspense fallback={loading}>
         <MyHome />
