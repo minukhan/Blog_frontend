@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PostItem from "../components/Home/PostItem";
-import * as S from "../styles/home/Home.style";
+import * as S from "../styles/home/home.style";
 import axios from "axios";
 function Home() {
   const [posts, setPosts] = useState([]); // 게시글 상태
