@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { profileAction } from "../../store/actions/profile";
 
 import { useNavigate } from "react-router-dom";
 
