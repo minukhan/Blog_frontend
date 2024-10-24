@@ -19,8 +19,8 @@ function PlayBox({ playlists }) {
       </S.TextWrap>
       {/* 볼륨 아이콘 */}
       <S.VolumeIcon />
-      {/* 오디오 플레이어 */}
-      <AudioPlayer src={playlists.audioUrl} />
+      {/* 오디오 플레이어, playlistId 추가 */}
+      <AudioPlayer src={playlists.audioUrl} playlistId={playlists.playlistId} />
     </S.PlayBox>
   );
 }

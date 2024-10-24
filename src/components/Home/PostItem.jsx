@@ -4,10 +4,13 @@ function PostItem({ post }) {
   // post prop 추가
   return (
     <S.PostContainer>
-      <S.Thumbnail
-        src={post.thumbnailUrl || "/images/home/thumbnail.png"}
-        alt="Post Thumbnail"
-      />
+      <S.ThumbnailWrap>
+        <S.Thumbnail
+          src={post.thumbnailUrl || "/images/home/thumbnail.png"}
+          alt="Post Thumbnail"
+        />
+      </S.ThumbnailWrap>
+
       <S.PostContent>
         <S.PostHeader>
           <S.Profile>

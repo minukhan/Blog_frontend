@@ -10,13 +10,27 @@ function PlayModalFull({ togglePlayModal }) {
   const [loading, setLoading] = useState(true); // 로딩 상태
   const [error, setError] = useState(null); // 에러 상태
 
+  // 쿠키에서 특정 이름의 토큰 값을 가져오는 함수
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+  }
+
   const fetchPlaylists = async () => {
     const userId = window.localStorage.getItem("userId");
-    console.log(userId);
+    console.log("유저ID :" + userId);
+    const token = getCookie("accessToken");
+    console.log("토큰 :" + token);
 
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/playlists/${userId}`
+        `http://localhost:8080/api/playlists/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Authorization 헤더에 토큰 추가
+          },
+        }
       ); // userId로 API 호출
       setPlaylists(response.data); // 상태 업데이트
       setSelectedPlaylist(response.data[0]); // 첫 번째 항목을 기본값으로 설정
@@ -27,12 +41,20 @@ function PlayModalFull({ togglePlayModal }) {
     }
   };
 
+  // 특정 항목만 삭제하는 handleDelete 함수
+  const handleDelete = (id) => {
+    setPlaylists(
+      (prevPlaylists) =>
+        prevPlaylists.filter((playlist) => playlist.playlistId !== id) // 클릭한 아이템만 필터링해서 삭제
+    );
+  };
   useEffect(() => {
     fetchPlaylists();
   }, []); // 컴포넌트 마운트 시 한 번만 실행됨
 
   if (loading) return <div>Loading...</div>; // 로딩 중일 때 표시
   if (error) return <div>Error: {error}</div>; // 에러 발생 시 표시
+  console.log("FULL MODAL playlists:", playlists); //잘됨
 
   return (
     <>
@@ -41,7 +63,11 @@ function PlayModalFull({ togglePlayModal }) {
         {/* 선택된 플레이리스트를 PlayBox에 전달 */}
         {selectedPlaylist && <PlayBox playlists={selectedPlaylist} />}
         {/* PlaylistBox에 onSelect 함수를 전달하여 선택된 항목을 변경 */}
-        <PlaylistBox playlists={playlists} onSelect={setSelectedPlaylist} />
+        <PlaylistBox
+          playlists={playlists}
+          onSelect={setSelectedPlaylist}
+          onDelete={handleDelete}
+        />
       </S.PlayModalFullWrapper>
     </>
   );
