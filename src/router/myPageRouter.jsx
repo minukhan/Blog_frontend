@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 
 const loading = <div className="bg-red-500">loading...</div>;
 const PostWritePage = lazy(() => import("../pages/myPage/postWrite/Index"));
-const PostViewPage = lazy(() => import("../pages/myPage/\bpostsView/Index"));
+const PostViewPage = lazy(() => import("../pages/myPage/postsView/Index"));
 
 const myPageRouter = () => {
   return [
