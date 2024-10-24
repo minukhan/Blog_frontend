@@ -61,13 +61,13 @@ function UserSideBar({ user }) {
       <S.CategoryWrap>
         <h2>CATEGORY</h2>
         <S.Category>
-          <Link to="#">기 술</Link>
-          <Link to="#">음 식</Link>
-          <Link to="#">여 행</Link>
-          <Link to="#">반려동물</Link>
-          <Link to="#">뉴 스</Link>
-          <Link to="#">영 화</Link>
-          <Link to="#">연 예</Link>
+          <Link to="TECH">기 술</Link>
+          <Link to="COOK">음 식</Link>
+          <Link to="TRAVEL">여 행</Link>
+          <Link to="ANIMAL">반려동물</Link>
+          <Link to="NEWS">뉴 스</Link>
+          <Link to="MOVIE">영 화</Link>
+          <Link to="ENTERTAIN">연 예</Link>
         </S.Category>
       </S.CategoryWrap>
     </S.Wrap>
