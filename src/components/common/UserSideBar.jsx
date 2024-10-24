@@ -1,41 +1,60 @@
 import * as S from "../../styles/common/UserSideBar.style";
 import { FaGithub, FaInstagram, FaTwitterSquare } from "react-icons/fa";
 import { StyledBtn } from "../../styles/commonStyled";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const user = {
-  img: "/images/myPageProfile.png",
-  nickname: "하니",
-  desc: "Senior Developer",
-  github: "https://example.com",
-  insta: "https://example.com",
-  twitter: "https://example.com",
-};
-function UserSideBar() {
+// const user = {
+//   img: "/images/myPageProfile.png",
+//   nickname: "하니",
+//   desc: "Senior Developer",
+//   github: "https://example.com",
+//   insta: "https://example.com",
+//   twitter: "https://example.com",
+// };
+function UserSideBar({ user }) {
+  const navigate = useNavigate();
   return (
     <S.Wrap>
       <S.ProfileWrap>
         <S.ProfileImg>
-          <img src={user.img} alt={user.name} />
+          <img src={user.profileImg} alt={user.name} />
         </S.ProfileImg>
 
-        <p style={{ fontWeight: "700", paddingTop: "15px" }}>{user.nickname}</p>
-        <p>{user.desc}</p>
+        <p style={{ fontWeight: "700", paddingTop: "15px" }}>{user.name}</p>
+        <p>{user.social.intro}</p>
 
         <S.SocialWrap>
-          <a href={user.github} target="_blank" rel="noopener noreferrer">
+          <a
+            href={user.social.github}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaGithub style={{ fontSize: "25px" }} />
           </a>
-          <a href={user.insta} target="_blank" rel="noopener noreferrer">
+          <a
+            href={user.social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaInstagram style={{ fontSize: "25px" }} />
           </a>
-          <a href={user.twitter} target="_blank" rel="noopener noreferrer">
+          <a
+            href={user.social.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaTwitterSquare style={{ fontSize: "25px" }} />
           </a>
         </S.SocialWrap>
 
         <div style={{ marginTop: "30px" }}>
-          <StyledBtn>새 글 작성</StyledBtn>
+          <StyledBtn
+            onClick={() => {
+              navigate("/mypage/newpost");
+            }}
+          >
+            새 글 작성
+          </StyledBtn>
         </div>
       </S.ProfileWrap>
 
