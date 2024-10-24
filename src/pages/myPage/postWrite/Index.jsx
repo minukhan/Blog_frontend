@@ -154,7 +154,7 @@ function PostWritePage() {
                     id="fileUpload"
                     onChange={handleSelectedThumbImg}
                   />
-                  <StyledBtn htmlFor="fileUpload">이미지 등록</StyledBtn>
+                  <label htmlFor="fileUpload">이미지 등록</label>
                 </InputWrap>
               </div>
               <ImgPreviewWrap>
