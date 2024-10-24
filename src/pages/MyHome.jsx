@@ -11,7 +11,7 @@ import {
 import { useParams } from "react-router-dom";
 
 function MyPage() {
-  const uid = 1;
+  const uid = window.localStorage.getItem("userId");
   const { categoryName } = useParams();
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({

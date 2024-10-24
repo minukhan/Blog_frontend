@@ -37,22 +37,56 @@ export const POST_FORMSETTING = async (formData) => {
   return res.data;
 };
 
+//사용자 상세정보 조회 api
 export const getUserInfo = async (uId) => {
-  const res = await axios.get(`${perfix}/${uId}`);
+  const res = await axios({
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${assessToken}`,
+    },
+    method: "get",
+    url: `${perfix}/${uId}`,
+  });
   return res.data;
 };
 
+//사용자 상세정보 수정1 - 닉네임, 목소리 선택
 export const editUserInfo = async (uId, uInfo) => {
-  const res = await axios.put(`${perfix}/${uId}`, uInfo);
+  const res = await axios({
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${assessToken}`,
+    },
+    method: "put",
+    url: `${perfix}/${uId}`,
+    data: uInfo,
+  });
   return res.data;
 };
 
+//사용자 상세정보 수정2 - 블로그 소개, 소셜 링크
 export const editUserSocialInfo = async (uId, uInfo) => {
-  const res = await axios.put(`${perfix}/${uId}/social`, uInfo);
+  const res = await axios({
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${assessToken}`,
+    },
+    method: "put",
+    url: `${perfix}/${uId}/social`,
+    data: uInfo,
+  });
   return res.data;
 };
 
+//회원 탈퇴
 export const deleteUserInfo = async (uId) => {
-  const res = await axios.delete(`${perfix}/${uId}/delete`);
+  const res = await axios({
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${assessToken}`,
+    },
+    method: "delete",
+    url: `${perfix}/${uId}/delete`,
+  });
   return res.data;
 };

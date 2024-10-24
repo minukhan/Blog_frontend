@@ -1,9 +1,11 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import * as S from "../../styles/modal/AudioPlayer.style";
 import useProgress from "../../hooks/useProgress";
-const AudioPlayer = ({ src }) => {
+
+const AudioPlayer = ({ src, playlistId }) => {
+  // playlistId prop 추가
   const [isPlaying, setIsPlaying] = useState(false);
-  const selectedMusicRef = useRef(null); // 오디오 엘리먼트를 참조
+  const selectedMusicRef = useRef(null);
   const {
     currentTime,
     duration,
@@ -12,6 +14,7 @@ const AudioPlayer = ({ src }) => {
     handleProgressClick,
     formatTime,
   } = useProgress(selectedMusicRef);
+
   const togglePlayPause = () => {
     if (selectedMusicRef.current.paused) {
       selectedMusicRef.current.play();
@@ -21,15 +24,13 @@ const AudioPlayer = ({ src }) => {
       setIsPlaying(false);
     }
   };
-  // 10초 앞으로 이동
-  const forwardTenSeconds = () => {
-    selectedMusicRef.current.currentTime += 10;
-  };
 
-  // 10초 뒤로 이동
-  const backwardTenSeconds = () => {
-    selectedMusicRef.current.currentTime -= 10;
-  };
+  // duration 값을 로컬 스토리지에 저장
+  useEffect(() => {
+    if (duration) {
+      localStorage.setItem(`audioDuration_${playlistId}`, Math.floor(duration)); // Math.ceil로 올림하여 저장
+    }
+  }, [duration, playlistId]);
 
   return (
     <>
@@ -40,8 +41,7 @@ const AudioPlayer = ({ src }) => {
           onTimeUpdate={handleTimeUpdate}
           controls
           hidden
-        />{" "}
-        {/* 오디오 엘리먼트 */}
+        />
         <S.TimeWrapper>
           <S.Time>{formatTime(currentTime)}</S.Time>
           <S.Time>{formatTime(duration)}</S.Time>
@@ -53,9 +53,13 @@ const AudioPlayer = ({ src }) => {
         </S.ProgressBarContainer>
       </S.PlayerContainer>
       <S.ButtonGroup>
-        <S.PrevButton onClick={backwardTenSeconds} />
+        <S.PrevButton
+          onClick={() => (selectedMusicRef.current.currentTime -= 10)}
+        />
         <S.ControlButton onClick={togglePlayPause} />
-        <S.NextButton onClick={forwardTenSeconds} />
+        <S.NextButton
+          onClick={() => (selectedMusicRef.current.currentTime += 10)}
+        />
       </S.ButtonGroup>
     </>
   );

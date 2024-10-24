@@ -12,16 +12,13 @@ function PostItem({ item, username }) {
 
     if (currentTime < postedTime) return "미래에서 온 포스트";
 
-    if (Math.floor(calTime / 365) > 0) {
-      let year = Math.floor(calTime / 365);
-      showDate = year;
-      if (year == 1) showDate += " year ago";
-      else showDate += "years ago";
-    } else if (Math.floor(calTime / 30) > 0) {
-      let month = Math.floor(calTime / 30);
-      showDate = month;
-      if (month == 1) showDate += " month ago";
-      else showDate += " months ago";
+    if (Math.floor(calTime / 28) > 0) {
+      showDate = postedTime.toLocaleDateString();
+    } else if (Math.floor(calTime / 7) > 0) {
+      let week = Math.floor(calTime / 7);
+      showDate = week;
+      if (week == 1) showDate += " week ago";
+      else showDate += " weeks ago";
     } else if (Math.floor(calTime) >= 1) {
       if (Math.floor(calTime) == 1) showDate = "yesterday";
       else showDate = Math.floor(calTime) + " days ago";
