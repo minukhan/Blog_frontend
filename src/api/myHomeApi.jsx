@@ -1,35 +1,27 @@
 import axios from "axios";
-import { getCookie } from "../utils/useCookie";
 
-const API_SERVER_HOST = "http://localhost:8080/";
+const API_SERVER_HOST = "http://localhost:8080";
 const perfix = `${API_SERVER_HOST}/api`;
-
-const assessToken = getCookie("accessToken");
-const userId = window.localStorage.getItem("userId");
 
 //사이드 바 위한 사용자 정보 조회
 export const getUserInfo = async (uId) => {
-  const res = await axios({
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${assessToken}`,
-    },
-    method: "get",
-    url: `${perfix}/users/${uId}`,
-  });
-  console.log(res);
+  const res = await axios.get(`${perfix}/users/${uId}`);
+
   return res.data;
 };
 
 //유저별 포스트 조회
 export const getPostByUserId = async (uId) => {
-  const res = await axios({
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${assessToken}`,
+  const res = await axios.get(`${perfix}/posts/user/${uId}`);
+
+  return res.data;
+};
+
+export const getUserPostsByCategory = async (uId, categoryName) => {
+  const res = await axios.get(`${perfix}/posts/user/category/${uId}`, {
+    params: {
+      category: categoryName,
     },
-    method: "get",
-    url: `${perfix}/posts/user/${uId}`,
   });
   return res.data;
 };
