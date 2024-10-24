@@ -2,11 +2,14 @@ import React, { useRef } from "react";
 import styled from "styled-components";
 import * as Form from "@radix-ui/react-form";
 import { StyledBtn } from "../../styles/commonStyled";
+import { useSelect } from "../../hooks/useSelect";
 
 function InfoForm() {
   const nicknameRef = useRef();
   const descRef = useRef();
   const categoryRef = useRef();
+  const { isOpen, selectedOption, toggleDropdown, selectOption } =
+    useSelect("내 목소리");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,7 +64,7 @@ function InfoForm() {
           </div>
         </FormField>
 
-        <FormField name="category">
+        {/* <FormField name="category">
           <FormLabel>카테고리</FormLabel>
           <div
             style={{
@@ -76,6 +79,39 @@ function InfoForm() {
               <option value="WOMAN">젊은 여성 목소리</option>
               <option value="MAN">중후한 남성 목소리</option>
             </Select>
+          </div>
+        </FormField> */}
+
+        <FormField name="category">
+          <FormLabel>카테고리</FormLabel>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              alignItems: "baseline",
+            }}
+          >
+            <DropdownWrapper>
+              <CustomSelect
+                type="text"
+                readOnly
+                ref={categoryRef}
+                value={selectedOption}
+                onClick={toggleDropdown}
+              />
+              {isOpen && (
+                <Dropdown>
+                  <li onClick={() => selectOption("내 목소리")}>내 목소리</li>
+                  <li onClick={() => selectOption("젊은 여성 목소리")}>
+                    젊은 여성 목소리
+                  </li>
+                  <li onClick={() => selectOption("중후한 남성 목소리")}>
+                    중후한 남성 목소리
+                  </li>
+                </Dropdown>
+              )}
+            </DropdownWrapper>
           </div>
         </FormField>
 
@@ -135,22 +171,10 @@ const Input = styled.input`
   }
 `;
 
-const Button = styled.button`
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  font-size: 14px;
-  border: none;
-  border-radius: 4px;
+const CustomSelect = styled.input`
   cursor: pointer;
-  margin-top: 10px;
-
-  &:hover {
-    background-color: #0056b3;
-  }
-`;
-
-const Select = styled.select`
+  font-size: 13px;
+  height: 29.6px;
   border: 1px solid #ccc;
   box-shadow: 6px 6px 16px rgba(0, 0, 0, 0.15) inset;
 
@@ -170,5 +194,41 @@ const Select = styled.select`
   &:focus {
     outline: none;
     border: 1px solid #ccc;
+  }
+`;
+
+export const DropdownWrapper = styled.div`
+  position: relative;
+`;
+export const Dropdown = styled.ul`
+  position: absolute;
+  top: 30px;
+  right: 0;
+  border-radius: var(--border-radius);
+  background-color: var(--light-gray);
+  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.1),
+    3px 3px 10px rgba(255, 255, 255, 0.8) inset;
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  width: 130px;
+
+  li {
+    font-size: 12px;
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    &::after {
+      content: "";
+      display: block;
+      width: 80%;
+      height: 1px;
+      background-color: #999999;
+      position: absolute;
+      bottom: 3px; // 아래쪽 위치
+    }
+    &:hover {
+      opacity: 0.7;
+    }
   }
 `;

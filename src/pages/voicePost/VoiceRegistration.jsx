@@ -177,7 +177,7 @@ const Wrap = styled.div`
 `;
 
 const IconBtn = styled.button`
-  background-color: var(--deep-gray); /* 배경 색상 */
+  background-color: var(--deep-gray);
   border: none;
   border-radius: 50%;
   width: 34px;
