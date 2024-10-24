@@ -4,7 +4,7 @@ import { FiSettings } from "react-icons/fi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import useLogin from "../../lib/\boauth/useLogin";
+import useLogin from "../../lib/oauth/useLogin";
 import { getCookie } from "../../utils/useCookie";
 
 function Header() {

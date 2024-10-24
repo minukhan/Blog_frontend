@@ -10,7 +10,7 @@ const loading = <div>loading...</div>;
 const MyPage = lazy(() => import("../pages/myPage/Index"));
 const HomePage = lazy(() => import("../pages/Index"));
 const VoicePostPage = lazy(() => import("../pages/voicePost/Index"));
-const KakaoMiddle = lazy(() => import("../lib/\boauth/KakaoMiddle"));
+const KakaoMiddle = lazy(() => import("../lib/oauth/KakaoMiddle"));
 
 const root = createBrowserRouter([
   {

@@ -13,6 +13,7 @@ const KakaoMiddle = () => {
     const fetchData = async () => {
       try {
         const code = new URL(window.location.href).searchParams.get("code");
+        console.log("인가코드:", code);
 
         const url = `http://localhost:8080/api/kakao/callback?code=${code}`;
         const res = await axios({
@@ -31,11 +32,11 @@ const KakaoMiddle = () => {
           window.localStorage.setItem("userNickname", res.data.userNickname);
           window.localStorage.setItem(
             "userProfileImage",
-            res.datauserProfileImage
+            res.data.userProfileImage
           );
 
-          //   navigate("/narration/register");
-          navigate("/");
+          navigate("/narration/register");
+          // navigate("/");
         } else {
           console.log(res);
         }
