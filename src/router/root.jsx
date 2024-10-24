@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import myPageRouter from "./myPageRouter";
-import PostDetailpage from "../pages/PostDetailpage/PostDetailpage";
 import UserSettings from "../pages/userSettings";
 import MyHome from "../pages/MyHome";
 import MainLayout from "../components/layouts/MainLayout";
@@ -24,14 +23,6 @@ const root = createBrowserRouter([
         element: (
           <Suspense fallback={loading}>
             <HomePage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "/post/detail",
-        element: (
-          <Suspense fallback={loading}>
-            <PostDetailpage />
           </Suspense>
         ),
       },
