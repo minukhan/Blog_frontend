@@ -77,6 +77,16 @@ const root = createBrowserRouter([
             <MyHome />
           </Suspense>
         ),
+        children: [
+          {
+            path: ":categoryName", // "/mypage/:categoryName" 자식 경로
+            element: (
+              <Suspense fallback={loading}>
+                <MyPage />
+              </Suspense>
+            ),
+          },
+        ],
       },
     ],
   },
