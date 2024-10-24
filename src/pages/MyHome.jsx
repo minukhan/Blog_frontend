@@ -28,12 +28,8 @@ function MyPage() {
       console.log(res);
       setUser(res.data);
     });
-<<<<<<< HEAD
-  }, [uid, setPosts]);
-=======
     console.log(userName);
   }, [setPosts]);
->>>>>>> cdc2b683b91bc722fe07dcfd7271c75c13da5d62
 
   return (
     <MainWrap>
