@@ -2,6 +2,7 @@ import * as S from "../../styles/common/UserSideBar.style";
 import { FaGithub, FaInstagram, FaTwitterSquare } from "react-icons/fa";
 import { StyledBtn } from "../../styles/commonStyled";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 // const user = {
 //   img: "/images/myPageProfile.png",
@@ -13,11 +14,20 @@ import { Link, useNavigate } from "react-router-dom";
 // };
 function UserSideBar({ user }) {
   const navigate = useNavigate();
+  const localProfileImg = localStorage.getItem("userProfileImage");
+  useEffect(() => {
+    console.log(user);
+  }, []);
   return (
     <S.Wrap>
       <S.ProfileWrap>
         <S.ProfileImg>
-          <img src={user.profileImg} alt={user.name} />
+          <img
+            src={
+              user.profileImg || localProfileImg || "./images/userBasicImg.png"
+            }
+            alt={user.name}
+          />
         </S.ProfileImg>
 
         <p style={{ fontWeight: "700", paddingTop: "15px" }}>{user.name}</p>
