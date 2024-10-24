@@ -10,7 +10,8 @@ export const StyledBtn = styled(Button)`
   border-radius: 98px;
   cursor: pointer;
 
-  color: black;
+  color: var(--navy);
+  font-weight: 600;
 
   &:hover {
     background: var(--light-gray);
