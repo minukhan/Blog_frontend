@@ -1,4 +1,4 @@
-import * as S from "../../styles/mypage/PostViewCommentItem.style";
+import * as S from "../../../styles/mypage/PostViewCommentItem.style";
 function PostViewCommentItem() {
   return (
     <>

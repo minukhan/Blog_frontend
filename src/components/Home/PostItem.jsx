@@ -16,7 +16,7 @@ function PostItem({ post }) {
               alt="Profile Image"
             />
             <S.ProfileTextWrap>
-              <S.UserName>{post.username || "Username"}</S.UserName>
+              <S.UserName>{post.userName || "Username"}</S.UserName>
               <S.PostDate>{post.createdAt || "3 days ago - 3:27"}</S.PostDate>
             </S.ProfileTextWrap>
           </S.Profile>

@@ -1,20 +1,15 @@
-import React from "react";
 import styled from "styled-components";
 import UserSideBar from "../common/UserSideBar";
-import Header from "../common/Header";
-import Footer from "../common/Footer";
 
 function MyPageLayout({ children }) {
   return (
     <div>
-      <Header />
       <PageWrap>
         <Wrap>
           <UserSideBar />
           {children}
         </Wrap>
       </PageWrap>
-      <Footer />
     </div>
   );
 }

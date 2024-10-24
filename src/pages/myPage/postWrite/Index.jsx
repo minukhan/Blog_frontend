@@ -1,9 +1,10 @@
 import { TextArea } from "@radix-ui/themes";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { StyledBtn } from "../../../styles/commonStyled";
 import PostEditor from "./PostEditor";
 import { POST_WRITE } from "../../../api/post";
+import { useSelect } from "./../../../hooks/useSelect";
 
 function PostWritePage() {
   const [selectedThumbImg, setSelectedThumbImg] = useState(
@@ -13,6 +14,9 @@ function PostWritePage() {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [editorContent, setEditorContent] = useState("");
+  const categoryRef = useRef();
+  const { isOpen, selectedOption, toggleDropdown, selectOption } =
+    useSelect("카테고리");
 
   // 기본 이미지를 파일로 변환하는 함수
   const urlToFile = async (url, filename, mimeType) => {
@@ -83,9 +87,29 @@ function PostWritePage() {
 
   return (
     <Wrap>
+      <DropdownWrapper>
+        <CustomSelect
+          type="text"
+          readOnly
+          ref={categoryRef}
+          value={selectedOption}
+          onClick={toggleDropdown}
+        />
+        {isOpen && (
+          <Dropdown>
+            <li onClick={() => selectOption("기술")}>기술</li>
+            <li onClick={() => selectOption("음식")}>음식</li>
+            <li onClick={() => selectOption("여행")}>여행</li>
+            <li onClick={() => selectOption("반려동물")}>반려동물</li>
+            <li onClick={() => selectOption("뉴스")}>뉴스</li>
+            <li onClick={() => selectOption("영화")}>영화</li>
+            <li onClick={() => selectOption("연예")}>연예</li>
+          </Dropdown>
+        )}
+      </DropdownWrapper>
       <InfoWrap>
         <Right>
-          <Box>
+          <Box_2>
             <Text>
               <img src="/images/postWrite_title.png" />
               게시글 제목
@@ -97,8 +121,8 @@ function PostWritePage() {
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
-          </Box>
-          <Box>
+          </Box_2>
+          <Box_2>
             <Text>
               <img src="/images/postWrite_desc.png" />
               게시글 한줄 요약
@@ -110,7 +134,7 @@ function PostWritePage() {
                 onChange={(e) => setSummary(e.target.value)}
               />
             </div>
-          </Box>
+          </Box_2>
         </Right>
 
         {/* 썸네일 등록 */}
@@ -130,7 +154,7 @@ function PostWritePage() {
                     id="fileUpload"
                     onChange={handleSelectedThumbImg}
                   />
-                  <label htmlFor="fileUpload">이미지 등록</label>
+                  <StyledBtn htmlFor="fileUpload">이미지 등록</StyledBtn>
                 </InputWrap>
               </div>
               <ImgPreviewWrap>
@@ -175,7 +199,9 @@ const Right = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 15px;
+  height: 254px;
 `;
 const Left = styled.div`
   width: 50%;
@@ -183,7 +209,18 @@ const Left = styled.div`
 const Box = styled.div`
   background-color: white;
   padding: 13px;
-  border-radius: 16px;
+  border-radius: var(--border-radius);
+
+  p {
+    color: gray;
+    font-size: 14px;
+  }
+`;
+const Box_2 = styled.div`
+  background-color: white;
+  padding: 13px;
+  border-radius: var(--border-radius);
+  height: 50%;
 
   p {
     color: gray;
@@ -245,4 +282,66 @@ const EditorWrap = styled.div``;
 const BtnWrap = styled.div`
   display: flex;
   justify-content: end;
+`;
+
+const CustomSelect = styled.input`
+  cursor: pointer;
+  font-size: 13px;
+  height: 29.6px;
+  border: 1px solid #ccc;
+  box-shadow: 6px 6px 16px rgba(0, 0, 0, 0.15) inset;
+
+  background: var(--light-gray)
+    url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23000%27%3E%3Cpath d=%27M8 12l-4-4h8z%27/%3E%3C/svg%3E")
+    no-repeat right 10px center;
+  background-size: 15px;
+
+  padding: 6px 10px;
+  width: 200px;
+
+  border-radius: 54px;
+  color: black;
+  box-sizing: border-box;
+  appearance: none;
+
+  &:focus {
+    outline: none;
+    border: 1px solid #ccc;
+  }
+`;
+
+export const DropdownWrapper = styled.div`
+  position: relative;
+`;
+export const Dropdown = styled.ul`
+  position: absolute;
+  top: 30px;
+  left: 130px;
+  border-radius: var(--border-radius);
+  background-color: var(--light-gray);
+  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.1),
+    3px 3px 10px rgba(255, 255, 255, 0.8) inset;
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  width: 70px;
+
+  li {
+    font-size: 12px;
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    &::after {
+      content: "";
+      display: block;
+      width: 80%;
+      height: 1px;
+      background-color: #999999;
+      position: absolute;
+      bottom: 3px; // 아래쪽 위치
+    }
+    &:hover {
+      opacity: 0.7;
+    }
+  }
 `;
