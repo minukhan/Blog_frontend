@@ -58,8 +58,14 @@ function Home() {
         <S.CategoryButton onClick={() => fetchPostsByCategory("반려동물")}>
           반려동물
         </S.CategoryButton>
-        <S.CategoryButton onClick={() => fetchPostsByCategory("리뷰")}>
-          리뷰
+        <S.CategoryButton onClick={() => fetchPostsByCategory("뉴스")}>
+          뉴스
+        </S.CategoryButton>
+        <S.CategoryButton onClick={() => fetchPostsByCategory("영화")}>
+          영화
+        </S.CategoryButton>
+        <S.CategoryButton onClick={() => fetchPostsByCategory("연예")}>
+          연예
         </S.CategoryButton>
       </S.CategorySection>
       <S.PostListContainer>
