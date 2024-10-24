@@ -15,6 +15,7 @@ function Home() {
   const fetchPosts = async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/posts"); // API 호출
+
       setPosts(response.data); // 게시글 상태 업데이트
       setLoading(false); // 로딩 완료
       console.log(response);

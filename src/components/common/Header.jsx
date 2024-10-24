@@ -3,7 +3,7 @@ import { CiLogin } from "react-icons/ci";
 import { FiSettings } from "react-icons/fi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useLogin from "../../lib/oauth/useLogin";
 import { getCookie } from "../../utils/useCookie";
 
@@ -12,6 +12,8 @@ function Header() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [isProfileDropdownOpen, setProfileDropdownOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = getCookie("accessToken");
@@ -22,6 +24,11 @@ function Header() {
   const toggleProfileDropdown = () => {
     console.log(isProfileDropdownOpen);
     setProfileDropdownOpen((prev) => !prev);
+  };
+
+  // Myblog 클릭 시 userId 경로로 이동
+  const handleMyBlogClick = () => {
+    navigate(`/mypage`); // userId 경로로 이동
   };
 
   return (
@@ -57,7 +64,7 @@ function Header() {
             {isProfileDropdownOpen && (
               <S.ProfileDropdownWrapper>
                 <S.ProfileDropdown>
-                  <li>Myblog</li>
+                  <li onClick={handleMyBlogClick}>Myblog</li>
                   <li>Logout</li>
                 </S.ProfileDropdown>
               </S.ProfileDropdownWrapper>

@@ -1,10 +1,10 @@
 import { lazy, Suspense } from "react";
+import MyPage from "../pages/MyHome";
 
 const loading = <div className="bg-red-500">loading...</div>;
 const PostWritePage = lazy(() => import("../pages/myPage/postWrite/Index"));
 // todo
 const PostViewPage = lazy(() => import("../pages/myPage/postView/Index"));
-
 const myPageRouter = () => {
   return [
     {
@@ -23,6 +23,14 @@ const myPageRouter = () => {
         </Suspense>
       ),
     },
+    // {
+    //   path: "",
+    //   element: (
+    //     <Suspense fallback={loading}>
+    //       <MyPage />
+    //     </Suspense>
+    //   ),
+    // },
   ];
 };
 
