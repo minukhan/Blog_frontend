@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import UserSideBar from "../common/UserSideBar";
 import Header from "../common/Header";
+import Footer from "../common/Footer";
 
 function MyPageLayout({ children }) {
   return (
@@ -13,6 +14,7 @@ function MyPageLayout({ children }) {
           {children}
         </Wrap>
       </PageWrap>
+      <Footer />
     </div>
   );
 }
@@ -20,7 +22,7 @@ function MyPageLayout({ children }) {
 export default MyPageLayout;
 
 const PageWrap = styled.div`
-  max-width: 1000px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding-top: 20px;
   padding-bottom: 100px;
@@ -28,5 +30,6 @@ const PageWrap = styled.div`
 
 const Wrap = styled.div`
   display: flex;
-  gap: 40px;
+  justify-content: center;
+  gap: 20px;
 `;

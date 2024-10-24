@@ -5,12 +5,14 @@ export const Wrap = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 130px;
-  min-width: 342px;
+  gap: 100px;
+  min-width: 270px;
   padding: 30px 0px;
   border-radius: 30px;
   background: var(--light-gray);
-  box-shadow: 13px 13px 25px #c3c3c3, -13px -13px 25px #fdfdfd;
+  /* box-shadow: 13px 13px 25px #c3c3c3, -13px -13px 25px #fdfdfd; */
+  box-shadow: 10px 10px 30px rgba(174, 174, 192, 0.6);
+  height: 700px;
 `;
 
 export const ProfileWrap = styled.div`
@@ -56,6 +58,7 @@ export const CategoryWrap = styled.div`
     font-weight: 500;
     padding: 0 3px 0 3px;
     border-bottom: 2px solid black;
+    margin-bottom: 15px;
   }
 `;
 
@@ -64,7 +67,7 @@ export const Category = styled.div`
   display: flex;
   flex-direction: column;
   align-items: end;
-  gap: 15px;
+  gap: 20px;
   a {
     padding-right: 40px;
   }

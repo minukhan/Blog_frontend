@@ -6,7 +6,7 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 10px 30px;
-  max-width: 1000px;
+  max-width: var(--max-width);
   margin: 0 auto;
 `;
 export const LeftSection = styled.div`

@@ -42,13 +42,13 @@ function UserSideBar() {
       <S.CategoryWrap>
         <h2>CATEGORY</h2>
         <S.Category>
-          <Link to="#">카테고리1</Link>
-          <Link to="#">카테고리2</Link>
-          <Link to="#">카테고리3</Link>
-          <Link to="#">카테고리4</Link>
-          <Link to="#">카테고리5</Link>
-          <Link to="#">카테고리6</Link>
-          <Link to="#">카테고리7</Link>
+          <Link to="#">기 술</Link>
+          <Link to="#">음 식</Link>
+          <Link to="#">여 행</Link>
+          <Link to="#">반려동물</Link>
+          <Link to="#">뉴 스</Link>
+          <Link to="#">영 화</Link>
+          <Link to="#">연 예</Link>
         </S.Category>
       </S.CategoryWrap>
     </S.Wrap>
