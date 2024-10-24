@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const REGISTRATION_VOICEID = async (voiceUrl) => {
-  //   const accessToken = window.localStorage.getItem("accessToken");
+  //   const ≈ = window.localStorage.getItem("accessToken");
 
   console.log("확인용", voiceUrl);
   // userId local에서 가져오기
