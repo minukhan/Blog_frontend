@@ -2,22 +2,17 @@ import * as S from "../../styles/common/UserSideBar.style";
 import { FaGithub, FaInstagram, FaTwitterSquare } from "react-icons/fa";
 import { StyledBtn } from "../../styles/commonStyled";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
-// const user = {
-//   img: "/images/myPageProfile.png",
-//   nickname: "하니",
-//   desc: "Senior Developer",
-//   github: "https://example.com",
-//   insta: "https://example.com",
-//   twitter: "https://example.com",
-// };
-function UserSideBar({ user }) {
+const user = {
+  img: "/images/myPageProfile.png",
+  nickname: "하니",
+  desc: "Senior Developer",
+  github: "https://example.com",
+  insta: "https://example.com",
+  twitter: "https://example.com",
+};
+function UserSideBar() {
   const navigate = useNavigate();
-  const localProfileImg = localStorage.getItem("userProfileImage");
-  useEffect(() => {
-    console.log(user);
-  }, []);
   return (
     <S.Wrap>
       <S.ProfileWrap>
@@ -58,11 +53,7 @@ function UserSideBar({ user }) {
         </S.SocialWrap>
 
         <div style={{ marginTop: "30px" }}>
-          <StyledBtn
-            onClick={() => {
-              navigate("/mypage/newpost");
-            }}
-          >
+          <StyledBtn onClick={() => navigate(`/${userId}/newpost`)}>
             새 글 작성
           </StyledBtn>
         </div>
