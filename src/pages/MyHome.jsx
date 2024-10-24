@@ -7,7 +7,7 @@ import { getPostByUserId, getUserInfo } from "../api/myHomeApi";
 import { useParams } from "react-router-dom";
 
 function MyPage() {
-  const uid = 2;
+  const uid = window.localStorage.getItem("userId");
   const [posts, setPosts] = useState([]);
   const [userName, setUserName] = useState("");
 
@@ -17,6 +17,7 @@ function MyPage() {
       setPosts(res);
     });
     getUserInfo(uid).then((res) => {
+      console.log(res);
       setUserName(res.data.name);
     });
     console.log(userName);

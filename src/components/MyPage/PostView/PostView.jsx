@@ -34,21 +34,7 @@ function PostView() {
     }
   };
 
-  const postdate = () => {
-    const pdate = new Date(postObject.createdAt);
-    return (
-      pdate.getFullYear() +
-      "-" +
-      (pdate.getMonth() + 1) +
-      "-" +
-      pdate.getDate() +
-      " " +
-      pdate.getHours() +
-      ":" +
-      pdate.getMinutes() +
-      ":"
-    );
-  };
+  const postdate = new Date(postObject.createdAt);
   useEffect(() => {
     POST_READ(postId).then((res) => {
       console.log(res);
@@ -81,16 +67,7 @@ function PostView() {
         <S.PostCategory>{postObject.postCategory}</S.PostCategory>
       </S.PostHeader>
       <S.PostTitle>{postObject.postTitle}</S.PostTitle>
-      <S.PostMeta>
-        {
-          /* {postdate.getFullYear() +
-          "-" +
-          (postdate.getMonth() + 1) +
-          "-" +
-          postdate.getDate() +
-          " "} */ postdate()
-        }
-      </S.PostMeta>
+      <S.PostMeta>{postdate.toLocaleString()}</S.PostMeta>
       <S.PostContent>
         <S.PostContentHeader>
           <S.Thumbnail src={postObject.thumbnailUrl} alt="Post Thumbnail" />
