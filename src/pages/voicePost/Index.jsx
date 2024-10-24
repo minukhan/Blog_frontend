@@ -10,7 +10,9 @@ function VoicePostPage() {
         <Box>
           <VoiceRegistration />
         </Box>
-        {/* <InfoForm /> */}
+        <div style={{ marginTop: "30px" }}>
+          <InfoForm />
+        </div>
       </Main>
     </Wrap>
   );

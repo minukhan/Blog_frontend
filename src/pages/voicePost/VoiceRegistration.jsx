@@ -3,15 +3,18 @@ import styled from "styled-components";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import { TbPlayerPauseFilled } from "react-icons/tb";
 import { StyledBtn } from "../../styles/commonStyled";
+import { REGISTRATION_VOICEID } from "../../api/narration";
+import { DotLoader } from "react-spinners";
 
 const VoiceRegistration = () => {
   const [stream, setStream] = useState();
   const [media, setMedia] = useState();
-  const [onRec, setOnRec] = useState(true); // 녹음 중인지 여부를 나타내는 상태입니다. true이면 녹음이 중지된 상태, false이면 녹음이 진행 중
+  const [onRec, setOnRec] = useState(true); // 녹음 중인지 여부를 나타내는 상태. true이면 녹음이 중지된 상태, false이면 녹음이 진행 중
   const [source, setSource] = useState();
   const [analyser, setAnalyser] = useState();
   const [audioUrl, setAudioUrl] = useState();
-  //   const [audioSrc, setAudioSrc] = useState("");
+  const [modelingSrc, setModelingSrc] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const onRecAudio = () => {
     // 음원정보를 담은 노드를 생성하거나 음원을 실행또는 디코딩 시키는 일을 한다
@@ -86,7 +89,24 @@ const VoiceRegistration = () => {
         lastModified: new Date().getTime(),
         type: "audio",
       });
-      console.log(sound); // File 정보 출력
+      //   console.log(sound); // File 정보 출력
+
+      // FormData 객체 생성 및 파일 추가
+      const formData = new FormData();
+      formData.append("voiceUrl", sound); // 'audioFile'은 서버에서 받을 때 사용할 필드명입니다.
+
+      setLoading(true);
+      REGISTRATION_VOICEID(formData)
+        .then((data) => {
+          console.log("modelingFile", data);
+          setModelingSrc(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     } else {
       alert("녹음을 먼저 진행해주세요");
     }
@@ -102,24 +122,34 @@ const VoiceRegistration = () => {
             <TbPlayerPauseFilled size={18} color="#fff" />
           )}
         </IconBtn>
-        <p>버튼을 눌러 녹음을 시작하세요</p>
+
+        {onRec ? (
+          <p>버튼을 눌러 녹음을 시작하세요</p>
+        ) : (
+          <p>녹음이 완료되었다면 모델링을 시작해주세요</p>
+        )}
       </Main>
 
       <StyledBtn onClick={onSubmitAudioFile}>모델링 실행</StyledBtn>
 
-      {/* 모델링 결과 */}
+      {loading && (
+        <div style={{ padding: "20px" }}>
+          <DotLoader size={50} />
+        </div>
+      )}
 
+      {/* 모델링 결과 */}
       {/* 녹음된 오디오 재생 */}
-      {/* {audioSrc && (
+      {modelingSrc && (
         <audio controls>
-          <source src={audioSrc} type="audio/webm" />
+          <source src={modelingSrc} type="audio/webm" />
           Your browser does not support the audio element.
         </audio>
-      )} */}
+      )}
 
       <ScriptWrap>
-        <b>"틈새"</b>에서는 회원님의 목소리를 AI가 분석해 모델링한 후 블로그
-        글을 읽어줄 때 사용해요. 간단히{" "}
+        <b>&quot;틈새&quot;</b>에서는 회원님의 목소리를 AI가 분석해 모델링한 후
+        블로그 글을 읽어줄 때 사용해요. 간단히{" "}
         <b>
           <span style={{ color: "var(--red)" }}>목소리를 녹음</span>
         </b>
