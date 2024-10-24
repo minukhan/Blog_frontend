@@ -4,12 +4,20 @@ import UserSideBar from "../components/common/UserSideBar";
 import { FaCaretDown } from "react-icons/fa";
 import PostItem from "../components/MyPage/PostItem";
 import { getPostByUserId, getUserInfo } from "../api/myHomeApi";
-import { useParams } from "react-router-dom";
 
 function MyPage() {
-  const uid = 2;
+  const uid = 1;
   const [posts, setPosts] = useState([]);
-  const [userName, setUserName] = useState("");
+  const [user, setUser] = useState({
+    name: "",
+    profileImg: "",
+    social: {
+      github: "",
+      instagram: "",
+      twitter: "",
+      intro: "",
+    },
+  });
 
   useEffect(() => {
     getPostByUserId(uid).then((res) => {
@@ -17,14 +25,19 @@ function MyPage() {
       setPosts(res);
     });
     getUserInfo(uid).then((res) => {
-      setUserName(res.data.name);
+      console.log(res);
+      setUser(res.data);
     });
+<<<<<<< HEAD
+  }, [uid, setPosts]);
+=======
     console.log(userName);
   }, [setPosts]);
+>>>>>>> cdc2b683b91bc722fe07dcfd7271c75c13da5d62
 
   return (
     <MainWrap>
-      <UserSideBar />
+      <UserSideBar user={user} />
       <PostMain>
         <SortToggleBar>
           Sort
@@ -32,7 +45,7 @@ function MyPage() {
         </SortToggleBar>
 
         {posts.map((item, i) => {
-          return <PostItem key={i} item={item} username={userName} />;
+          return <PostItem key={i} item={item} username={user.name} />;
         })}
       </PostMain>
     </MainWrap>
