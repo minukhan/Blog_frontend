@@ -48,6 +48,14 @@ function UserSideBar({
       navigate("/");
     }
   };
+  const deleteCookie = (cookieName) => {
+    document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  };
+  const handleLogout = () => {
+    // accessToken 쿠키 삭제
+    deleteCookie("accessToken");
+    window.location.href = "/";
+  };
 
   return (
     <Wrap>
@@ -83,8 +91,13 @@ function UserSideBar({
       <AccountInfoWrap>
         <h2>Account Information</h2>
         <Category>
-          <p>Logout</p>
-          <p style={{ color: "#cc0000" }} onClick={() => deleteAccount()}>
+          <p style={{ cursor: "pointer" }} onClick={handleLogout}>
+            Logout
+          </p>
+          <p
+            style={{ color: "#cc0000", cursor: "pointer" }}
+            onClick={() => deleteAccount()}
+          >
             Delete Account
           </p>
         </Category>

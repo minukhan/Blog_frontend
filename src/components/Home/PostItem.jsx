@@ -1,6 +1,15 @@
+import { useEffect } from "react";
 import * as S from "../../styles/home/PostItem.style";
 
 function PostItem({ post }) {
+  const userProfileImage = localStorage.getItem("userProfileImage");
+  useEffect(() => {
+    if (userProfileImage) {
+      post.profileImage = userProfileImage;
+    } else {
+      console.log("userProfileImage가 로컬 스토리지에 저장되어 있지 않습니다.");
+    }
+  }, []);
   // post prop 추가
   return (
     <S.PostContainer>
