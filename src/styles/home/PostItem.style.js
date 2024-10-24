@@ -8,8 +8,15 @@ export const PostContainer = styled.div`
   margin-bottom: 20px;
 `;
 
-export const Thumbnail = styled.img`
+export const ThumbnailWrap = styled.div`
   width: 300px;
+  height: 207px;
+  border-radius: 8px 0 0 8px;
+`;
+export const Thumbnail = styled.img`
+  /* width: 300px; */
+  width: 100%;
+  height: 100%;
   border-radius: 8px 0 0 8px;
   object-fit: cover;
 `;

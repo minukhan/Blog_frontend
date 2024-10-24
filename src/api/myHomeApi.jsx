@@ -33,3 +33,12 @@ export const getPostByUserId = async (uId) => {
   });
   return res.data;
 };
+
+export const getUserPostsByCategory = async (uId, categoryName) => {
+  const res = await axios.get(`${perfix}/posts/user/category/${uId}`, {
+    params: {
+      category: categoryName,
+    },
+  });
+  return res.data;
+};
