@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
+import { setCookie } from "../../utils/useCookie";
 
 const KakaoMiddle = () => {
   const dispatch = useDispatch();
@@ -15,38 +16,30 @@ const KakaoMiddle = () => {
         const code = new URL(window.location.href).searchParams.get("code"); // 현재 url의 파라미터 가져오기 + 파라미터 안에서 'code'값 가져오기
         console.log("인가코드:", code);
 
-        // const url = `/auth/kakao/login?code=${code}`;
-        // const res = await axios({
-        //   method: "get",
-        //   url: url,
-        // });
+        const url = `http://localhost:8080/api/kakao/callback?code=${code}`;
+        const res = await axios({
+          method: "post",
+          url: url,
+        });
 
-        // if (res.data.success) {
-        //   console.log(res.data);
+        if (res.status == 200) {
+          console.log(res);
+          setCookie("accessToken", res.data.token, {
+            expires: 7,
+            path: "/",
+          });
 
-        //   dispatch(
-        //     profileAction({
-        //       userId: res.data.data.memberIdx,
-        //       email: res.data.data.email,
-        //     })
-        //   );
-        //   window.localStorage.setItem(
-        //     "accessToken",
-        //     res.data.data.tokenInfo.accessToken
-        //   );
-        //   window.localStorage.setItem("email", res.data.data.email);
-        //   window.localStorage.setItem("userId", res.data.data.memberIdx);
-        //   window.localStorage.setItem(
-        //     "profileImg",
-        //     res.data.data.profileImgUrl
-        //   );
+          window.localStorage.setItem("userId", res.data.userId);
+          window.localStorage.setItem("userNickname", res.data.userNickname);
+          window.localStorage.setItem(
+            "userProfileImage",
+            res.datauserProfileImage
+          );
 
-        //   // window.localStorage.setItem("refreshToken", res.data.data.tokenInfo.refreshToken);
-
-        //   navigate("/signUp");
-        // } else {
-        //   console.log(res.data);
-        // }
+          navigate("/narration/register");
+        } else {
+          console.log(res);
+        }
       } catch (error) {
         console.log(error);
       }
