@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as S from "../../../styles/mypage/PostView.style";
 import { useEffect, useState } from "react";
 import { POST_READ } from "../../../api/post";
 function PostView() {
   const navigate = useNavigate();
-  const postId = 1;
+  const { postId } = useParams();
+
   const [postObject, setPostObject] = useState({
     postId: 0,
     userId: 0,
@@ -51,7 +52,6 @@ function PostView() {
   };
   useEffect(() => {
     POST_READ(postId).then((res) => {
-      console.log(res);
       setPostObject((prev) => {
         return {
           ...prev,
@@ -69,7 +69,7 @@ function PostView() {
         };
       });
     });
-  }, [setPostObject]);
+  }, [postId]);
 
   return (
     <>

@@ -11,6 +11,7 @@ const MyPage = lazy(() => import("../pages/myPage/Index"));
 const HomePage = lazy(() => import("../pages/Index"));
 const VoicePostPage = lazy(() => import("../pages/voicePost/Index"));
 const KakaoMiddle = lazy(() => import("../lib/oauth/KakaoMiddle"));
+const PostWritePage = lazy(() => import("../pages/myPage/postWrite/Index"));
 
 const root = createBrowserRouter([
   {
@@ -78,6 +79,14 @@ const root = createBrowserRouter([
           </Suspense>
         ),
       },
+      // {
+      //   path: "newpost",
+      //   element: (
+      //     <Suspense fallback={loading}>
+      //       <PostWritePage />
+      //     </Suspense>
+      //   ),
+      // },
     ],
   },
 ]);
