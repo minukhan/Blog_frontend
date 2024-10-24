@@ -9,12 +9,22 @@ const loading = <div>loading...</div>;
 const MyPage = lazy(() => import("../pages/myPage/Index"));
 const MainLayout = lazy(() => import("../pages/Index"));
 const VoicePostPage = lazy(() => import("../pages/voicePost/Index"));
+const KakaoMiddle = lazy(() => import("../lib/\boauth/KakaoMiddle"));
+
 const root = createBrowserRouter([
   {
     path: "/",
     element: (
       <Suspense fallback={loading}>
         <MainLayout />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/authMiddle",
+    element: (
+      <Suspense fallback={loading}>
+        <KakaoMiddle />
       </Suspense>
     ),
   },

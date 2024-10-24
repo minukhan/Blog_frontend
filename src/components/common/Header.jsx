@@ -5,7 +5,11 @@ import { FaRegUserCircle } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useLogin from "../../lib/\boauth/useLogin";
+
 function Header() {
+  const { handleLogin } = useLogin();
+
   // const { loggedIn } = useAuth();
   const [loggedIn, setLoggedIn] = useState(false);
   const [isProfileDropdownOpen, setProfileDropdownOpen] = useState(false);
@@ -61,12 +65,12 @@ function Header() {
             )}
           </>
         ) : (
-          <>
+          <S.LoginWrap onClick={handleLogin}>
             <S.Icon>
               <CiLogin size={20} />
             </S.Icon>
             <S.LoginButton onClick={toggleLogin}>Login</S.LoginButton>
-          </>
+          </S.LoginWrap>
         )}
       </S.IconsWrapper>
     </S.HeaderContainer>
