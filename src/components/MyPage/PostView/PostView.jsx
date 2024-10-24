@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import * as S from "../../styles/mypage/PostView.style";
+import * as S from "../../../styles/mypage/PostView.style";
 function PostView() {
   const navigate = useNavigate();
   const postId = 1;

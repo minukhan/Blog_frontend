@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import PostView from "../../../components/Mypage/PostView";
-import PostViewComment from "./../../../components/mypage/PostViewComment";
+import PostView from "./../../../components/MyPage/PostView/PostView";
+import PostViewComment from "./../../../components/MyPage/PostView/PostViewComment";
 
 function PostsViewPage() {
   return (
