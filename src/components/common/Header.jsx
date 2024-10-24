@@ -3,7 +3,7 @@ import { CiLogin } from "react-icons/ci";
 import { FiSettings } from "react-icons/fi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useLogin from "../../lib/oauth/useLogin";
 import { getCookie } from "../../utils/useCookie";
 
@@ -13,15 +13,41 @@ function Header() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isProfileDropdownOpen, setProfileDropdownOpen] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const token = getCookie("accessToken");
+    console.log(token);
     setLoggedIn(!!token);
   }, []);
 
   // 드롭다운 토글 함수
   const toggleProfileDropdown = () => {
-    console.log(isProfileDropdownOpen);
     setProfileDropdownOpen((prev) => !prev);
+  };
+
+  // Myblog 클릭 시 userId 경로로 이동
+  const handleMyBlogClick = () => {
+    navigate(`/mypage`); // userId 경로로 이동
+  };
+  const handleAccountSettingClick = () => {
+    // 로컬 스토리지에서 userId 가져오기
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      // userId를 경로에 동적으로 추가하여 이동
+      navigate(`/user/settings/${userId}`);
+    } else {
+      console.error("userId가 로컬 스토리지에 없습니다.");
+    }
+  };
+  const deleteCookie = (cookieName) => {
+    document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  };
+
+  const handleLogout = () => {
+    // accessToken 쿠키 삭제
+    deleteCookie("accessToken");
+    window.location.href = "/";
   };
 
   return (
@@ -36,9 +62,13 @@ function Header() {
           <S.NavItem>
             Category <S.DropdownIcon />
             <S.DropdownMenu>
-              <li>Subcategory 1</li>
-              <li>Subcategory 2</li>
-              <li>Subcategory 3</li>
+              <li>기술</li>
+              <li>음식</li>
+              <li>여행</li>
+              <li>반려동물</li>
+              <li>뉴스</li>
+              <li>영화</li>
+              <li>연예</li>
             </S.DropdownMenu>
           </S.NavItem>
           <div style={{ cursor: "pointer" }}>test</div>
@@ -48,7 +78,7 @@ function Header() {
       <S.IconsWrapper>
         {loggedIn ? (
           <>
-            <S.Icon>
+            <S.Icon onClick={handleAccountSettingClick}>
               <FiSettings size={20} />
             </S.Icon>
             <S.Icon onClick={toggleProfileDropdown}>
@@ -57,8 +87,8 @@ function Header() {
             {isProfileDropdownOpen && (
               <S.ProfileDropdownWrapper>
                 <S.ProfileDropdown>
-                  <li>Myblog</li>
-                  <li>Logout</li>
+                  <li onClick={handleMyBlogClick}>Myblog</li>
+                  <li onClick={handleLogout}>Logout</li>
                 </S.ProfileDropdown>
               </S.ProfileDropdownWrapper>
             )}
