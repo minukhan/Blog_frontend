@@ -16,6 +16,12 @@ function UserInputSelect({ voiceSelect, setVoiceSelect }) {
     setVoiceSelect(opt);
   };
 
+  const printOption = () => {
+    if (voiceSelect == "MAN") return "남성";
+    else if (voiceSelect == "WOMAN") return "여성";
+    else return "내 목소리";
+  };
+
   useEffect(() => {}, [voiceSelect]);
 
   return (
@@ -46,7 +52,7 @@ function UserInputSelect({ voiceSelect, setVoiceSelect }) {
 
       <div>
         <SS.select onClick={voiceOptionOpen}>
-          {voiceSelect}
+          {printOption()}
           <FaCaretDown color="#000000" size={"20px"} />
         </SS.select>
         <div
@@ -141,7 +147,7 @@ function UserInputSelect({ voiceSelect, setVoiceSelect }) {
           >
             <div
               role="button"
-              onClick={() => changeOption("MYVOICE")}
+              onClick={() => changeOption("ME")}
               style={{
                 alignSelf: "stretch",
                 color: "#40565F",
@@ -152,7 +158,7 @@ function UserInputSelect({ voiceSelect, setVoiceSelect }) {
                 cursor: "pointer",
               }}
             >
-              My Voice
+              내 목소리
             </div>
             <div
               style={{
@@ -174,7 +180,7 @@ function UserInputSelect({ voiceSelect, setVoiceSelect }) {
                 cursor: "pointer",
               }}
             >
-              Woman
+              여성
             </div>
             <div
               style={{
@@ -196,7 +202,7 @@ function UserInputSelect({ voiceSelect, setVoiceSelect }) {
                 cursor: "pointer",
               }}
             >
-              Man
+              남성
             </div>
             <div
               style={{
