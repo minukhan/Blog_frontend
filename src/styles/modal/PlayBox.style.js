@@ -19,7 +19,7 @@ export const Thumbnail = styled.div`
   width: 250px;
   height: 250px;
   margin: 0 auto;
-  background-image: url("/images/thumbnail.png");
+  background-image: url(${(props) => props.src});
   background-size: cover;
   background-position: center;
   border-radius: 50%;
