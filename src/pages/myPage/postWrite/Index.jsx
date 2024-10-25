@@ -66,11 +66,11 @@ function PostWritePage() {
     } else {
       formData.append("thumbnailUrl", thumbFile);
     }
-    console.log("@@@@@@@@@", editorContent);
+
     formData.append("postTitle", title);
     formData.append("postSummary", summary);
     formData.append("postContent", editorContent);
-    formData.append("postCategory", "tech");
+    formData.append("postCategory", selectedOption);
     formData.append("plainText", plainText);
     formData.append("userId", 1);
 
