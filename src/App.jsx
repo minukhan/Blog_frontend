@@ -9,6 +9,7 @@ function App() {
   const { loggedIn } = useAuth(); // 로그인 여부 확인
   const [isPlayModalOpen, setIsPlayModalOpen] = useState(true);
   const togglePlayModal = () => {
+    console.log("모달 전환 중...");
     setIsPlayModalOpen((prev) => !prev); // 이전 상태값을 토글
   };
   return (

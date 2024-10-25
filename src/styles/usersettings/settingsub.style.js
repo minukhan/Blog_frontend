@@ -64,6 +64,7 @@ export const select = styled.button`
   border-style: none;
 
   text-align: left;
+  font-family: "Oxygen";
   cursor: pointer;
 `;
 

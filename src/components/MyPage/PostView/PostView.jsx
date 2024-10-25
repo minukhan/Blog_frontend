@@ -1,10 +1,13 @@
 import { useNavigate, useParams } from "react-router-dom";
 import * as S from "../../../styles/mypage/PostView.style";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { POST_READ } from "../../../api/post";
+
 function PostView() {
   const navigate = useNavigate();
   const { postId } = useParams();
+  const [onPlay, setOnPlay] = useState(false);
+  const audioRef = useRef(null);
 
   const [postObject, setPostObject] = useState({
     postId: 0,
@@ -35,21 +38,7 @@ function PostView() {
     }
   };
 
-  const postdate = () => {
-    const pdate = new Date(postObject.createdAt);
-    return (
-      pdate.getFullYear() +
-      "-" +
-      (pdate.getMonth() + 1) +
-      "-" +
-      pdate.getDate() +
-      " " +
-      pdate.getHours() +
-      ":" +
-      pdate.getMinutes() +
-      ":"
-    );
-  };
+  const postdate = new Date(postObject.createdAt);
   useEffect(() => {
     POST_READ(postId).then((res) => {
       setPostObject((prev) => {
@@ -71,26 +60,28 @@ function PostView() {
     });
   }, [postId]);
 
+  const togglePlay = () => {
+    if (onPlay) {
+      audioRef.current.pause(); // 오디오 일시정지
+    } else {
+      audioRef.current.play(); // 오디오 재생
+    }
+    setOnPlay(!onPlay);
+  };
+
   return (
     <>
       <S.PostHeader>
         <S.IconWrapper>
-          <S.PlayIcon />
+          <div onClick={togglePlay}>
+            {onPlay ? <S.PauseIcon /> : <S.PlayIcon />}
+          </div>
           <S.AddIcon />
         </S.IconWrapper>
         <S.PostCategory>{postObject.postCategory}</S.PostCategory>
       </S.PostHeader>
       <S.PostTitle>{postObject.postTitle}</S.PostTitle>
-      <S.PostMeta>
-        {
-          /* {postdate.getFullYear() +
-          "-" +
-          (postdate.getMonth() + 1) +
-          "-" +
-          postdate.getDate() +
-          " "} */ postdate()
-        }
-      </S.PostMeta>
+      <S.PostMeta>{postdate.toLocaleString()}</S.PostMeta>
       <S.PostContent>
         <S.PostContentHeader>
           <S.Thumbnail src={postObject.thumbnailUrl} alt="Post Thumbnail" />
@@ -104,6 +95,11 @@ function PostView() {
           dangerouslySetInnerHTML={{ __html: postObject.postContent }}
         />
       </S.PostContent>
+
+      {/* 오디오 요소 추가 */}
+      {postObject.audioUrl && (
+        <audio ref={audioRef} src={postObject.audioUrl} />
+      )}
 
       <S.PostButtonWrap>
         <S.Btn onClick={handleEdit}>수정</S.Btn>
