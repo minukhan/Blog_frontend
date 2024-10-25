@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import * as S from "../../styles/modal/AudioPlayer.style";
 import useProgress from "../../hooks/useProgress";
-
+import { FaPlay } from "react-icons/fa";
 const AudioPlayer = ({ src, playlistId }) => {
   // playlistId prop 추가
   const [isPlaying, setIsPlaying] = useState(false);
@@ -32,6 +32,8 @@ const AudioPlayer = ({ src, playlistId }) => {
     }
   }, [duration, playlistId]);
 
+  const playbutton = false;
+
   return (
     <>
       <S.PlayerContainer>
@@ -56,7 +58,11 @@ const AudioPlayer = ({ src, playlistId }) => {
         <S.PrevButton
           onClick={() => (selectedMusicRef.current.currentTime -= 10)}
         />
-        <S.ControlButton onClick={togglePlayPause} />
+        {isPlaying ? (
+          <S.ControlButton onClick={togglePlayPause} />
+        ) : (
+          <FaPlay onClick={togglePlayPause} />
+        )}
         <S.NextButton
           onClick={() => (selectedMusicRef.current.currentTime += 10)}
         />

@@ -20,18 +20,22 @@ function Home() {
   };
 
   const assessToken = getCookie("accessToken");
-  // const userId = window.localStorage.getItem("userId");
+
+  // 최신순 정렬 함수
+  const sortPostsByDate = (posts) => {
+    return posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  };
 
   const fetchPosts = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/posts"); // API 호출
-
-      setPosts(response.data); // 게시글 상태 업데이트
-      setLoading(false); // 로딩 완료
+      const response = await axios.get("http://localhost:8080/api/posts");
+      const sortedPosts = sortPostsByDate(response.data);
+      setPosts(sortedPosts);
+      setLoading(false);
       console.log(response);
     } catch (err) {
-      setError(err.message); // 에러 발생 시 상태 업데이트
-      setLoading(false); // 로딩 완료
+      setError(err.message);
+      setLoading(false);
     }
   };
 
@@ -41,17 +45,18 @@ function Home() {
         `http://localhost:8080/api/posts/category/${category}`,
         {
           headers: {
-            Authorization: `Bearer ${assessToken}`, // 여기에 실제 토큰을 추가하세요.
-            "Content-Type": "application/json", // 필요에 따라 추가
+            Authorization: `Bearer ${assessToken}`,
+            "Content-Type": "application/json",
           },
         }
       );
-      setPosts(response.data); // 게시글 상태 업데이트
-      setLoading(false); // 로딩 완료
+      const sortedPosts = sortPostsByDate(response.data);
+      setPosts(sortedPosts);
+      setLoading(false);
       console.log(response);
     } catch (err) {
-      setError(err.message); // 에러 발생 시 상태 업데이트
-      setLoading(false); // 로딩 완료
+      setError(err.message);
+      setLoading(false);
     }
   };
 
@@ -91,9 +96,8 @@ function Home() {
         </S.CategoryButton>
       </S.CategorySection>
       <S.PostListContainer>
-        {loading && <p>Loading...</p>} {/* 로딩 상태 표시 */}
-        {error && <p>Error: {error}</p>} {/* 에러 상태 표시 */}
-        {/* 각 게시글 렌더링 */}
+        {loading && <p>Loading...</p>}
+        {error && <p>Error: {error}</p>}
         {posts.map((post) => (
           <PostItem key={post.postId} post={post} />
         ))}
