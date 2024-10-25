@@ -34,3 +34,19 @@ export const POST_READ = async (postId) => {
   console.log(res.data);
   return res.data;
 };
+
+export const POST_EDIT = async (postId, postInfo) => {
+  const url = `http://localhost:8080/api/posts/${postId}`;
+
+  const res = await axios({
+    method: "put",
+    url: url,
+    data: postInfo, // FormData를 직접 데이터로 사용
+    headers: {
+      "Content-Type": "multipart/form-data", // FormData를 사용하므로 Content-Type을 설정
+      Authorization: `Bearer ${assessToken}`,
+    },
+  });
+  console.log(res.data);
+  return res.data;
+};

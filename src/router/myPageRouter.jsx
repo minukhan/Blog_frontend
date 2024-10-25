@@ -5,6 +5,7 @@ const loading = <div className="bg-red-500">loading...</div>;
 const PostWritePage = lazy(() => import("../pages/myPage/postWrite/Index"));
 // todo
 const PostViewPage = lazy(() => import("../pages/myPage/postView/Index"));
+const PostEditPage = lazy(() => import("../pages/myPage/postEdit/Index"));
 const myPageRouter = () => {
   return [
     {
@@ -20,6 +21,14 @@ const myPageRouter = () => {
       element: (
         <Suspense fallback={loading}>
           <PostViewPage />
+        </Suspense>
+      ),
+    },
+    {
+      path: "edit",
+      element: (
+        <Suspense fallback={loading}>
+          <PostEditPage />
         </Suspense>
       ),
     },

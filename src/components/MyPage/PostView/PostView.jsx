@@ -23,7 +23,7 @@ function PostView() {
     updatedAt: "",
   });
   const handleEdit = () => {
-    navigate(`/edit/${postId}`); // todo
+    navigate(`/${postId}/edit`); // todo
   };
   const handleDelete = () => {
     const confirmDelete = window.confirm(
