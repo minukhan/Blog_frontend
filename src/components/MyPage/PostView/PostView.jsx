@@ -100,7 +100,11 @@ function PostView() {
 
       {/* 오디오 요소 추가 */}
       {postObject.audioUrl && (
-        <audio ref={audioRef} src={postObject.audioUrl} />
+        <audio
+          ref={audioRef}
+          src={postObject.audioUrl}
+          onEnded={() => setOnPlay(false)}
+        />
       )}
 
       <S.PostButtonWrap>
