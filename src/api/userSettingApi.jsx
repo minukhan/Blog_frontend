@@ -15,13 +15,14 @@ export const POST_FORMSETTING = async (formData) => {
 
   const voiceMapping = {
     "내 목소리": "ME",
-    "여자 목소리": "WOMAN",
-    "남자 목소리": "MAN",
+    "젊은 여성 목소리": "WOMAN",
+    "중후한 남성 목소리": "MAN",
   };
 
   // Update the voiceSelected in formData based on the mapping
   if (formData.voiceSelected in voiceMapping) {
     formData.voiceSelected = voiceMapping[formData.voiceSelected];
+    console.log(formData.voiceSelected);
   }
 
   const res = await axios({
