@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import * as S from "../../styles/modal/PlaylistItem.style";
 import axios from "axios";
-
+import { FaPlay } from "react-icons/fa";
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -60,7 +60,9 @@ function PlaylistItem({ playlist, onSelect, onDelete }) {
     <S.ItemContainer>
       <S.ThumbnailContainer onClick={() => onSelect(playlist)}>
         <S.Thumbnail src={playlist.thumbnailUrl} alt={playlist.title} />
-        <S.Icon className="icon">🔍</S.Icon>
+        <S.Icon className="icon">
+          <FaPlay style={{ color: "var(--light-gray)" }} />
+        </S.Icon>
       </S.ThumbnailContainer>
 
       <S.InfoWrapper>
