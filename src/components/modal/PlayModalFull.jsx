@@ -3,6 +3,7 @@ import * as S from "../../styles/modal/PlayModalFull.style";
 import PlayBox from "./PlayBox";
 import PlaylistBox from "./PlaylistBox";
 import axios from "axios";
+import SkeletonPlayBox from "./SkeltonPlaybox";
 
 function PlayModalFull({ togglePlayModal }) {
   const [playlists, setPlaylists] = useState([]); // 플레이리스트 상태
@@ -56,9 +57,15 @@ function PlayModalFull({ togglePlayModal }) {
         prevPlaylists.filter((playlist) => playlist.playlistId !== id) // 클릭한 아이템만 필터링해서 삭제
     );
   };
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     fetchPlaylists();
+    console.log(selectedPlaylist);
   }, []); // 컴포넌트 마운트 시 한 번만 실행됨
 
   if (loading) return <div>Loading...</div>; // 로딩 중일 때 표시
@@ -69,8 +76,13 @@ function PlayModalFull({ togglePlayModal }) {
       <S.ModalBackground onClick={togglePlayModal} />
 
       <S.PlayModalFullWrapper>
+        {isLoading ? (
+          <SkeletonPlayBox />
+        ) : (
+          <PlayBox playlists={selectedPlaylist} />
+        )}
         {/* 선택된 플레이리스트를 PlayBox에 전달 */}
-        {selectedPlaylist && <PlayBox playlists={selectedPlaylist} />}
+        {/* {selectedPlaylist && <PlayBox playlists={selectedPlaylist} />} */}
         {/* PlaylistBox에 onSelect 함수를 전달하여 선택된 항목을 변경 */}
         <PlaylistBox
           playlists={playlists}
