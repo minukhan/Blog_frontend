@@ -1,11 +1,17 @@
 import { useNavigate, useParams } from "react-router-dom";
 import * as S from "../../../styles/mypage/PostView.style";
 import { useEffect, useRef, useState } from "react";
+
+import { useDispatch } from "react-redux";
+
 import { POST_READ, POST_REMOVE } from "../../../api/post";
+
 
 function PostView() {
   const navigate = useNavigate();
   const { postId } = useParams();
+  const dispatch = useDispatch();
+
   const [onPlay, setOnPlay] = useState(false);
   const audioRef = useRef(null);
   const userId = window.localStorage.getItem("userId");
@@ -43,6 +49,7 @@ function PostView() {
   const postdate = new Date(postObject.createdAt);
   useEffect(() => {
     POST_READ(postId).then((res) => {
+      // store에 저장
       setPostObject((prev) => {
         return {
           ...prev,
@@ -59,6 +66,14 @@ function PostView() {
           updatedAt: res.updatedAt,
         };
       });
+
+      // dispatch({
+      //   type: "UPDATE_INFO",
+      //   payload: {
+      //     userId: res.userId,
+      //     postId: res.postId,
+      //   },
+      // });
     });
   }, [postId]);
 
