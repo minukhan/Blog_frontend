@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as S from "../../../styles/mypage/PostView.style";
 import { useEffect, useReducer, useRef, useState } from "react";
 import { POST_READ, POST_REMOVE } from "../../../api/post";
+import axios from "axios";
 
 function PostView() {
   const navigate = useNavigate();
@@ -69,30 +70,35 @@ function PostView() {
     setOnPlay(!onPlay);
   };
 
-  function getCookie(name) {
+  const getCookie = (name) => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
+
     if (parts.length === 2) return parts.pop().split(";").shift();
-  }
+    return null;
+  };
+
   const userId = window.localStorage.getItem("userId");
   console.log("유저 아이디입니다 : ", userId);
+  const token = getCookie("accessToken");
 
   const onAddToPlaylist = async (userId, postId) => {
     try {
-      const response = await fetch(`/api/playlist`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: userId,
-          postId: postId,
-          // 필요시 playListDto에 추가 정보를 보낼 수 있음
-        }),
-      });
+      const response = await axios.post(
+        `http://localhost:8080/api/playlists/${userId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // 토큰을 Authorization 헤더에 추가
+          },
+          params: {
+            postId: postId,
+          },
+        }
+      );
 
-      if (response.ok) {
-        const data = await response.json();
+      if (response.status === 200 || response.status === 201) {
+        const data = response.data;
         alert("플레이리스트에 추가되었습니다!");
         console.log("추가된 플레이리스트: ", data);
       } else {
