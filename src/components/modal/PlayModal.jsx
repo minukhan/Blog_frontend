@@ -15,11 +15,19 @@ function PlayModal({ togglePlayModal }) {
     const parts = value.split(`; ${name}=`);
 
     if (parts.length === 2) return parts.pop().split(";").shift();
+    return null; // 토큰이 없을 경우 null을 반환
   }
 
   const fetchPlaylists = async () => {
     const userId = window.localStorage.getItem("userId");
     const token = getCookie("accessToken");
+
+    // 토큰이 없을 경우 early return 처리
+    if (!token) {
+      console.log("토큰이 없습니다. 요청을 보내지 않습니다.");
+      setLoading(false); // 로딩 상태도 false로 설정
+      return;
+    }
 
     try {
       const response = await axios.get(
@@ -38,12 +46,15 @@ function PlayModal({ togglePlayModal }) {
       setLoading(false); // 로딩 완료
     }
   };
+
   useEffect(() => {
-    const duration = localStorage.getItem(
-      `audioDuration_${playlists.playlistId}`
-    );
-    setAudioDuration(duration);
-  }, [playlists.playlistId]);
+    if (playlists.length > 0) {
+      const duration = localStorage.getItem(
+        `audioDuration_${playlists[0].playlistId}`
+      );
+      setAudioDuration(duration);
+    }
+  }, [playlists]);
 
   useEffect(() => {
     fetchPlaylists();
@@ -64,6 +75,7 @@ function PlayModal({ togglePlayModal }) {
   if (error) {
     return <p>Error: {error}</p>;
   }
+
   const formatTime = (time) => {
     if (isNaN(time)) return "00:00";
     const minutes = Math.floor(time / 60);
@@ -75,19 +87,18 @@ function PlayModal({ togglePlayModal }) {
 
   return (
     <S.ModalWrapper onClick={togglePlayModal}>
-      <S.Thumbnail src={selectedPlaylist.thumbnailUrl} />
-      <S.InfoWrapper>
-        {/* 선택된 플레이리스트의 정보 표시 */}
-        {selectedPlaylist && (
-          <>
+      {selectedPlaylist && (
+        <>
+          <S.Thumbnail src={selectedPlaylist.thumbnailUrl} />
+          <S.InfoWrapper>
             <S.Title>{selectedPlaylist.title}</S.Title>
             <S.Author>{selectedPlaylist.userName}</S.Author>
-          </>
-        )}
-      </S.InfoWrapper>
-      <S.Duration>
-        {audioDuration ? formatTime(audioDuration) : "Loading..."}
-      </S.Duration>
+          </S.InfoWrapper>
+          <S.Duration>
+            {audioDuration ? formatTime(audioDuration) : "Loading..."}
+          </S.Duration>
+        </>
+      )}
       <S.IconWrapper onClick={togglePlayPause}>
         {isPlaying ? <S.PauseIcon /> : <S.PlayIcon />}
       </S.IconWrapper>
