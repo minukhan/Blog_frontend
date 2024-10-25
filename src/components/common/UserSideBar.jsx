@@ -11,41 +11,32 @@ const user = {
   insta: "https://example.com",
   twitter: "https://example.com",
 };
+
 function UserSideBar() {
   const navigate = useNavigate();
   const userId = window.localStorage.getItem("userId");
-
 
   return (
     <S.Wrap>
       <S.ProfileWrap>
         <S.ProfileImg>
-          <img src={user.profileImg} alt={user.name} />
+          {/* user.img로 수정 */}
+          <img src={user.img} alt={user.nickname} />
         </S.ProfileImg>
 
-        <p style={{ fontWeight: "700", paddingTop: "15px" }}>{user.name}</p>
-        <p>{user.social.intro}</p>
+        {/* user.nickname으로 수정 */}
+        <p style={{ fontWeight: "700", paddingTop: "15px" }}>{user.nickname}</p>
+        <p>{user.desc}</p>
 
         <S.SocialWrap>
-          <a
-            href={user.social.github}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          {/* 소셜 미디어 링크 직접 참조 */}
+          <a href={user.github} target="_blank" rel="noopener noreferrer">
             <FaGithub style={{ fontSize: "25px" }} />
           </a>
-          <a
-            href={user.social.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={user.insta} target="_blank" rel="noopener noreferrer">
             <FaInstagram style={{ fontSize: "25px" }} />
           </a>
-          <a
-            href={user.social.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={user.twitter} target="_blank" rel="noopener noreferrer">
             <FaTwitterSquare style={{ fontSize: "25px" }} />
           </a>
         </S.SocialWrap>
