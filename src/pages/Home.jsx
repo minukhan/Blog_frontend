@@ -95,7 +95,7 @@ function Home() {
         {error && <p>Error: {error}</p>} {/* 에러 상태 표시 */}
         {/* 각 게시글 렌더링 */}
         {posts.map((post) => (
-          <PostItem key={post.id} post={post} />
+          <PostItem key={post.postId} post={post} />
         ))}
       </S.PostListContainer>
     </S.Container>
