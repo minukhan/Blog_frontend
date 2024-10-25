@@ -29,11 +29,7 @@ function PostItem({ post }) {
         <S.PostHeader>
           <S.Profile>
             <S.ProfileImage
-              src={
-                post.profileImage ||
-                userProfiles[post.postId % 14].profileImage ||
-                "/images/home/profileImage.png"
-              }
+              src={post.profileImage || "/images/home/profileImage.png"}
               alt="Profile Image"
             />
             <S.ProfileTextWrap>
