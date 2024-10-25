@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import * as S from "../../../styles/mypage/PostView.style";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { POST_READ } from "../../../api/post";
 
 function PostView() {
@@ -8,7 +8,6 @@ function PostView() {
   const { postId } = useParams();
   const [onPlay, setOnPlay] = useState(false);
   const audioRef = useRef(null);
-
   const [postObject, setPostObject] = useState({
     postId: 0,
     userId: 0,
@@ -69,6 +68,42 @@ function PostView() {
     setOnPlay(!onPlay);
   };
 
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+  }
+  const userId = window.localStorage.getItem("userId");
+  console.log("유저 아이디입니다 : ", userId);
+
+  const onAddToPlaylist = async (userId, postId) => {
+    try {
+      const response = await fetch(`/api/playlist`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: userId,
+          postId: postId,
+          // 필요시 playListDto에 추가 정보를 보낼 수 있음
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert("플레이리스트에 추가되었습니다!");
+        console.log("추가된 플레이리스트: ", data);
+      } else {
+        console.error("플레이리스트 추가 중 오류 발생");
+        alert("플레이리스트 추가 중 오류가 발생했습니다.");
+      }
+    } catch (error) {
+      console.error("에러 발생: ", error);
+      alert("플레이리스트 추가 중 에러가 발생했습니다.");
+    }
+  };
+
   return (
     <>
       <S.PostHeader>
@@ -76,7 +111,7 @@ function PostView() {
           <div onClick={togglePlay}>
             {onPlay ? <S.PauseIcon /> : <S.PlayIcon />}
           </div>
-          <S.AddIcon />
+          <S.AddIcon onClick={() => onAddToPlaylist(userId, postId)} />
         </S.IconWrapper>
         <S.PostCategory>{postObject.postCategory}</S.PostCategory>
       </S.PostHeader>
