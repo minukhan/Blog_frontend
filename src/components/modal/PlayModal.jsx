@@ -24,7 +24,7 @@ function PlayModal({ togglePlayModal }) {
 
     // 토큰이 없을 경우 early return 처리
     if (!token) {
-      console.log("토큰이 없습니다. 요청을 보내지 않습니다.");
+      console.log("토큰이 없습니다. 모달을 표시하지 않습니다.");
       setLoading(false); // 로딩 상태도 false로 설정
       return;
     }
@@ -38,8 +38,19 @@ function PlayModal({ togglePlayModal }) {
           },
         }
       ); // userId로 API 호출
-      setPlaylists(response.data); // 상태 업데이트
-      setSelectedPlaylist(response.data[0]); // 첫 번째 항목을 기본값으로 설정
+
+      console.log(response);
+
+      // 서버에서 빈 배열이 올 수 있으므로 이를 처리
+      if (response.data && response.data.length > 0) {
+        setPlaylists(response.data); // 상태 업데이트
+        setSelectedPlaylist(response.data[0]); // 첫 번째 항목을 기본값으로 설정
+      } else {
+        // 빈 배열일 경우 처리
+        setPlaylists([]); // 빈 배열로 설정
+        setSelectedPlaylist(null); // 선택된 플레이리스트도 null로 설정
+      }
+
       setLoading(false); // 로딩 완료
     } catch (err) {
       setError(err.message); // 에러 발생 시 상태 업데이트
@@ -48,7 +59,11 @@ function PlayModal({ togglePlayModal }) {
   };
 
   useEffect(() => {
-    if (playlists.length > 0) {
+    fetchPlaylists();
+  }, []); // 컴포넌트 마운트 시 한 번만 실행됨
+
+  useEffect(() => {
+    if (playlists.length > 0 && playlists[0]?.playlistId) {
       const duration = localStorage.getItem(
         `audioDuration_${playlists[0].playlistId}`
       );
@@ -56,15 +71,23 @@ function PlayModal({ togglePlayModal }) {
     }
   }, [playlists]);
 
-  useEffect(() => {
-    fetchPlaylists();
-  }, []); // 컴포넌트 마운트 시 한 번만 실행됨
-
   const [isPlaying, setIsPlaying] = useState(false);
 
   const togglePlayPause = () => {
     setIsPlaying((prev) => !prev);
   };
+
+  // 현재 경로가 '/narration/register'일 경우 모달을 표시하지 않음
+  const currentPath = window.location.pathname;
+  if (currentPath === "/narration/register") {
+    return null; // 경로가 '/narration/register'이면 모달을 렌더링하지 않음
+  }
+
+  // 토큰이 없을 경우 모달을 아예 표시하지 않음
+  const token = getCookie("accessToken");
+  if (!token) {
+    return null; // 토큰이 없으면 모달을 렌더링하지 않음
+  }
 
   // 로딩 중일 때
   if (loading) {
@@ -87,7 +110,8 @@ function PlayModal({ togglePlayModal }) {
 
   return (
     <S.ModalWrapper onClick={togglePlayModal}>
-      {selectedPlaylist && (
+      {/* 선택된 플레이리스트가 없어도 모달은 뜨고, 기본 로딩 표시 */}
+      {selectedPlaylist ? (
         <>
           <S.Thumbnail src={selectedPlaylist.thumbnailUrl} />
           <S.InfoWrapper>
@@ -97,11 +121,18 @@ function PlayModal({ togglePlayModal }) {
           <S.Duration>
             {audioDuration ? formatTime(audioDuration) : "Loading..."}
           </S.Duration>
+          <S.IconWrapper onClick={togglePlayPause}>
+            {isPlaying ? <S.PauseIcon /> : <S.PlayIcon />}
+          </S.IconWrapper>
+        </>
+      ) : (
+        <>
+          <S.IconWrapper onClick={togglePlayPause}>
+            {isPlaying ? <S.PauseIcon /> : <S.PlayIcon />}
+          </S.IconWrapper>
+          <p>플레이리스트가 없습니다.</p>
         </>
       )}
-      <S.IconWrapper onClick={togglePlayPause}>
-        {isPlaying ? <S.PauseIcon /> : <S.PlayIcon />}
-      </S.IconWrapper>
     </S.ModalWrapper>
   );
 }
