@@ -33,11 +33,14 @@ function PostItem({ item, username }) {
 
   return (
     <S.PostContainer>
-      <S.Thumbnail src="/images/home/thumbnail.png" alt="Post Thumbnail" />
+      <S.Thumbnail src={item.thumbnailUrl} alt="Post Thumbnail" />
       <S.PostContent>
         <S.PostHeader>
           <S.Profile>
-            <S.ProfileImage src={item.thumbnailUrl} alt="Profile Image" />
+            <S.ProfileImage
+              src={window.localStorage.getItem("userProfileImage")}
+              alt="Profile Image"
+            />
             <S.ProfileTextWrap>
               <S.UserName>{username}</S.UserName>
               <S.PostDate>{changeTimestampToString()}</S.PostDate>

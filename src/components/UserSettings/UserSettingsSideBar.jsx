@@ -58,9 +58,12 @@ function UserSideBar({
     setIsAlertOpen(true);
   };
 
-  const handleCloseAlert = () => {
+  const handleOkAlert = () => {
     setIsAlertOpen(false);
     navigate("/");
+  };
+  const handleCancelAlert = () => {
+    setIsAlertOpen(false);
   };
 
   const deleteCookie = (cookieName) => {
@@ -77,7 +80,8 @@ function UserSideBar({
       {isAlertOpen && (
         <AlertModal
           message="회원 탈퇴를 하시겠습니까?"
-          onClose={handleCloseAlert}
+          onOk={handleOkAlert}
+          onCancel={handleCancelAlert}
         />
       )}
       <ProfileWrap>

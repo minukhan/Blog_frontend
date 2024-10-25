@@ -1,5 +1,5 @@
 import styled from "styled-components";
-const AlertModal = ({ message, onOk, onCancel }) => {
+const AlertModal1 = ({ message, onOk }) => {
   return (
     <ModalOverlay>
       <ItemContainer>
@@ -8,7 +8,6 @@ const AlertModal = ({ message, onOk, onCancel }) => {
           <ButtonWrap>
             {/* <CloseButton onClick={onClose}>닫기</CloseButton> */}
             <OkButton onClick={onOk}>확인</OkButton>
-            <CloseButton onClick={onCancel}>취소</CloseButton>
           </ButtonWrap>
         </ModalContent>
       </ItemContainer>
@@ -16,7 +15,7 @@ const AlertModal = ({ message, onOk, onCancel }) => {
   );
 };
 
-export default AlertModal;
+export default AlertModal1;
 
 // 스타일 정의
 
@@ -61,18 +60,7 @@ const ButtonWrap = styled.div`
   display: flex;
   gap: 10px;
 `;
-const CloseButton = styled.button`
-  background-color: var(--deep-gray);
-  color: var(--light-gray);
-  padding: 10px 20px;
-  border: none;
-  border-radius: var(--border-radius);
-  cursor: pointer;
 
-  &:hover {
-    opacity: 0.8;
-  }
-`;
 const OkButton = styled.button`
   background-color: var(--navy);
   opacity: 0.9;
