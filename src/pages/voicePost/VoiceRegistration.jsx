@@ -5,7 +5,7 @@ import { TbPlayerPauseFilled } from "react-icons/tb";
 import { StyledBtn } from "../../styles/commonStyled";
 import { REGISTRATION_VOICEID } from "../../api/narration";
 import { DotLoader } from "react-spinners";
-import AlertModal from "../../components/common/\bAlertModal";
+import AlertModal from "../../components/common/AlertModal";
 
 const VoiceRegistration = () => {
   const [stream, setStream] = useState();
