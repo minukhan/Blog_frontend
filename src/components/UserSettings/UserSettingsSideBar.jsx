@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FaGithub, FaInstagram, FaTwitterSquare } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { deleteUserInfo } from "../../api/userSettingApi";
+import AlertModal from "../common/AlertModal";
 
 const user = {
   img: "",
@@ -41,14 +42,27 @@ function UserSideBar({
     console.log("ref됨");
     console.log(data);
   }, [profileImg, name, blogintro, github, instagram, twitter, uid, refresh]);
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
 
   const deleteAccount = () => {
-    if (confirm("회원 탈퇴를 하시겠습니까?")) {
-      deleteUserInfo(uid);
-      alert("탈퇴가 완료됐습니다.");
-      navigate("/");
-    }
+    // if (confirm("회원 탈퇴를 하시겠습니까?")) {
+    //   deleteUserInfo(uid);
+    //   handleOpenAlert();
+    //   navigate("/");
+    // }
+    deleteUserInfo(uid);
+    handleOpenAlert();
+    // navigate("/");
   };
+  const handleOpenAlert = () => {
+    setIsAlertOpen(true);
+  };
+
+  const handleCloseAlert = () => {
+    setIsAlertOpen(false);
+    navigate("/");
+  };
+
   const deleteCookie = (cookieName) => {
     document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
   };
@@ -60,6 +74,12 @@ function UserSideBar({
 
   return (
     <Wrap>
+      {isAlertOpen && (
+        <AlertModal
+          message="회원 탈퇴를 하시겠습니까?"
+          onClose={handleCloseAlert}
+        />
+      )}
       <ProfileWrap>
         <ProfileImg>
           <img

@@ -23,7 +23,8 @@
     "styled-components": "^6.1.13",
     "styled-reset": "^4.5.2",
     "suneditor": "^2.47.0",
-    "suneditor-react": "^3.6.1"
+    "suneditor-react": "^3.6.1",
+    "zustand": "^5.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",

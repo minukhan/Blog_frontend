@@ -3,11 +3,21 @@ import PostItem from "../components/Home/PostItem";
 import * as S from "../styles/home/home.style";
 import axios from "axios";
 import { getCookie } from "../utils/useCookie";
+import AlertModal from "../components/common/AlertModal";
 
 function Home() {
   const [posts, setPosts] = useState([]); // 게시글 상태
   const [loading, setLoading] = useState(true); // 로딩 상태
   const [error, setError] = useState(null); // 에러 상태
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+
+  const handleOpenAlert = () => {
+    setIsAlertOpen(true);
+  };
+
+  const handleCloseAlert = () => {
+    setIsAlertOpen(false);
+  };
 
   const assessToken = getCookie("accessToken");
   // const userId = window.localStorage.getItem("userId");

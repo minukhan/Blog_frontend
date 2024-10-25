@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { IoIosClose } from "react-icons/io";
 export const ItemContainer = styled.div`
   display: flex;
@@ -85,4 +85,64 @@ export const DeleteIcon = styled(IoIosClose)`
   margin-bottom: auto;
   width: 20px;
   height: 20px;
+`;
+
+// 스켈레톤
+// 스켈레톤 애니메이션
+const skeletonLoading = keyframes`
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+`;
+
+// 스켈레톤 공통 스타일
+const SkeletonBase = styled.div`
+  background-color: #e0e0e0;
+  background-image: linear-gradient(90deg, #e0e0e0, #f5f5f5, #e0e0e0);
+  background-size: 200% 100%;
+  background-position: 0 0;
+  animation: ${skeletonLoading} 5s infinite linear;
+  border-radius: 4px;
+`;
+
+// 스켈레톤 썸네일 스타일
+export const SkeletonThumbnailContainer = styled.div`
+  width: 65px;
+  height: 65px;
+  margin-right: 10px;
+  border-radius: 50%;
+  overflow: hidden;
+`;
+
+export const SkeletonThumbnail = styled(SkeletonBase)`
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+`;
+
+// 스켈레톤 제목, 작성자, 재생 시간 스타일
+export const SkeletonTitle = styled(SkeletonBase)`
+  width: 70%;
+  height: 12px;
+  margin-bottom: 5px;
+`;
+
+export const SkeletonAuthor = styled(SkeletonBase)`
+  width: 50%;
+  height: 10px;
+  margin-bottom: 5px;
+`;
+
+export const SkeletonDuration = styled(SkeletonBase)`
+  width: 30%;
+  height: 10px;
+`;
+
+export const SkeletonDeleteIcon = styled(SkeletonBase)`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
 `;
