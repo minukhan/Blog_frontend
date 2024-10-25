@@ -11,9 +11,9 @@ const user = {
   insta: "https://example.com",
   twitter: "https://example.com",
 };
-function UserSideBar({ user, userId }) {
+function UserSideBar({ user }) {
   const navigate = useNavigate();
-
+  const userId = window.localStorage.getItem("userId");
   return (
     <S.Wrap>
       <S.ProfileWrap>

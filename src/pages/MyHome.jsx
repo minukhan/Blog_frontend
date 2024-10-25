@@ -49,7 +49,7 @@ function MyPage() {
 
   return (
     <MainWrap>
-      <UserSideBar user={user} userId={userId} />
+      <UserSideBar user={user} />
       <PostMain>
         <SortToggleBar>
           Sort
