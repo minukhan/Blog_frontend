@@ -67,6 +67,7 @@ function PlayModalFull({ togglePlayModal }) {
   return (
     <>
       <S.ModalBackground onClick={togglePlayModal} />
+
       <S.PlayModalFullWrapper>
         {/* 선택된 플레이리스트를 PlayBox에 전달 */}
         {selectedPlaylist && <PlayBox playlists={selectedPlaylist} />}

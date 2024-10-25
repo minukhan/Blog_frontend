@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { Button } from "@radix-ui/themes";
-
 const AlertModal = ({ message, onClose }) => {
   return (
     <ModalOverlay>
