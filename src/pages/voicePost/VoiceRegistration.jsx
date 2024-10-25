@@ -1,10 +1,11 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import styled from "styled-components";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import { TbPlayerPauseFilled } from "react-icons/tb";
 import { StyledBtn } from "../../styles/commonStyled";
 import { REGISTRATION_VOICEID } from "../../api/narration";
 import { DotLoader } from "react-spinners";
+import AlertModal from "../../components/common/\bAlertModal";
 
 const VoiceRegistration = () => {
   const [stream, setStream] = useState();
@@ -15,7 +16,15 @@ const VoiceRegistration = () => {
   const [audioUrl, setAudioUrl] = useState();
   const [modelingSrc, setModelingSrc] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
 
+  const handleOpenAlert = () => {
+    setIsAlertOpen(true);
+  };
+
+  const handleCloseAlert = () => {
+    setIsAlertOpen(false);
+  };
   const onRecAudio = () => {
     // 음원정보를 담은 노드를 생성하거나 음원을 실행또는 디코딩 시키는 일을 한다
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -108,12 +117,19 @@ const VoiceRegistration = () => {
           setLoading(false);
         });
     } else {
-      alert("녹음을 먼저 진행해주세요");
+      // alert("녹음을 먼저 진행해주세요");
+      handleOpenAlert();
     }
   }, [audioUrl]);
 
   return (
     <Wrap>
+      {isAlertOpen && (
+        <AlertModal
+          message="녹음을 먼저 진행해주세요"
+          onClose={handleCloseAlert}
+        />
+      )}
       <Main>
         <IconBtn onClick={onRec ? onRecAudio : offRecAudio}>
           {onRec ? (
