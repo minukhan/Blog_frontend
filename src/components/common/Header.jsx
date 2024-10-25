@@ -55,8 +55,10 @@ function Header() {
     <S.HeaderContainer>
       <S.LeftSection>
         {/* <S.Logo src="/logo.png" alt="logo" /> */}
-        <S.Logo src="/tmp.png" alt="logo" />
-        <S.NavLinks>
+        <Link to="/">
+          <S.Logo src="/tmp.png" alt="logo" />
+        </Link>
+        {/* <S.NavLinks>
           <S.NavItem>
             <Link to="/">Home</Link>
           </S.NavItem>
@@ -73,7 +75,7 @@ function Header() {
             </S.DropdownMenu>
           </S.NavItem>
           <div style={{ cursor: "pointer" }}>test</div>
-        </S.NavLinks>
+        </S.NavLinks> */}
       </S.LeftSection>
 
       <S.IconsWrapper>

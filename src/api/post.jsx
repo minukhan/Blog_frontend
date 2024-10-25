@@ -50,3 +50,16 @@ export const POST_EDIT = async (postId, postInfo) => {
   console.log(res.data);
   return res.data;
 };
+
+export const POST_REMOVE = async (postId) => {
+  const res = await axios({
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${assessToken}`,
+    },
+    method: "delete",
+    url: `http://localhost:8080/api/posts/${postId}`,
+  });
+  console.log(res.data);
+  return res.data;
+};

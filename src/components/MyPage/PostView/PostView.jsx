@@ -1,11 +1,20 @@
 import { useNavigate, useParams } from "react-router-dom";
 import * as S from "../../../styles/mypage/PostView.style";
-import { useEffect, useRef, useState } from "react";
-import { POST_READ } from "../../../api/post";
+
+import { useEffect, useReducer, useRef, useState } from "react";
+
+
+import { useDispatch } from "react-redux";
+
+import { POST_READ, POST_REMOVE } from "../../../api/post";
+import axios from "axios";
+
 
 function PostView() {
   const navigate = useNavigate();
   const { postId } = useParams();
+  const dispatch = useDispatch();
+
   const [onPlay, setOnPlay] = useState(false);
   const audioRef = useRef(null);
 
@@ -41,6 +50,7 @@ function PostView() {
   const postdate = new Date(postObject.createdAt);
   useEffect(() => {
     POST_READ(postId).then((res) => {
+      // store에 저장
       setPostObject((prev) => {
         return {
           ...prev,
@@ -57,6 +67,14 @@ function PostView() {
           updatedAt: res.updatedAt,
         };
       });
+
+      // dispatch({
+      //   type: "UPDATE_INFO",
+      //   payload: {
+      //     userId: res.userId,
+      //     postId: res.postId,
+      //   },
+      // });
     });
   }, [postId]);
 
@@ -69,6 +87,47 @@ function PostView() {
     setOnPlay(!onPlay);
   };
 
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+
+    if (parts.length === 2) return parts.pop().split(";").shift();
+    return null;
+  };
+
+  const userId = window.localStorage.getItem("userId");
+  console.log("유저 아이디입니다 : ", userId);
+  const token = getCookie("accessToken");
+
+  const onAddToPlaylist = async (userId, postId) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/api/playlists/${userId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // 토큰을 Authorization 헤더에 추가
+          },
+          params: {
+            postId: postId,
+          },
+        }
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        const data = response.data;
+        alert("플레이리스트에 추가되었습니다!");
+        console.log("추가된 플레이리스트: ", data);
+      } else {
+        console.error("플레이리스트 추가 중 오류 발생");
+        alert("플레이리스트 추가 중 오류가 발생했습니다.");
+      }
+    } catch (error) {
+      console.error("에러 발생: ", error);
+      alert("플레이리스트 추가 중 에러가 발생했습니다.");
+    }
+  };
+
   return (
     <>
       <S.PostHeader>
@@ -76,7 +135,7 @@ function PostView() {
           <div onClick={togglePlay}>
             {onPlay ? <S.PauseIcon /> : <S.PlayIcon />}
           </div>
-          <S.AddIcon />
+          <S.AddIcon onClick={() => onAddToPlaylist(userId, postId)} />
         </S.IconWrapper>
         <S.PostCategory>{postObject.postCategory}</S.PostCategory>
       </S.PostHeader>

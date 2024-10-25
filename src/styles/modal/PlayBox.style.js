@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 export const PlayBox = styled.div`
   border-radius: var(--border-radius);
   background-color: var(--light-gray);
@@ -60,4 +60,65 @@ export const VolumeIcon = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   margin-bottom: 40px;
+`;
+
+//스켈레톤
+
+// 스켈레톤 애니메이션 정의
+const skeletonAnimation = keyframes`
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+`;
+
+// 공통 스켈레톤 스타일
+const SkeletonBase = styled.div`
+  background-color: #e0e0e0;
+  background-image: linear-gradient(90deg, #e0e0e0, #f5f5f5, #e0e0e0);
+  background-size: 200% 100%;
+  background-position: 0 0;
+  animation: ${skeletonAnimation} 1.5s infinite linear;
+  border-radius: 4px;
+`;
+
+// 스켈레톤 요소 스타일
+export const SkeletonTitle = styled(SkeletonBase)`
+  width: 50%;
+  height: 20px;
+  margin: 0 auto 30px;
+`;
+
+export const SkeletonThumbnail = styled(SkeletonBase)`
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+`;
+
+export const SkeletonMainText = styled(SkeletonBase)`
+  width: 70%;
+  height: 20px;
+  margin: 0 auto 5px;
+`;
+
+export const SkeletonSubText = styled(SkeletonBase)`
+  width: 50%;
+  height: 15px;
+  margin: 0 auto 10px;
+`;
+
+export const SkeletonVolumeIcon = styled(SkeletonBase)`
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin: 0 auto 40px;
+`;
+
+export const SkeletonAudioPlayer = styled(SkeletonBase)`
+  width: 100%;
+  height: 30px;
+  margin-top: 10px;
 `;
