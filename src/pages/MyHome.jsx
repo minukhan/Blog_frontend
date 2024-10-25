@@ -11,7 +11,7 @@ import {
 import { useParams } from "react-router-dom";
 
 function MyPage() {
-  const uid = 1;
+  const userId = window.localStorage.getItem("userId");
   const { categoryName } = useParams();
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({
@@ -28,7 +28,7 @@ function MyPage() {
   useEffect(() => {
     console.log(categoryName);
     // 유저 정보는 공통이므로 항상 요청
-    getUserInfo(uid).then((res) => {
+    getUserInfo(userId).then((res) => {
       console.log(res);
       setUser(res.data);
     });
@@ -36,20 +36,20 @@ function MyPage() {
     // categoryName에 따라 요청 분기
     if (categoryName) {
       console.log("Fetching posts by category:", categoryName);
-      getUserPostsByCategory(uid, categoryName).then((res) => {
+      getUserPostsByCategory(userId, categoryName).then((res) => {
         setPosts(res ? res : []); // 카테고리별 게시물 설정
       });
     } else {
       console.log("Fetching all posts for user");
-      getPostByUserId(uid).then((res) => {
+      getPostByUserId(userId).then((res) => {
         setPosts(res ? res : []); // 모든 게시물 설정
       });
     }
-  }, [categoryName, uid]);
+  }, [categoryName, userId]);
 
   return (
     <MainWrap>
-      <UserSideBar user={user} />
+      <UserSideBar user={user} userId={userId} />
       <PostMain>
         <SortToggleBar>
           Sort
