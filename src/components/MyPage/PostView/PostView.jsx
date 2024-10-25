@@ -3,17 +3,29 @@ import * as S from "../../../styles/mypage/PostView.style";
 
 import { useEffect, useReducer, useRef, useState } from "react";
 
-
 import { useDispatch } from "react-redux";
 
 import { POST_READ, POST_REMOVE } from "../../../api/post";
 import axios from "axios";
-
+import AlertModal from "../../common/AlertModal";
 
 function PostView() {
   const navigate = useNavigate();
   const { postId } = useParams();
   const dispatch = useDispatch();
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const handleOpenAlert = () => {
+    setIsAlertOpen(true);
+  };
+
+  const handleOkAlert = () => {
+    setIsAlertOpen(false);
+    navigate("/mypage");
+  };
+  const handleCancelAlert = () => {
+    setIsAlertOpen(false);
+    // navigate("/mypage");
+  };
 
   const [onPlay, setOnPlay] = useState(false);
   const audioRef = useRef(null);
@@ -35,16 +47,14 @@ function PostView() {
     navigate(`/${postId}/edit`); // todo
   };
   const handleDelete = () => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this post?"
-    );
-
-    if (confirmDelete) {
-      console.log("Post deleted");
-      // todo 삭제 API를 호출
-    } else {
-      console.log("Post not deleted");
-    }
+    handleOpenAlert();
+    console.log("Post deleted");
+    //   if (confirmDelete) {
+    //     console.log("Post deleted");
+    //     // todo 삭제 API를 호출
+    //   } else {
+    //     console.log("Post not deleted");
+    //   }
   };
 
   const postdate = new Date(postObject.createdAt);
@@ -131,6 +141,13 @@ function PostView() {
   return (
     <>
       <S.PostHeader>
+        {isAlertOpen && (
+          <AlertModal
+            message="삭제하시겠습니까?"
+            onOk={handleOkAlert}
+            onCancel={handleCancelAlert}
+          />
+        )}
         <S.IconWrapper>
           <div onClick={togglePlay}>
             {onPlay ? <S.PauseIcon /> : <S.PlayIcon />}

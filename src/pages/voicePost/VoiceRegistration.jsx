@@ -5,7 +5,7 @@ import { TbPlayerPauseFilled } from "react-icons/tb";
 import { StyledBtn } from "../../styles/commonStyled";
 import { REGISTRATION_VOICEID } from "../../api/narration";
 import { DotLoader } from "react-spinners";
-import AlertModal from "../../components/common/AlertModal";
+import AlertModal1 from "../../components/common/AlertModal1";
 
 const VoiceRegistration = () => {
   const [stream, setStream] = useState();
@@ -125,9 +125,9 @@ const VoiceRegistration = () => {
   return (
     <Wrap>
       {isAlertOpen && (
-        <AlertModal
+        <AlertModal1
           message="녹음을 먼저 진행해주세요"
-          onClose={handleCloseAlert}
+          onOk={handleCloseAlert}
         />
       )}
       <Main>
