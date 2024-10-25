@@ -1,13 +1,14 @@
 import { useNavigate, useParams } from "react-router-dom";
 import * as S from "../../../styles/mypage/PostView.style";
 import { useEffect, useReducer, useRef, useState } from "react";
-import { POST_READ } from "../../../api/post";
+import { POST_READ, POST_REMOVE } from "../../../api/post";
 
 function PostView() {
   const navigate = useNavigate();
   const { postId } = useParams();
   const [onPlay, setOnPlay] = useState(false);
   const audioRef = useRef(null);
+
   const [postObject, setPostObject] = useState({
     postId: 0,
     userId: 0,
