@@ -8,23 +8,39 @@ import { useDispatch } from "react-redux";
 import { POST_READ, POST_REMOVE } from "../../../api/post";
 import axios from "axios";
 import AlertModal from "../../common/AlertModal";
+import AlertModal1 from "../../common/AlertModal1";
 
 function PostView() {
   const navigate = useNavigate();
   const { postId } = useParams();
   const dispatch = useDispatch();
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
+  const [isPlaylistOkAlertOpen, setIsPlaylistOkAlertOpen] = useState(false);
+  const [isPlaylistErrorAlertOpen, setIsPlaylistErrorAlertOpen] =
+    useState(false);
   const handleOpenAlert = () => {
-    setIsAlertOpen(true);
+    setIsDeleteAlertOpen(true);
   };
-
   const handleOkAlert = () => {
-    setIsAlertOpen(false);
+    setIsDeleteAlertOpen(false);
     navigate("/mypage");
   };
   const handleCancelAlert = () => {
-    setIsAlertOpen(false);
-    // navigate("/mypage");
+    setIsDeleteAlertOpen(false);
+  };
+  //플리 추가 성공 alert
+  const handlePlaylistOpenAlert = () => {
+    setIsPlaylistOkAlertOpen(true);
+  };
+  const handlePlaylistCloseAlert = () => {
+    setIsPlaylistOkAlertOpen(false);
+  };
+  //플리 실패 alert
+  const handlePlaylistErrorOpenAlert = () => {
+    setIsPlaylistErrorAlertOpen(true);
+  };
+  const handlePlaylistErrorCloseAlert = () => {
+    setIsPlaylistErrorAlertOpen(false);
   };
 
   const [onPlay, setOnPlay] = useState(false);
@@ -126,26 +142,57 @@ function PostView() {
 
       if (response.status === 200 || response.status === 201) {
         const data = response.data;
-        alert("플레이리스트에 추가되었습니다!");
+        handlePlaylistOpenAlert();
         console.log("추가된 플레이리스트: ", data);
       } else {
         console.error("플레이리스트 추가 중 오류 발생");
-        alert("플레이리스트 추가 중 오류가 발생했습니다.");
+        handlePlaylistOpenAlert();
+        //alert("플레이리스트 추가 중 오류가 발생했습니다.");
       }
     } catch (error) {
       console.error("에러 발생: ", error);
-      alert("플레이리스트 추가 중 에러가 발생했습니다.");
+      handlePlaylistErrorCloseAlert();
+      //alert("플레이리스트 추가 중 에러가 발생했습니다.");
     }
   };
+  useEffect(() => {
+    // 오디오가 끝까지 재생되면 아이콘을 변경
+    const handleAudioEnd = () => setOnPlay(false);
+
+    // 이벤트 리스너 추가
+    if (audioRef.current) {
+      audioRef.current.addEventListener("ended", handleAudioEnd);
+    }
+    console.log("오디오 리스너 추가", audioRef.current);
+
+    // 컴포넌트 언마운트 시 이벤트 리스너 제거
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.removeEventListener("ended", handleAudioEnd);
+      }
+    };
+  }, [audioRef.current]);
 
   return (
     <>
       <S.PostHeader>
-        {isAlertOpen && (
+        {isDeleteAlertOpen && (
           <AlertModal
             message="삭제하시겠습니까?"
             onOk={handleOkAlert}
             onCancel={handleCancelAlert}
+          />
+        )}
+        {isPlaylistOkAlertOpen && (
+          <AlertModal1
+            message="플레이리스트에 추가되었습니다!"
+            onOk={handlePlaylistCloseAlert}
+          />
+        )}
+        {isPlaylistErrorAlertOpen && (
+          <AlertModal1
+            message="플레이리스트에 추가되었습니다!"
+            onOk={handlePlaylistErrorOpenAlert}
           />
         )}
         <S.IconWrapper>
