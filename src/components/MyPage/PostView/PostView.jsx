@@ -155,6 +155,23 @@ function PostView() {
       //alert("플레이리스트 추가 중 에러가 발생했습니다.");
     }
   };
+  useEffect(() => {
+    // 오디오가 끝까지 재생되면 아이콘을 변경
+    const handleAudioEnd = () => setOnPlay(false);
+
+    // 이벤트 리스너 추가
+    if (audioRef.current) {
+      audioRef.current.addEventListener("ended", handleAudioEnd);
+    }
+    console.log("오디오 리스너 추가", audioRef.current);
+
+    // 컴포넌트 언마운트 시 이벤트 리스너 제거
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.removeEventListener("ended", handleAudioEnd);
+      }
+    };
+  }, [audioRef.current]);
 
   return (
     <>
