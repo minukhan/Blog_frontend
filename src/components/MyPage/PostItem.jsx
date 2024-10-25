@@ -27,6 +27,8 @@ function PostItem({ item, username }) {
     return showDate;
   };
 
+  console.log(item);
+
   useEffect(() => {
     //changeTimestampToString();
   }, [item.uid]);
