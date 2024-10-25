@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import * as S from "../../styles/home/PostItem.style";
 import { useNavigate } from "react-router-dom";
+import { getRandomUserProfile, userProfiles } from "../../data/userProfile";
 
 function PostItem({ post }) {
   const navigate = useNavigate();
@@ -8,6 +9,14 @@ function PostItem({ post }) {
   const handleTitleClick = () => {
     navigate(`/${post.postId}/post`);
   };
+  useEffect(() => {
+    console.log(post);
+  }, []);
+
+  const { userName, profileImage } =
+    post.userName && post.profileImage
+      ? { userName: post.userName, profileImage: post.profileImage }
+      : getRandomUserProfile();
 
   // post prop 추가
   return (
