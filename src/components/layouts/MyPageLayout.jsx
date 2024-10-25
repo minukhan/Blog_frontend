@@ -4,7 +4,7 @@ import { getUserInfo } from "../../api/myHomeApi";
 import { useEffect, useState } from "react";
 
 function MyPageLayout({ children }) {
-  const uid = 1;
+  const uid = window.localStorage.getItem("userId");
   const [user, setUser] = useState({
     name: "",
     profileImg: "",

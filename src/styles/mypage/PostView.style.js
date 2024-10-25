@@ -133,3 +133,80 @@ export const Btn = styled.button`
       3px 3px 10px rgba(174, 174, 192, 0.3);
   }
 `;
+// 스켈레톤 애니메이션
+const skeletonAnimation = `
+  @keyframes skeleton-loading {
+    0% {
+      background-position: -200px 0;
+    }
+    100% {
+      background-position: 200px 0;
+    }
+  }
+`;
+
+// 스켈레톤 스타일 공통
+const SkeletonBase = styled.div`
+  background-color: #e0e0e0;
+  background-image: linear-gradient(90deg, #e0e0e0, #f0f0f0, #e0e0e0);
+  background-size: 200% 100%; /* 스켈레톤 배경 크기 */
+  background-position: 0% 0; /* 애니메이션 시작 배경 위치 */
+  animation: skeleton-loading 8s infinite; /* 애니메이션 적용 */
+  border-radius: 4px;
+  ${skeletonAnimation}/* 애니메이션 키프레임 호출 */
+`;
+
+// 각 스켈레톤 요소 스타일
+export const SkeletonTitle = styled(SkeletonBase)`
+  width: 70%;
+  height: 30px;
+  margin: 16px 0;
+`;
+
+export const SkeletonMeta = styled(SkeletonBase)`
+  width: 50%;
+  height: 23.99px;
+  margin-bottom: 12px;
+`;
+
+export const SkeletonCategory = styled(SkeletonBase)`
+  width: 100px;
+  height: 20px;
+`;
+
+export const SkeletonIcon = styled(SkeletonBase)`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 8px;
+`;
+
+export const SkeletonThumbnail = styled(SkeletonBase)`
+  width: 400px;
+  height: 300px;
+  border-radius: 8px;
+  margin-right: 16px;
+`;
+
+export const SkeletonSummaryTitle = styled(SkeletonBase)`
+  width: 100px;
+  height: 20px;
+  margin-bottom: 8px;
+`;
+
+export const SkeletonSummary = styled(SkeletonBase)`
+  width: 200px;
+  height: 60px;
+`;
+
+export const SkeletonTextPlaceholder = styled(SkeletonBase)`
+  width: 100%;
+  height: 200px;
+  margin-top: 16px;
+`;
+
+export const SkeletonButton = styled(SkeletonBase)`
+  width: 80px;
+  height: 40px;
+  margin-right: 16px;
+`;

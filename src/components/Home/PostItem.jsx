@@ -6,9 +6,9 @@ import { userProfiles } from "../../data/userProfile";
 function PostItem({ post }) {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(post);
-  }, []);
+  // useEffect(() => {
+  //   console.log(post);
+  // }, []);
 
   // 포스트 제목 클릭 시 해당 경로로 이동하는 함수
   const handleTitleClick = () => {
