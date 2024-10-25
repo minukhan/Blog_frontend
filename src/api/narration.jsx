@@ -7,7 +7,8 @@ export const REGISTRATION_VOICEID = async (voiceUrl) => {
 
   console.log("확인용", voiceUrl);
   // userId local에서 가져오기
-  let userId = 1;
+  // let userId = 1;
+  const userId = window.localStorage.getItem("userId");
   const url = `http://localhost:8080/api/voice/${userId}`;
 
   const res = await axios({
