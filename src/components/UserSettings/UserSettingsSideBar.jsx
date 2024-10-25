@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FaGithub, FaInstagram, FaTwitterSquare } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { deleteUserInfo } from "../../api/userSettingApi";
-import AlertModal from "../common/\bAlertModal";
+import AlertModal from "../common/AlertModal";
 
 const user = {
   img: "",
