@@ -25,16 +25,15 @@ function PostViewComment({ postId }) {
   }
 
   const handlePostComment = () => {
-    console.log("댓글 등록");
-    // 새 댓글을 리덕스에 추가
     const commentData = {
       commentId: Date.now(), // 임시로 ID를 생성, 실제로는 서버에서 가져옴
       content: newComment,
       postId,
     };
-
-    dispatch({ type: "ADD_COMMENT", payload: commentData });
-    setNewComment("");
+    setTimeout(() => {
+      dispatch({ type: "ADD_COMMENT", payload: commentData });
+      setNewComment("");
+    }, 1000);
   };
 
   // 댓글 데이터를 가져오는 함수

@@ -30,6 +30,16 @@ const CommentReducer = (state = init, action) => {
         ),
       };
 
+    case "UPDATE_COMMENT":
+      return {
+        ...state,
+        comments: state.comments.map((item) =>
+          item.commentId === action.payload.commentId
+            ? { ...item, content: action.payload.content }
+            : item
+        ),
+      };
+
     default:
       return state;
   }
