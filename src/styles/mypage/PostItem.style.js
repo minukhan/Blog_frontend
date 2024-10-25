@@ -5,20 +5,23 @@ export const PostContainer = styled.div`
   justify-self: center;
   border-radius: var(--border-radius);
   box-shadow: 10px 10px 30px rgba(174, 174, 192, 0.4);
-  width: 96%;
+  width: 916px;
+  height: 230px;
   margin-bottom: 20px;
+  overflow: hidden;
 `;
 
 export const Thumbnail = styled.img`
   width: 300px;
+  height: 100%;
   border-radius: 8px 0 0 8px;
   object-fit: cover;
+  object-position: center;
 `;
 
 export const PostContent = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
   padding: 20px;
 `;
 

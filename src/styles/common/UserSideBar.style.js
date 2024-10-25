@@ -6,11 +6,10 @@ export const Wrap = styled.div`
   align-items: center;
   justify-content: center;
   gap: 100px;
-  min-width: 270px;
+  width: 270px;
   padding: 30px 0px;
   border-radius: 30px;
   background: var(--light-gray);
-  /* box-shadow: 13px 13px 25px #c3c3c3, -13px -13px 25px #fdfdfd; */
   box-shadow: 10px 10px 30px rgba(174, 174, 192, 0.6);
   height: 700px;
 `;
@@ -31,7 +30,7 @@ export const ProfileImg = styled.div`
   width: 100px;
   height: 100px;
   border-radius: 6.875rem;
-  background-color: white;
+  background-color: #f2f4f8;
   img {
     width: 100%;
     height: 100%;

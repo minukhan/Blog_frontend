@@ -115,10 +115,11 @@ function UserSideBar({
           margin: "50px 0",
         }}
       />
-
       <AccountInfoWrap>
-        <h2>Account Information</h2>
         <Category>
+          <h2 style={{ cursor: "pointer", marginLeft: "-5px" }}>
+            Account Information
+          </h2>
           <p style={{ cursor: "pointer" }} onClick={handleLogout}>
             Logout
           </p>
@@ -141,21 +142,21 @@ const Wrap = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  min-width: 342px;
-  height: 736px;
+  width: 270px;
   border-radius: 30px;
   background: var(--light-gray);
-  box-shadow: 13px 13px 25px #c3c3c3, -13px -13px 25px #fdfdfd;
+  /* box-shadow: 13px 13px 25px #c3c3c3, -13px -13px 25px #fdfdfd; */
+  box-shadow: 10px 10px 30px rgba(174, 174, 192, 0.6);
+  height: 700px;
 `;
 const ProfileWrap = styled.div`
   width: 100%;
-
   font-size: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
+  margin-top: -110px;
 
   p {
     letter-spacing: 1.5;
@@ -177,22 +178,23 @@ const ProfileImg = styled.div`
 `;
 const SocialWrap = styled.div`
   display: flex;
-  gap: 5px;
-  padding-top: 10px;
+  gap: 15px;
+  padding-top: 30px;
 `;
 
 const AccountInfoWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
-  width: 250px;
+  width: 70%;
 
   h2 {
+    margin-left: 20px;
     font-size: 18px;
     font-weight: 500;
-    padding-bottom: 5px;
-    margin-bottom: 25px;
-    border-bottom: 3px solid black;
+    padding: 0 3px 0 3px;
+    border-bottom: 2px solid black;
+    margin-bottom: 15px;
   }
 `;
 
