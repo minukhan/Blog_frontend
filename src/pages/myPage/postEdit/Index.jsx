@@ -3,14 +3,13 @@ import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { StyledBtn } from "../../../styles/commonStyled";
 import PostEditor from "./PostEditor";
-import { POST_WRITE } from "../../../api/post";
+import { POST_EDIT, POST_READ, POST_WRITE } from "../../../api/post";
 import { useSelect } from "./../../../hooks/useSelect";
-import { useNavigate } from "react-router-dom";
-import useLoadingStore from "../../../store/useLoadingStore";
+import { useNavigate, useParams } from "react-router-dom";
 
-function PostWritePage() {
+function PostEditPage() {
   const navigate = useNavigate();
-  const { setLoadingSignal } = useLoadingStore();
+  const { postId } = useParams();
 
   const [selectedThumbImg, setSelectedThumbImg] = useState(
     "/images/postWrite_thumbPreview.png"
@@ -31,18 +30,27 @@ function PostWritePage() {
   };
 
   useEffect(() => {
+    POST_READ(postId).then((res) => {
+      setSelectedThumbImg(res.thumbnailUrl);
+      setTitle(res.postTitle);
+      setSummary(res.postSummary);
+      selectOption(res.postCategory);
+      setEditorContent(res.postContent);
+    });
+    console.log(title);
+
     // 페이지 로드 시 기본 이미지를 파일로 변환해서 thumbFile로 설정
     const convertUrlToFile = async () => {
       const file = await urlToFile(
-        "/images/postWrite_thumbPreview.png",
-        "postWrite_thumbPreview.png",
+        selectedThumbImg,
+        selectedThumbImg + ".png",
         "image/png"
       );
       setThumbFile(file);
     };
 
     convertUrlToFile();
-  }, []);
+  }, [setSelectedThumbImg]);
 
   //
   const handleSelectedThumbImg = (e) => {
@@ -56,9 +64,6 @@ function PostWritePage() {
   };
 
   const handleSubmit = (e) => {
-    // 폼 제출 시 로딩 신호를 true로 변경
-    setLoadingSignal(true);
-
     e.preventDefault();
     const plainText = editorContent.replace(/<[^>]*>/g, "");
 
@@ -71,7 +76,7 @@ function PostWritePage() {
     } else {
       formData.append("thumbnailUrl", thumbFile);
     }
-
+    console.log("@@@@@@@@@", editorContent);
     formData.append("postTitle", title);
     formData.append("postSummary", summary);
     formData.append("postContent", editorContent);
@@ -84,15 +89,25 @@ function PostWritePage() {
       console.log(key, value);
     }
 
-    POST_WRITE(formData)
-      .then((data) => {
-        console.log("postId", data);
-        // navigate(`/mypage`);
-        navigate(`/${data}/post`);
+    POST_EDIT(postId, formData)
+      .then((res) => {
+        console.log(res);
+        navigate(`/${postId}/post`);
       })
       .catch((error) => {
         console.log(error);
       });
+
+    // api 바꾸기ㅣㅣㅣㅣㅣ
+    // POST_WRITE(formData)
+    //   .then((data) => {
+    //     console.log("postId", data);
+    //     // navigate(`/mypage`);
+    //     navigate(`/${data}/post`);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   return (
@@ -176,7 +191,10 @@ function PostWritePage() {
       </InfoWrap>
 
       <EditorWrap>
-        <PostEditor setContent={setEditorContent} />
+        <PostEditor
+          editorContent={editorContent}
+          setContent={setEditorContent}
+        />
       </EditorWrap>
 
       <BtnWrap>
@@ -186,7 +204,7 @@ function PostWritePage() {
   );
 }
 
-export default PostWritePage;
+export default PostEditPage;
 
 const Wrap = styled.div`
   background-color: red;
