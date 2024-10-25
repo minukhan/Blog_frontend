@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import { TbPlayerPauseFilled } from "react-icons/tb";
