@@ -22,7 +22,8 @@ export default VoicePostPage;
 
 const Wrap = styled.div`
   width: 100vw;
-  height: 100vh;
+  /* height: 100vh; */
+  margin-top: 50px;
   background-color: var(--light-gray);
   background-image: url(/images/toggleBackground.png);
 
