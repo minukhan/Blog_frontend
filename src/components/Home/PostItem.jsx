@@ -15,6 +15,40 @@ function PostItem({ post }) {
     navigate(`/${post.postId}/post`);
   };
 
+  const userImageMapping = [
+    {
+      userId: 3757150318,
+      imageUrl:
+        "http://k.kakaocdn.net/dn/cKBAgO/btsKk5WCykb/Ekw9iYbp6l18qkMJQE72uK/img_640x640.jpg",
+    },
+    {
+      userId: 3763248410,
+      imageUrl:
+        "http://k.kakaocdn.net/dn/tF2gR/btsKkf6B7DV/E2o3BGbuagxhvukdDAcR1K/img_640x640.jpg",
+    },
+    {
+      userId: 3763779868,
+      imageUrl:
+        "http://k.kakaocdn.net/dn/9PH1n/btsKlr50Drb/cKaFOPYUCkbdoJQYUZuJnK/img_640x640.jpg",
+    },
+    {
+      userId: 3763943503,
+      imageUrl:
+        "http://img1.kakaocdn.net/thumb/R640x640.q70/?fname=http://t1.kakaocdn.net/account_images/default_profile.jpeg",
+    },
+    {
+      userId: 3764009578,
+      imageUrl:
+        "http://k.kakaocdn.net/dn/9PH1n/btsKlr50Drb/cKaFOPYUCkbdoJQYUZuJnK/img_640x640.jpg",
+    },
+  ];
+  const userImage = userImageMapping.find(
+    (user) => user.userId === post.userId
+  );
+  // useEffect(() => {
+  //   console.log(post);
+  //   console.log(userImageMapping[post.userId]);
+  // }, []);
   // post prop 추가
   return (
     <S.PostContainer>
@@ -28,8 +62,12 @@ function PostItem({ post }) {
       <S.PostContent>
         <S.PostHeader>
           <S.Profile>
+            {/* <S.ProfileImage
+              src={userImage || "/images/home/profileImage.png"}
+              alt="Profile Image"
+            /> */}
             <S.ProfileImage
-              src={post.profileImage || "/images/home/profileImage.png"}
+              src={userImage?.imageUrl || "/images/home/profileImage.png"}
               alt="Profile Image"
             />
             <S.ProfileTextWrap>
