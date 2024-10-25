@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import myPageRouter from "./myPageRouter";
-import UserSettings from "../pages/userSettings";
+import UserSettings from "../pages/UserSettings";
 import MyHome from "../pages/MyHome";
 import MainLayout from "../components/layouts/MainLayout";
 import PostDetailpage from "../pages/PostDetailPage/ PostDetailpage";

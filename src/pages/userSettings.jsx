@@ -7,7 +7,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { getUserInfo } from "../api/userSettingApi";
 
-function userSettings() {
+function UserSettings() {
   const { uid } = useParams();
   const [name, setName] = useState(null);
   const [voiceSelect, setVoiceSelect] = useState("");
@@ -82,4 +82,4 @@ function userSettings() {
   );
 }
 
-export default userSettings;
+export default UserSettings;

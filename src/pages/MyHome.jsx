@@ -71,7 +71,8 @@ const MainWrap = styled.div`
   min-width: 1500px;
   height: auto;
   margin: 0 auto;
-  padding: 200px 0;
+  /* padding: 200px 0; */
+  padding-top: 20px;
   display: flex;
   justify-content: center;
   gap: 30px;
