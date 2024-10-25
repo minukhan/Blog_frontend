@@ -5,10 +5,11 @@ export const PostContainer = styled.div`
   justify-self: center;
   border-radius: var(--border-radius);
   box-shadow: 10px 10px 30px rgba(174, 174, 192, 0.4);
-  width: 916px;
+  width: 820px;
   height: 230px;
   margin-bottom: 20px;
   overflow: hidden;
+  margin-top: 20px;
 `;
 
 export const Thumbnail = styled.img`

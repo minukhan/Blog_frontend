@@ -83,7 +83,7 @@ const MainWrap = styled.div`
 const PostMain = styled.div`
   /* Rectangle 1 */
   margin-top: 5px;
-  width: 955px;
+  width: 860px;
   height: auto;
   min-height: 1248px;
 
