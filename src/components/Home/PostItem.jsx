@@ -1,8 +1,11 @@
 import { useEffect } from "react";
 import * as S from "../../styles/home/PostItem.style";
+import { useNavigate } from "react-router-dom";
 
 function PostItem({ post }) {
   const userProfileImage = localStorage.getItem("userProfileImage");
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (userProfileImage) {
       post.profileImage = userProfileImage;
@@ -10,9 +13,13 @@ function PostItem({ post }) {
       console.log("userProfileImage가 로컬 스토리지에 저장되어 있지 않습니다.");
     }
   }, []);
+
+  const handleClick = () => {
+    navigate(`${post.postId}/post`);
+  };
   // post prop 추가
   return (
-    <S.PostContainer>
+    <S.PostContainer onClick={handleClick}>
       <S.ThumbnailWrap>
         <S.Thumbnail
           src={post.thumbnailUrl || "/images/home/thumbnail.png"}
