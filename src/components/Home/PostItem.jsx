@@ -1,25 +1,23 @@
 import { useEffect } from "react";
 import * as S from "../../styles/home/PostItem.style";
 import { useNavigate } from "react-router-dom";
-
+import { userProfiles } from "../../data/userProfile";
+// import { getRandomUserProfile, userProfiles } from "../../data/userProfile";
 function PostItem({ post }) {
-  const userProfileImage = localStorage.getItem("userProfileImage");
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userProfileImage) {
-      post.profileImage = userProfileImage;
-    } else {
-      console.log("userProfileImage가 로컬 스토리지에 저장되어 있지 않습니다.");
-    }
+    console.log(post);
   }, []);
 
-  const handleClick = () => {
-    navigate(`${post.postId}/post`);
+  // 포스트 제목 클릭 시 해당 경로로 이동하는 함수
+  const handleTitleClick = () => {
+    navigate(`/${post.postId}/post`);
   };
+
   // post prop 추가
   return (
-    <S.PostContainer onClick={handleClick}>
+    <S.PostContainer>
       <S.ThumbnailWrap>
         <S.Thumbnail
           src={post.thumbnailUrl || "/images/home/thumbnail.png"}
@@ -31,18 +29,24 @@ function PostItem({ post }) {
         <S.PostHeader>
           <S.Profile>
             <S.ProfileImage
-              src={post.profileImage || "/images/home/profileImage.png"}
+              src={
+                post.profileImage ||
+                userProfiles[post.postId % 14].profileImage ||
+                "/images/home/profileImage.png"
+              }
               alt="Profile Image"
             />
             <S.ProfileTextWrap>
-              <S.UserName>{post.userName || "Username"}</S.UserName>
+              <S.UserName>
+                {post.userName || userProfiles[post.postId % 14].userName}
+              </S.UserName>
               <S.PostDate>{post.createdAt || "3 days ago - 3:27"}</S.PostDate>
             </S.ProfileTextWrap>
           </S.Profile>
           <S.Icon />
         </S.PostHeader>
         <S.PostBody>
-          <S.PostTitle>
+          <S.PostTitle onClick={handleTitleClick}>
             {post.postTitle || "틈새에서 나만의 플레이리스트 만들기"}
           </S.PostTitle>
           <S.PostSummary>

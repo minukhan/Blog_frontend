@@ -29,6 +29,7 @@ function Header() {
   // Myblog 클릭 시 userId 경로로 이동
   const handleMyBlogClick = () => {
     navigate(`/mypage`); // userId 경로로 이동
+    setProfileDropdownOpen(false); // 드롭다운 닫기
   };
   const handleAccountSettingClick = () => {
     // 로컬 스토리지에서 userId 가져오기

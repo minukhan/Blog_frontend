@@ -1,8 +1,7 @@
 import * as S from "../../styles/common/UserSideBar.style";
 import { FaGithub, FaInstagram, FaTwitterSquare } from "react-icons/fa";
 import { StyledBtn } from "../../styles/commonStyled";
-import { Link, useNavigate, useParams } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 const user = {
   img: "/images/myPageProfile.png",
   nickname: "하니",
@@ -11,6 +10,8 @@ const user = {
   insta: "https://example.com",
   twitter: "https://example.com",
 };
+
+const localProfileImg = localStorage.getItem("userProfileImage");
 function UserSideBar({ user }) {
   const navigate = useNavigate();
   const userId = window.localStorage.getItem("userId");
@@ -18,7 +19,12 @@ function UserSideBar({ user }) {
     <S.Wrap>
       <S.ProfileWrap>
         <S.ProfileImg>
-          <img src={user.profileImg} alt={user.name} />
+          <img
+            src={
+              user.profileImg || localProfileImg || "./images/userBasicImg.png"
+            }
+            alt={user.name}
+          />
         </S.ProfileImg>
 
         <p style={{ fontWeight: "700", paddingTop: "15px" }}>{user.name}</p>

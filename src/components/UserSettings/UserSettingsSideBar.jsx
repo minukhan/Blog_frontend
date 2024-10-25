@@ -25,6 +25,7 @@ function UserSideBar({
 }) {
   const [data, setData] = useState(user);
   const navigate = useNavigate();
+  const localProfileImg = localStorage.getItem("userProfileImage");
 
   useEffect(() => {
     setData((cur) => {
@@ -61,7 +62,10 @@ function UserSideBar({
     <Wrap>
       <ProfileWrap>
         <ProfileImg>
-          <img src={data.img} alt={""} />
+          <img
+            src={data.img || localProfileImg || "./images/userBasicImg.png"}
+            alt={""}
+          />
         </ProfileImg>
 
         <p style={{ fontWeight: "700", paddingTop: "15px" }}>{data.name}</p>
