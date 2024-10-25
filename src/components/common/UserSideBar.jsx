@@ -11,7 +11,7 @@ const user = {
   insta: "https://example.com",
   twitter: "https://example.com",
 };
-function UserSideBar() {
+function UserSideBar({ user }) {
   const navigate = useNavigate();
   const userId = window.localStorage.getItem("userId");
 
