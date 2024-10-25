@@ -2,13 +2,10 @@ import { useEffect } from "react";
 import * as S from "../../styles/home/PostItem.style";
 import { useNavigate } from "react-router-dom";
 import { getRandomUserProfile, userProfiles } from "../../data/userProfile";
-
 function PostItem({ post }) {
+  const userProfileImage = localStorage.getItem("userProfileImage");
   const navigate = useNavigate();
-  // 포스트 제목 클릭 시 해당 경로로 이동하는 함수
-  const handleTitleClick = () => {
-    navigate(`/${post.postId}/post`);
-  };
+
   useEffect(() => {
     console.log(post);
   }, []);
@@ -18,9 +15,13 @@ function PostItem({ post }) {
       ? { userName: post.userName, profileImage: post.profileImage }
       : getRandomUserProfile();
 
+  const handleClick = () => {
+    navigate(`${post.postId}/post`);
+  };
+
   // post prop 추가
   return (
-    <S.PostContainer>
+    <S.PostContainer onClick={handleClick}>
       <S.ThumbnailWrap>
         <S.Thumbnail
           src={post.thumbnailUrl || "/images/home/thumbnail.png"}

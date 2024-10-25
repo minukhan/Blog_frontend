@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { IoIosPlayCircle, IoIosAddCircle } from "react-icons/io";
+import { FaCirclePause } from "react-icons/fa6";
 
 export const PostHeader = styled.div`
   display: flex;
@@ -10,10 +11,21 @@ export const PostHeader = styled.div`
 export const IconWrapper = styled.div`
   display: flex;
   gap: 10px;
+  justify-content: center;
+  align-items: center;
 `;
 export const PlayIcon = styled(IoIosPlayCircle)`
   width: 35px;
   height: 35px;
+  color: var(--navy);
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+export const PauseIcon = styled(FaCirclePause)`
+  width: 30px;
+  height: 30px;
   color: var(--navy);
   cursor: pointer;
   &:hover {
