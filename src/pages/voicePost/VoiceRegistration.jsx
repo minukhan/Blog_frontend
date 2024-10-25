@@ -6,6 +6,7 @@ import { StyledBtn } from "../../styles/commonStyled";
 import { REGISTRATION_VOICEID } from "../../api/narration";
 import { DotLoader } from "react-spinners";
 import AlertModal1 from "../../components/common/AlertModal1";
+import LoadingSpinner from "../../utils/svg";
 
 const VoiceRegistration = () => {
   const [stream, setStream] = useState();
@@ -17,6 +18,7 @@ const VoiceRegistration = () => {
   const [modelingSrc, setModelingSrc] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [isRecordingComplete, setIsRecordingComplete] = useState(false);
 
   const handleOpenAlert = () => {
     setIsAlertOpen(true);
@@ -26,6 +28,8 @@ const VoiceRegistration = () => {
     setIsAlertOpen(false);
   };
   const onRecAudio = () => {
+    setOnRec(false); // 녹음 중 상태로 설정
+    setIsRecordingComplete(false); // 녹음 완료 메시지를 초기화
     // 음원정보를 담은 노드를 생성하거나 음원을 실행또는 디코딩 시키는 일을 한다
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     // 자바스크립트를 통해 음원의 진행상태에 직접접근에 사용된다.
@@ -72,6 +76,8 @@ const VoiceRegistration = () => {
 
   // 사용자가 음성 녹음을 중지했을 때
   const offRecAudio = () => {
+    setOnRec(true); // 녹음 완료 상태로 설정
+    setIsRecordingComplete(true); // 녹음 완료 메시지를 표시하도록 설정
     // dataavailable 이벤트로 Blob 데이터에 대한 응답을 받을 수 있음
     media.ondataavailable = function (e) {
       setAudioUrl(e.data);
@@ -131,18 +137,24 @@ const VoiceRegistration = () => {
         />
       )}
       <Main>
-        <IconBtn onClick={onRec ? onRecAudio : offRecAudio}>
-          {onRec ? (
-            <FaMicrophoneAlt size={18} color="#fff" />
-          ) : (
-            <TbPlayerPauseFilled size={18} color="#fff" />
-          )}
-        </IconBtn>
-
-        {onRec ? (
-          <p>버튼을 눌러 녹음을 시작하세요</p>
+        {isRecordingComplete ? (
+          <p>녹음이 완료되었어요</p>
         ) : (
-          <p>녹음이 완료되었다면 모델링을 시작해주세요</p>
+          <>
+            <IconBtn onClick={onRec ? onRecAudio : offRecAudio}>
+              {onRec ? (
+                <FaMicrophoneAlt size={18} color="#fff" />
+              ) : (
+                <TbPlayerPauseFilled size={18} color="#fff" />
+              )}
+            </IconBtn>
+
+            {onRec ? (
+              <p>버튼을 눌러 녹음을 시작하세요</p>
+            ) : (
+              <LoadingSpinner width="40px" height="40px" color="#000" />
+            )}
+          </>
         )}
       </Main>
 
