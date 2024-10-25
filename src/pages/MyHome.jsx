@@ -51,10 +51,10 @@ function MyPage() {
     <MainWrap>
       <UserSideBar user={user} />
       <PostMain>
-        <SortToggleBar>
+        {/* <SortToggleBar>
           Sort
           <FaCaretDown color="#000000" size={"30px"} />
-        </SortToggleBar>
+        </SortToggleBar> */}
 
         {posts.map((item, i) => {
           return <PostItem key={i} item={item} username={user.name} />;
@@ -82,6 +82,7 @@ const MainWrap = styled.div`
 
 const PostMain = styled.div`
   /* Rectangle 1 */
+  margin-top: 5px;
   width: 955px;
   height: auto;
   min-height: 1248px;
