@@ -5,7 +5,7 @@ import "suneditor/dist/css/suneditor.min.css";
 
 function PostEditor({ setContent }) {
   const handleContentChange = (content) => {
-    setContent(content); // 부모 컴포넌트의 상태를 업데이트
+    setContent(content);
   };
 
   return (
