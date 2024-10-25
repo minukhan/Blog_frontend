@@ -36,6 +36,10 @@ export const getPostByUserId = async (uId) => {
 
 export const getUserPostsByCategory = async (uId, categoryName) => {
   const res = await axios.get(`${perfix}/posts/user/category/${uId}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${assessToken}`,
+    },
     params: {
       category: categoryName,
     },

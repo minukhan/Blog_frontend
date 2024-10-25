@@ -1,13 +1,14 @@
 import { useNavigate, useParams } from "react-router-dom";
 import * as S from "../../../styles/mypage/PostView.style";
 import { useEffect, useRef, useState } from "react";
-import { POST_READ } from "../../../api/post";
+import { POST_READ, POST_REMOVE } from "../../../api/post";
 
 function PostView() {
   const navigate = useNavigate();
   const { postId } = useParams();
   const [onPlay, setOnPlay] = useState(false);
   const audioRef = useRef(null);
+  const userId = window.localStorage.getItem("userId");
 
   const [postObject, setPostObject] = useState({
     postId: 0,
@@ -32,7 +33,8 @@ function PostView() {
 
     if (confirmDelete) {
       console.log("Post deleted");
-      // todo 삭제 API를 호출
+      POST_REMOVE(postId);
+      navigate("/mypage");
     } else {
       console.log("Post not deleted");
     }
@@ -102,8 +104,12 @@ function PostView() {
       )}
 
       <S.PostButtonWrap>
-        <S.Btn onClick={handleEdit}>수정</S.Btn>
-        <S.Btn onClick={handleDelete}>삭제</S.Btn>
+        {postObject.userId == userId && (
+          <>
+            <S.Btn onClick={handleEdit}>수정</S.Btn>
+            <S.Btn onClick={handleDelete}>삭제</S.Btn>
+          </>
+        )}
       </S.PostButtonWrap>
     </>
   );
