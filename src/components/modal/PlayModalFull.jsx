@@ -19,8 +19,16 @@ function PlayModalFull({ togglePlayModal }) {
 
   const fetchPlaylists = async () => {
     const userId = window.localStorage.getItem("userId");
-    console.log("유저ID :" + userId);
     const token = getCookie("accessToken");
+
+    // 토큰이 없으면 요청을 보내지 않고 함수 종료
+    if (!token) {
+      console.log("토큰이 없습니다. 요청을 보내지 않습니다.");
+      setLoading(false); // 로딩 상태도 false로 변경
+      return;
+    }
+
+    console.log("유저ID :" + userId);
     console.log("토큰 :" + token);
 
     try {
@@ -48,13 +56,13 @@ function PlayModalFull({ togglePlayModal }) {
         prevPlaylists.filter((playlist) => playlist.playlistId !== id) // 클릭한 아이템만 필터링해서 삭제
     );
   };
+
   useEffect(() => {
     fetchPlaylists();
   }, []); // 컴포넌트 마운트 시 한 번만 실행됨
 
   if (loading) return <div>Loading...</div>; // 로딩 중일 때 표시
   if (error) return <div>Error: {error}</div>; // 에러 발생 시 표시
-  console.log("FULL MODAL playlists:", playlists); //잘됨
 
   return (
     <>
