@@ -6,9 +6,11 @@ import PostEditor from "./PostEditor";
 import { POST_WRITE } from "../../../api/post";
 import { useSelect } from "./../../../hooks/useSelect";
 import { useNavigate } from "react-router-dom";
+import useLoadingStore from "../../../store/useLoadingStore";
 
 function PostWritePage() {
   const navigate = useNavigate();
+  const { setLoadingSignal } = useLoadingStore();
 
   const [selectedThumbImg, setSelectedThumbImg] = useState(
     "/images/postWrite_thumbPreview.png"
@@ -54,6 +56,9 @@ function PostWritePage() {
   };
 
   const handleSubmit = (e) => {
+    // 폼 제출 시 로딩 신호를 true로 변경
+    setLoadingSignal(true);
+
     e.preventDefault();
     const plainText = editorContent.replace(/<[^>]*>/g, "");
 

@@ -5,7 +5,8 @@ export const Container = styled.div`
   min-width: 1500px;
   height: auto;
   margin: 0 auto;
-  padding: 200px 0;
+  /* padding: 200px 0; */
+  padding: 20px 0;
   display: flex;
   justify-content: center;
   gap: 30px;
