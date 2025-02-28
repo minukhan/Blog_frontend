@@ -1,7 +1,8 @@
 import { combineReducers } from "redux";
+import CommentReducer from "./comment";
 
 const RootReducer = combineReducers({
-  // login: LoginReducer,
+  comment: CommentReducer,
 });
 
 export default RootReducer;
